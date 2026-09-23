@@ -1,0 +1,30 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-user-material-vasp-protected",
+  "topic": "受保护的 VASP 材料",
+  "content_type": "tool_review",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {
+      "id": "M1",
+      "title": "VASP source archive",
+      "organization": "用户提供",
+      "source_level": "user_material",
+      "access_status": "accessible",
+      "usage_status": "allowed",
+      "material_id": "vasp-protected-bad",
+      "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "as_of": "2026-01-20",
+      "rights_confirmed": true,
+      "sensitivity_reviewed": true,
+      "contains_restricted_vasp_material": true,
+      "retrieved_at": "2026-02-01"
+    }
+  ],
+  "claims": [
+    {"id": "C1", "text": "源码内容支持这项性能结论", "kind": "fact", "source_ids": ["M1"], "evidence_class": "user_material", "evidence_quotes": [{"source_id": "M1", "text": "VASP source archive"}]}
+  ],
+  "uncertainties": [{"id": "U1", "text": "受保护材料禁止输入模型", "claim_ids": ["C1"]}]
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "real_chromium_acceptance",
+  "dataDir": "C:\\Users\\ironman\\Documents\\公众号\\wechat-article-studio\\data\\acceptance-20260904-run2",
+  "origin": "http://127.0.0.1:43210",
+  "notUserAcceptance": true,
+  "results": [
+    {
+      "name": "fixed_entry_isolated_server_started",
+      "status": "passed",
+      "health": {
+        "ok": true,
+        "service": "wechat-article-studio-core",
+        "workspaceScope": "4ebffb8b1c08"
+      },
+      "stdout": "wechat-article-studio listening on http://127.0.0.1:43210"
+    },
+    {
+      "name": "new_topic_and_requirements_entered",
+      "status": "passed"
+    },
+    {
+      "name": "verified_materials_selected_and_sources_visible",
+      "status": "passed"
+    },
+    {
+      "name": "outline_edited_and_confirmed",
+      "status": "passed"
+    }
+  ],
+  "errors": [
+    "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#article-title') to be visible\u001b[22m\n"
+  ]
+}

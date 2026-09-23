@@ -1,0 +1,16 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-partial-coverage",
+  "topic": "部分取回却没有覆盖范围",
+  "content_type": "standard_analysis",
+  "cutoff": "2026-02-01",
+  "research_status": "partial",
+  "retrieval_status": "partial",
+  "sources": [
+    {"id": "S1", "title": "Partially retrieved page", "organization": "Example", "url": "https://example.com/partial", "source_level": "official", "access_status": "partial", "usage_status": "allowed", "retrieved_at": "2026-02-01"}
+  ],
+  "claims": [
+    {"id": "C1", "text": "部分页面提到某个定义", "kind": "definition", "source_ids": ["S1"], "evidence_quotes": [{"source_id": "S1", "text": "某个定义"}]}
+  ],
+  "uncertainties": [{"id": "U1", "text": "页面只取回部分段落，范围未完整核对", "claim_ids": ["C1"]}]
+}

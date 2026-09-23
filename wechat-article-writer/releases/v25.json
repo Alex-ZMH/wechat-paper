@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v25",
+  "productVersion": "0.25.0",
+  "siteVersion": 25,
+  "siteVersionId": "appgprj_6a8e546836b88191b3ded519fc5d233e~appgver_5fa6aa1aec408191b594d4c1a58c2d81",
+  "sourceCommit": "b4220183f05ba37d211813ba85bf5171240049f5",
+  "sourceTag": "content-desk-v25",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v25",
+  "bridgeVersion": "codex-bridge.v25-20260831",
+  "adapterSchemaVersion": "multipost-desktop.v1",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "archive": {
+    "path": "outputs/content-desk-v25-b422018.tar.gz",
+    "sha256": "fe6a771d1adbf0d81d8d31a5ffda65194a58ee85267118c0358c85b06133a272"
+  },
+  "validation": {
+    "studioTests": "64/64",
+    "bridgeTests": "127/127",
+    "typescript": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "localMultiPostProbe": "multipost_unavailable"
+  },
+  "status": "saved_not_deployed",
+  "notes": [
+    "只提供本机 MultiPost 配置、健康检查、账号和平台能力读取；没有 publish、submit 或 retry 路由。",
+    "Token 仅存在本机 Bridge；浏览器、草稿、版本和日志均不保存。",
+    "本机 MultiPost 0.3.6 正在运行，但 127.0.0.1:19528 未监听、外部 API 未启用且账号为 0，因此真实状态为不可用。",
+    "公开站点仍保持 v23；v25 是独立保存的回滚点。"
+  ]
+}

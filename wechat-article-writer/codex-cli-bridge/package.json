@@ -1,0 +1,16 @@
+{
+  "name": "codex-cli-bridge",
+  "private": true,
+  "version": "0.40.0",
+  "description": "Local-only Codex CLI bridge for the composable nonfiction content workbench.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test",
+    "smoke": "node tests/smoke.mjs",
+    "smoke:annotation": "node tests/annotation-smoke.mjs"
+  }
+}

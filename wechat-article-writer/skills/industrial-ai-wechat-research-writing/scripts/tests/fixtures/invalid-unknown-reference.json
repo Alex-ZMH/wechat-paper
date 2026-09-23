@@ -1,0 +1,16 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-reference",
+  "topic": "未知引用",
+  "content_type": "flash",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {"id": "S1", "title": "Official page", "organization": "Example", "url": "ftp://example.com/no", "source_level": "official", "access_status": "accessible", "usage_status": "allowed", "retrieved_at": "2026-02-01"}
+  ],
+  "claims": [
+    {"id": "C1", "text": "事实", "kind": "fact", "source_ids": ["S2"], "evidence_quotes": [{"source_id": "S2", "text": "事实"}]}
+  ],
+  "uncertainties": []
+}

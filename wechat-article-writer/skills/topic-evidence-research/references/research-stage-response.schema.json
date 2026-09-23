@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/content-desk/research-stage-response.schema.json",
+  "title": "Content Desk research stage response v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "status", "topic", "scope", "retrieval", "sources", "claims", "uncertainties"],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "content-desk.research-result.v1" },
+    "status": { "type": "string", "enum": ["complete", "partial", "blocked", "manual_required"] },
+    "topic": { "type": "string", "minLength": 1, "maxLength": 12000 },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["question", "audience", "domain", "genre", "channel", "jurisdiction", "include", "exclude", "cutoff", "sourceTypes"],
+      "properties": {
+        "question": { "type": ["string", "null"], "maxLength": 4000 },
+        "audience": { "type": ["string", "null"], "maxLength": 500 },
+        "domain": { "type": ["string", "null"], "maxLength": 500 },
+        "genre": { "type": ["string", "null"], "maxLength": 500 },
+        "channel": { "type": ["string", "null"], "maxLength": 500 },
+        "jurisdiction": { "type": ["string", "null"], "maxLength": 500 },
+        "include": { "type": "array", "maxItems": 20, "items": { "type": "string", "minLength": 1, "maxLength": 500 } },
+        "exclude": { "type": "array", "maxItems": 20, "items": { "type": "string", "minLength": 1, "maxLength": 500 } },
+        "cutoff": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "sourceTypes": { "type": "array", "maxItems": 12, "items": { "type": "string", "minLength": 1, "maxLength": 64 } }
+      }
+    },
+    "retrieval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["queries", "mode", "startedAt", "completedAt"],
+      "properties": {
+        "queries": { "type": "array", "minItems": 1, "maxItems": 40, "items": { "type": "string", "minLength": 1, "maxLength": 500 } },
+        "mode": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "startedAt": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "completedAt": { "type": "string", "minLength": 1, "maxLength": 64 }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "maxItems": 40,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sourceId", "title", "url", "publisher", "sourceType", "authority", "publishedAt", "accessedAt", "sourceFamilyId", "accessStatus", "usageStatus", "excerpt", "locator", "contentHash"],
+        "properties": {
+          "sourceId": { "type": "string", "pattern": "^s-[A-Za-z0-9][A-Za-z0-9_:-]*$" },
+          "title": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "url": { "type": "string", "pattern": "^https?://", "maxLength": 3000 },
+          "publisher": { "type": "string", "minLength": 1, "maxLength": 300 },
+          "sourceType": { "type": "string", "minLength": 1, "maxLength": 64 },
+          "authority": { "type": "string", "enum": ["A", "B", "C", "U"] },
+          "publishedAt": { "type": ["string", "null"], "maxLength": 100 },
+          "accessedAt": { "type": "string", "minLength": 1, "maxLength": 100 },
+          "sourceFamilyId": { "type": ["string", "null"], "maxLength": 128 },
+          "accessStatus": { "type": "string", "enum": ["accessible", "partial", "blocked", "manual_required"] },
+          "usageStatus": { "type": "string", "enum": ["allowed", "metadata_only", "manual_required", "unknown"] },
+          "excerpt": { "type": ["string", "null"], "maxLength": 1200 },
+          "locator": { "type": ["string", "null"], "maxLength": 500 },
+          "contentHash": { "type": ["string", "null"], "maxLength": 128 }
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claimId", "text", "kind", "sourceIds", "evidence", "confidence", "status", "basis"],
+        "properties": {
+          "claimId": { "type": "string", "pattern": "^c-[A-Za-z0-9][A-Za-z0-9_:-]*$" },
+          "text": { "type": "string", "minLength": 1, "maxLength": 1500 },
+          "kind": { "type": "string", "enum": ["fact", "definition", "metric", "case_result", "vendor_claim", "inference", "opinion"] },
+          "sourceIds": { "type": "array", "maxItems": 40, "items": { "type": "string", "minLength": 1, "maxLength": 128 } },
+          "evidence": {
+            "type": "array",
+            "maxItems": 40,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["sourceId", "excerpt", "locator"],
+              "properties": {
+                "sourceId": { "type": "string", "minLength": 1, "maxLength": 128 },
+                "excerpt": { "type": "string", "minLength": 1, "maxLength": 1200 },
+                "locator": { "type": ["string", "null"], "maxLength": 500 }
+              }
+            }
+          },
+          "confidence": { "type": "string", "enum": ["high", "medium", "low", "disputed"] },
+          "status": { "type": "string", "enum": ["supported", "mixed", "unverified", "rejected"] },
+          "basis": { "type": ["string", "null"], "maxLength": 1000 }
+        }
+      }
+    },
+    "uncertainties": {
+      "type": "array",
+      "maxItems": 80,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["uncertaintyId", "text", "claimIds", "action"],
+        "properties": {
+          "uncertaintyId": { "type": "string", "pattern": "^u-[A-Za-z0-9][A-Za-z0-9_:-]*$" },
+          "text": { "type": "string", "minLength": 1, "maxLength": 1000 },
+          "claimIds": { "type": "array", "maxItems": 100, "items": { "type": "string", "minLength": 1, "maxLength": 128 } },
+          "action": { "type": ["string", "null"], "maxLength": 1000 }
+        }
+      }
+    }
+  }
+}

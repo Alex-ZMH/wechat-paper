@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wechat-article-studio.local/schemas/codex-research-output.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sources", "claims"],
+  "properties": {
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sourceId", "title", "url", "publisher", "publishedAt", "sourceType", "authority", "excerpt", "locator"],
+        "properties": {
+          "sourceId": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "url": { "type": "string", "minLength": 1 },
+          "publisher": { "type": "string" },
+          "publishedAt": { "type": "string" },
+          "sourceType": { "type": "string" },
+          "authority": { "type": "string" },
+          "excerpt": { "type": "string", "minLength": 1 },
+          "locator": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claimId", "text", "evidenceIds", "confidence", "caveat", "kind", "status"],
+        "properties": {
+          "claimId": { "type": "string", "minLength": 1 },
+          "text": { "type": "string", "minLength": 1 },
+          "evidenceIds": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "caveat": { "type": "string" },
+          "kind": { "type": "string", "enum": ["fact", "inference"] },
+          "status": { "type": "string" }
+        }
+      }
+    }
+  }
+}

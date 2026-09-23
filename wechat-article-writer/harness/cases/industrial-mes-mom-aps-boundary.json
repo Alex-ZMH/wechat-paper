@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-mes-mom-aps-boundary",
+  "description": "解释 MES、MOM、APS 边界，不把产品标签或三个缩写当同义词。",
+  "input": {
+    "message": "用一篇公众号短文解释 MES、MOM、APS、ERP、SCADA 的关系，给实施团队看。请把 ISA-95 只作为需授权核对的导航入口，不读取受限正文；用允许使用的替代官方来源解释通用边界，并明确哪些映射需要看实施范围。"
+  },
+  "expect": {
+    "mustContain": ["MES", "MOM", "APS", "ISA-95", "实施范围"],
+    "mustNotContain": ["完全等同", "所有厂商都一样"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-mes-mom-aps-boundary.md"
+}

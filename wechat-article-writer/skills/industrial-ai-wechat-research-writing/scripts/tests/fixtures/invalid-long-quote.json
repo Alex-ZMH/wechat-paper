@@ -1,0 +1,16 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-long-quote",
+  "topic": "摘录过长",
+  "content_type": "flash",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {"id": "S1", "title": "Official page", "organization": "Example", "url": "https://example.com/page", "source_level": "official", "access_status": "accessible", "usage_status": "allowed", "retrieved_at": "2026-02-01"}
+  ],
+  "claims": [
+    {"id": "C1", "text": "短事实", "kind": "fact", "source_ids": ["S1"], "evidence_quotes": [{"source_id": "S1", "text": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}]}
+  ],
+  "uncertainties": []
+}

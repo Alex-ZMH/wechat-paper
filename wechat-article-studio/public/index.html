@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>公众号文章工作台</title>
+<style>
+      :root {
+        color-scheme: light;
+        font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+        color: #182230;
+        background: #f3f6fa;
+        --page: #f3f6fa;
+        --paper: #ffffff;
+        --ink: #182230;
+        --muted: #64748b;
+        --accent: #147d79;
+        --accent-soft: #e8f3f2;
+        --line: #dce3ec;
+        --success: #267a5b;
+        --warning: #b7791f;
+        --danger: #b4534b;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; background: var(--page); }
+      button, input, textarea, select { font: inherit; }
+      button { cursor: pointer; }
+      button:disabled { cursor: not-allowed; opacity: .5; }
+      button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible { outline: 3px solid #147d7944; outline-offset: 2px; }
+      .topbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 64px; padding: 12px 28px; border-bottom: 1px solid var(--line); background: #ffffffee; backdrop-filter: blur(12px); }
+      .brand { display: flex; align-items: center; gap: 10px; min-width: 220px; }
+      .brand-mark { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; background: var(--accent); color: #fff; font-weight: 700; font-size: 14px; }
+      .brand-name { font-weight: 700; letter-spacing: .02em; }
+      .top-context { flex: 1; min-width: 0; text-align: center; color: var(--muted); font-size: 13px; }
+      .top-context strong { color: var(--ink); font-weight: 600; }
+      .top-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: 250px; }
+      .save-state { color: var(--muted); font-size: 12px; white-space: nowrap; }
+      .shell { display: grid; grid-template-columns: 216px minmax(0, 1fr) 320px; gap: 20px; width: min(1480px, calc(100% - 40px)); margin: 0 auto; padding: 24px 0 56px; }
+      .rail { min-width: 0; }
+      .rail-title { margin: 0 0 12px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .08em; }
+      .steps { display: grid; gap: 6px; }
+      .step-button { display: grid; grid-template-columns: 28px 1fr; gap: 10px; width: 100%; padding: 10px 8px; border: 1px solid transparent; border-radius: 10px; background: transparent; color: var(--muted); text-align: left; }
+      .step-button:hover:not(:disabled) { background: #fff; color: var(--ink); }
+      .step-button.blocked { color: var(--muted); border-style: dashed; }
+      .step-button.blocked:hover { background: #fff; color: var(--ink); }
+      .step-button.active { border-color: #bcd9d7; background: var(--accent-soft); color: var(--ink); }
+      .step-button.complete { color: var(--success); }
+      .step-number { width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; font-size: 12px; }
+      .step-label { padding-top: 3px; font-size: 13px; line-height: 1.45; font-weight: 650; }
+      .outline { margin-top: 22px; padding: 14px 12px; border-top: 1px solid var(--line); }
+      .outline h2 { margin: 0 0 10px; font-size: 13px; }
+      .outline-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+      .outline-list button { width: 100%; padding: 0; border: 0; background: transparent; color: var(--muted); text-align: left; font-size: 12px; line-height: 1.5; }
+      .outline-list button:hover { color: var(--accent); }
+      .main-column { min-width: 0; }
+      .stage { display: none; }
+      .stage.active { display: block; }
+      .stage-header { margin: 4px 0 20px; }
+      .stage-kicker { margin: 0 0 6px; color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .08em; }
+      .stage-title { margin: 0; font-size: 24px; line-height: 1.35; letter-spacing: -.02em; }
+      .stage-description { margin: 8px 0 0; max-width: 680px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+      .card { border: 1px solid var(--line); border-radius: 14px; background: var(--paper); box-shadow: 0 8px 24px #27415f0b; }
+      .card-pad { padding: 22px; }
+      .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+      .field { display: grid; gap: 7px; }
+      .field.full { grid-column: 1 / -1; }
+      label { color: var(--ink); font-size: 13px; font-weight: 650; }
+      input, textarea, select { width: 100%; border: 1px solid #cfd9e5; border-radius: 8px; padding: 10px 12px; background: #fff; color: var(--ink); }
+      textarea { min-height: 116px; resize: vertical; line-height: 1.7; }
+      textarea.autogrow { overflow-y: hidden; }
+      .field-hint { color: var(--muted); font-size: 12px; line-height: 1.5; }
+      .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 22px; }
+      .button-primary, .button-secondary, .button-quiet { min-height: 38px; padding: 9px 15px; border-radius: 8px; font-weight: 650; }
+      .button-primary { border: 1px solid var(--accent); background: var(--accent); color: #fff; }
+      .button-primary:hover:not(:disabled) { background: #0f6e6a; }
+      .button-secondary { border: 1px solid #b8c8d7; background: #fff; color: var(--ink); }
+      .button-secondary:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+      .button-quiet { border: 0; background: transparent; color: var(--accent); }
+      .notice { margin-top: 14px; padding: 10px 12px; border-left: 3px solid var(--accent); background: #f5faf9; color: var(--muted); font-size: 12px; line-height: 1.6; }
+      .verified-panel { margin-top: 18px; padding: 16px; border: 1px dashed #a9c8c5; border-radius: 10px; background: #fbfefd; }
+      .verified-panel h2 { margin: 0 0 6px; font-size: 15px; }
+      .verified-panel p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+      .verified-panel .actions { margin-top: 12px; }
+      .status { min-height: 22px; margin-top: 12px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+      .status.success { color: var(--success); }
+      .status.warn { color: var(--warning); }
+      .status.error { color: var(--danger); }
+      .top-status { min-width: 0; max-width: 220px; color: var(--muted); font-size: 12px; line-height: 1.4; }
+      .top-status.success { color: var(--success); }
+      .top-status.warn { color: var(--warning); }
+      .top-status.error { color: var(--danger); }
+      .source-list, .outline-editor, .review-list { display: grid; gap: 10px; }
+      .source-card, .outline-card, .review-item { padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #fbfdff; }
+      .source-card h3, .outline-card h3 { margin: 0; font-size: 14px; line-height: 1.5; }
+      .source-meta { margin-top: 4px; color: var(--muted); font-size: 12px; }
+      .source-excerpt { margin: 8px 0 0; color: #334155; font-size: 13px; line-height: 1.65; }
+      a { color: var(--accent); }
+      .outline-card { display: grid; gap: 8px; }
+      .outline-card-header { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+      .outline-controls { display:flex; flex-wrap:wrap; gap:2px; }
+      .outline-controls .button-quiet { min-height:28px; padding:4px 7px; font-size:12px; }
+      .outline-toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding-top:2px; }
+      .claim-list { display:grid; gap:7px; margin:2px 0 0; padding:10px 12px; border:1px solid var(--line); border-radius:8px; }
+      .claim-list legend { padding:0 4px; color:var(--muted); font-size:12px; }
+      .claim-option { display:flex; align-items:flex-start; gap:8px; color:#334155; font-size:13px; font-weight:400; line-height:1.55; }
+      .claim-option input { flex:0 0 auto; width:auto; margin-top:3px; }
+      .claim-option small { display:block; color:var(--muted); font-size:11px; }
+      .outline-card textarea { min-height: 76px; }
+      .editor-card { padding: 30px 34px 40px; }
+      .editor-title { min-height: 44px; margin: 0 0 14px; border: 0; padding: 0; font-size: 26px; font-weight: 700; line-height: 1.4; }
+      .editor-digest { min-height: 64px; margin-bottom: 18px; border-color: transparent; background: #f7fafc; }
+      .editor-lead { min-height: 82px; margin-bottom: 20px; }
+      .article-section { margin-top: 28px; }
+      .article-section h2 { margin: 0 0 12px; font-size: 18px; line-height: 1.45; }
+      .article-paragraph { width: 100%; min-height: 86px; margin: 0 0 14px; border: 1px solid transparent; border-radius: 8px; padding: 5px 8px; line-height: 1.85; }
+      .article-paragraph:hover { border-color: #d2e5e4; background: #fbfefe; }
+      .article-paragraph.selected { border-color: #9ed0cb; border-left: 3px solid var(--accent); background: #f4fbfa; }
+      .editor-closing { min-height: 64px; margin-top: 20px; }
+      .inspector { min-width: 0; }
+      .inspector-card { position: sticky; top: 88px; min-height: 260px; }
+      .inspector-tabs { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); }
+      .inspector-tab { padding: 12px 8px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--muted); font-size: 13px; font-weight: 650; }
+      .inspector-tab.active { border-bottom-color: var(--accent); color: var(--accent); }
+      .inspector-body { padding: 16px; }
+      .inspector-body h2 { margin: 0 0 10px; font-size: 15px; }
+      .inspector-empty { color: var(--muted); font-size: 13px; line-height: 1.7; }
+      .evidence-detail { display: grid; gap: 12px; }
+      .evidence-detail article { padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+      .evidence-detail article:last-child { padding-bottom: 0; border-bottom: 0; }
+      .evidence-detail h3 { margin: 0; font-size: 13px; line-height: 1.5; }
+      .evidence-detail p { margin: 5px 0 0; color: #475569; font-size: 12px; line-height: 1.6; }
+      .annotation-form { display: grid; gap: 10px; }
+      .annotation-form textarea { min-height: 92px; }
+      .annotation-history { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+      .annotation-history h3 { margin: 0 0 8px; font-size: 13px; }
+      .annotation-history p { margin: 6px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+      .review-item { display: flex; align-items: flex-start; gap: 8px; color: #334155; font-size: 13px; line-height: 1.5; }
+      .review-mark { flex: 0 0 auto; width: 18px; height: 18px; display: grid; place-items: center; border-radius: 50%; background: #e7f4ee; color: var(--success); font-size: 12px; }
+      .review-item.warn .review-mark { background: #fff5dd; color: var(--warning); }
+      .review-summary { margin-bottom: 12px; padding: 12px; border-radius: 10px; background: #f7fafc; color: var(--muted); font-size: 13px; line-height: 1.6; }
+      .review-summary strong { color: var(--ink); }
+      .hidden { display: none !important; }
+      .loading::after { content: ""; display: inline-block; width: 12px; height: 12px; margin-left: 6px; border: 2px solid #c7d7e5; border-top-color: var(--accent); border-radius: 50%; vertical-align: -2px; animation: spin .7s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; } }
+      @media (max-width: 1040px) { .shell { grid-template-columns: 190px minmax(0, 1fr); } .inspector { grid-column: 2; } .inspector-card { position: static; } }
+      @media (max-width: 760px) { .topbar { align-items: flex-start; flex-wrap: wrap; padding: 12px 16px; } .top-context { order: 3; flex-basis: 100%; text-align: left; } .top-actions { min-width: 0; } .top-status { order: 4; flex-basis: 100%; max-width: none; } .shell { display: block; width: min(100% - 24px, 680px); padding-top: 16px; } .rail { margin-bottom: 18px; } .steps { grid-template-columns: repeat(4, 1fr); } .step-button { display: block; padding: 9px 6px; text-align: center; } .step-number { margin: 0 auto 5px; } .step-label { padding: 0; font-size: 11px; } .outline { display: none; } .form-grid { grid-template-columns: 1fr; } .field.full { grid-column: auto; } .editor-card { padding: 22px 18px 30px; } .editor-title { font-size: 22px; } .inspector { margin-top: 18px; } }
+    
+ textarea { resize:none; overflow-y:hidden; } .step-reason { display:block; font-size:11px; font-weight:400; margin-top:4px; }
+ .workspace-tools { display:grid; gap:8px; margin-bottom:20px; } .workspace-tools label { font-size:12px; }
+ .global-message { margin:0 auto; max-width:1440px; padding:10px 20px; color:var(--muted); font-size:13px; }
+ .global-message:empty { display:none; } .stage-title { font-size:21px; } .topbar { flex-wrap:wrap; }
+ .button-reason { font-size:12px; color:var(--muted); line-height:1.5; } .article-heading { border:0; font-size:18px; font-weight:700; padding:0; }
+ .references { margin-top:28px; font-size:12px; line-height:1.8; overflow-wrap:anywhere; }
+ .comment { border-bottom:1px solid var(--line); padding:12px 0; font-size:13px; line-height:1.65; }
+ .comment p { white-space:pre-wrap; overflow-wrap:anywhere; } .comment button { padding:6px 10px; font-size:12px; }
+ .source-excerpt { white-space:pre-wrap; } .source-card { overflow-wrap:anywhere; } .import-preview { margin-top:12px; }
+ .inspector-card { max-height:calc(100vh - 110px); overflow:auto; } .actions .button-reason { flex-basis:100%; }
+ .field input:read-only,.field textarea:read-only { background:#f7f9fc; color:#475569; }
+ @media(max-width:760px){ .inspector-card{max-height:none;} .top-actions{flex-wrap:wrap;} .brand{min-width:0;} .step-button{padding:8px 2px;} }
+</style></head>
+<body>
+<header class="topbar">
+ <div class="brand"><span class="brand-mark">文</span><span class="brand-name">公众号文章工作台</span></div>
+ <div class="top-context"><strong id="top-step">选题与要求</strong><span id="top-topic"></span></div>
+ <div class="top-actions"><span id="save-state" class="save-state">尚未保存</span><button id="save-button" class="button-secondary">保存修改</button><button id="download-button" class="button-primary">下载 Word</button></div>
+</header>
+<div id="top-action-reason" class="global-message"></div>
+<div id="top-status" class="global-message" role="status" aria-live="polite"></div>
+<div class="shell">
+<aside class="rail">
+ <div class="workspace-tools"><button id="new-article" class="button-secondary">另写一篇</button><label for="workspace-select">已保存的文章</label><select id="workspace-select"><option value="">选择文章</option></select><button id="open-workspace" class="button-quiet">打开所选文章</button></div>
+ <p class="rail-title">文章流程</p><nav id="steps" class="steps" aria-label="文章流程">
+ <button class="step-button active" data-step="1"><span class="step-number">1</span><span class="step-label">选题与要求<small class="step-reason"></small></span></button>
+<button class="step-button" data-step="2"><span class="step-number">2</span><span class="step-label">资料与大纲<small class="step-reason"></small></span></button>
+<button class="step-button" data-step="3"><span class="step-number">3</span><span class="step-label">写作与批注<small class="step-reason"></small></span></button>
+<button class="step-button" data-step="4"><span class="step-number">4</span><span class="step-label">检查与下载<small class="step-reason"></small></span></button>
+ </nav><div class="outline hidden" id="outline-rail"><h2>文章大纲</h2><ol id="outline-list" class="outline-list"></ol></div>
+</aside>
+<main class="main-column">
+<section id="stage-1" class="stage active" data-stage="1">
+ <div class="stage-header"><p class="stage-kicker">01 / 选题与要求</p><h1 class="stage-title">这篇文章要回答什么？</h1><p class="stage-description">写下主题、读者和要求，再开始搜集资料。</p></div>
+ <form id="brief-form" class="card card-pad"><div class="form-grid">
+ <div class="field full"><label for="topic">文章主题</label><input id="topic" required placeholder="输入你想研究的选题"></div>
+ <div class="field"><label for="audience">目标读者</label><input id="audience" required placeholder="这篇文章写给谁"></div>
+ <div class="field"><label for="targetLength">目标长度（字）</label><input id="targetLength" type="number" min="600" max="20000" value="3500"></div>
+ <div class="field full"><label for="purpose">文章要解决的问题</label><textarea id="purpose" required placeholder="核心问题、重点和判断边界"></textarea></div>
+ <div class="field full"><label for="tone">文风</label><input id="tone" value="清晰、克制、可信"></div></div>
+ <div id="brief-lock" class="notice hidden">资料已与当前要求关联。调整要求会另存一篇文章，原文章会保留。<button id="change-brief" type="button" class="button-quiet">修改选题与要求</button></div>
+ <div class="actions"><button id="research-button" type="submit" class="button-primary">开始查资料</button><button id="cancel-research" type="button" class="button-secondary hidden">停止搜集</button><span id="research-reason" class="button-reason"></span></div>
+ <div id="global-status" class="status" role="status" aria-live="polite"></div>
+ <div class="verified-panel"><h2>使用你已有的资料</h2><p>导入已核验的资料文件，先选择并查看来源，再用于当前文章。</p>
+ <div class="actions"><button id="verified-materials-button" type="button" class="button-secondary">导入已有资料</button><input id="verified-materials-file" type="file" accept=".json,application/json" class="hidden"></div>
+ <div id="verified-materials-status" class="status"></div><div id="import-preview" class="import-preview hidden"></div></div>
+ </form>
+</section>
+<section id="stage-2" class="stage" data-stage="2">
+ <div class="stage-header"><p class="stage-kicker">02 / 资料与大纲</p><h1 class="stage-title">先看资料，再确定文章结构</h1><p id="source-count" class="stage-description"></p></div>
+ <div class="card card-pad"><div id="source-list" class="source-list"></div><div class="actions"><button id="check-sources" class="button-secondary">检查来源（可选）</button><span id="source-check-status" class="button-reason"></span></div><h2>文章大纲</h2><div id="outline-editor" class="outline-editor"></div><div class="actions"><button id="confirm-outline" class="button-primary">进入写作</button><button id="back-to-brief" class="button-quiet">返回选题</button><span id="outline-reason" class="button-reason"></span></div></div>
+</section>
+<section id="stage-3" class="stage" data-stage="3">
+ <div class="stage-header"><p class="stage-kicker">03 / 写作与批注</p><h1 class="stage-title">让文章清楚、有据</h1><p class="stage-description">正文可逐段修改。点选段落，在右侧查看来源或添加批注。</p></div>
+ <div id="writer-actions" class="actions"><button id="generate-draft" class="button-primary">生成初稿</button><span id="writer-status" class="button-reason"></span></div>
+ <article id="article-editor" class="card editor-card"></article>
+ <div class="actions"><button id="back-to-outline" class="button-quiet">返回大纲</button><button id="review-article" class="button-secondary">检查文章（可选）</button></div>
+</section>
+<section id="stage-4" class="stage" data-stage="4">
+ <div class="stage-header"><p class="stage-kicker">04 / 检查与下载</p><h1 class="stage-title">检查当前版本，下载 Word</h1></div>
+ <div class="card card-pad"><div id="review-summary" class="review-summary"></div><div id="review-list" class="review-list"></div>
+ <p class="notice">检查是可选建议；批注和检查结果不会阻止保存或下载。下载前会先保存当前修改。</p>
+ <div class="actions"><button id="rerun-review" class="button-secondary">检查文章（可选）</button><button id="review-download" class="button-primary">下载 Word</button></div>
+ <div class="actions"><button id="back-to-writing" class="button-quiet">返回正文</button></div>
+ </div>
+</section>
+</main>
+<aside class="inspector"><div class="card inspector-card">
+ <div class="inspector-tabs"><button class="inspector-tab active" data-panel="evidence">证据</button><button class="inspector-tab" data-panel="annotation">批注</button><button class="inspector-tab" data-panel="review">审查</button></div>
+ <div id="inspector-body" class="inspector-body"></div>
+</div></aside>
+</div><script type="module" src="/app.js"></script></body></html>

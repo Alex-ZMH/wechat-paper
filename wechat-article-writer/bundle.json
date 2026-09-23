@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "matterai.bundle.v2",
+  "name": "wechat-article-writer",
+  "title": "个人非虚构内容工作台",
+  "version": "0.31.0",
+  "description": "面向个人知识创作者的通用非虚构写作、批注修订与可选工业调研智能体。",
+  "agent": {
+    "name": "wechat-article-writer",
+    "entry": "agents/wechat-article-writer/AGENT.md",
+    "skills": ["nonfiction-content-writing", "industrial-ai-wechat-research-writing", "humanizer-zh"]
+  },
+  "mcpServers": [],
+  "requirements": {
+    "capabilities": ["chat", "files"]
+  },
+  "harness": {
+    "cases": "harness/cases",
+    "format": "matterai.case.v2"
+  },
+  "owner": "unassigned",
+  "risk": "docs-only"
+}

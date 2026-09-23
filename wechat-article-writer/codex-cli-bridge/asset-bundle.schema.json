@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/content-desk/asset-bundle.schema.json",
+  "title": "Content Desk asset bundle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "cover"],
+  "properties": {
+    "schemaVersion": { "const": "content-desk.asset-bundle.v1", "type": "string" },
+    "cover": { "$ref": "#/$defs/asset" },
+    "images": { "type": "array", "maxItems": 100, "items": { "$ref": "#/$defs/asset" } }
+  },
+  "$defs": {
+    "asset": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 4096,
+      "pattern": "^[A-Za-z]:[\\\\/]"
+    }
+  }
+}

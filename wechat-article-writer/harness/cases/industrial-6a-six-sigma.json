@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-6a-six-sigma",
+  "description": "从 DMAIC、波动和西格玛水平线索识别 6A 的输入/OCR 替代。",
+  "input": {
+    "message": "老课件说“用6A降低过程波动”，后面依次写了 Define、Measure、Analyze、Improve、Control，还提到黑带和西格玛水平。帮我把这个概念讲清楚。"
+  },
+  "expect": {
+    "mustContain": ["6σ", "Six Sigma", "DMAIC", "波动"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-6a-six-sigma.md"
+}

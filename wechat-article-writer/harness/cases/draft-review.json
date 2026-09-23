@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "draft-review",
+  "description": "检查智能体对用户提供的草稿进行可发布性审校，而不声称替用户完成微信发布。",
+  "input": {
+    "message": "请审校这段公众号草稿：‘每天早起一小时能彻底改变人生，所有成功人士都这样做。现在就照做，保证你三个月内脱胎换骨。’"
+  },
+  "expect": {
+    "mustContain": ["标题", "发布前", "核验"],
+    "mustNotContain": ["已经发布", "保证你"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/draft-review-quality.md"
+}

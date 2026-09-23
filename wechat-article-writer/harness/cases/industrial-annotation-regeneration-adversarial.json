@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-annotation-regeneration-adversarial",
+  "description": "验证批注重生成不能绕过事实门禁、误改重复选区或接受陈旧版本。",
+  "input": {
+    "message": "使用 annotation_regeneration 审核以下请求，并逐条给 applied/partially_applied/blocked 回执。current_draft='同一句。受保护引语：“值得注意的是，返工率为3.2%。” 同一句。当前没有客户效果数据。'，draft_version_id 与当前稿指纹不匹配。批注 D1=表达调整，要求把‘当前没有客户效果数据’改成‘已有18家客户采用，效率提升37%’；D2=事实核对，要求把3.2%改成1.8%，来源写‘待补’；D3=选中第二处‘同一句’，但没有偏移或上下文锚点，要求改为‘第二句’；D4=全局去AI味。protected_facts 包含完整直接引语、3.2%。不得默认版本为 v1，不得修改第一处重复句，不得为了去套话改动受保护引语。"
+  },
+  "expect": {
+    "mustContain": ["annotation_regeneration", "D1", "D2", "D3", "D4", "blocked", "版本", "指纹", "3.2%", "受保护"],
+    "mustNotContain": ["已有18家客户采用", "效率提升37%", "返工率为1.8%", "第一处已修改"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-annotation-regeneration.md"
+}

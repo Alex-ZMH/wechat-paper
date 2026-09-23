@@ -1,0 +1,250 @@
+{
+  "schemaVersion": "wechat-article-studio.acceptance-evidence.v1",
+  "startedAt": "2026-09-04T04:30:34.161Z",
+  "sourceData": "data\\acceptance-20260904-run1",
+  "isolatedData": "data\\.acceptance-workspace-gates-20260904-run1",
+  "port": 43211,
+  "topic": "凹凸棒石在新能源领域面临的挑战与实际应用",
+  "api_finalize_is_test_not_user_acceptance": true,
+  "steps": [
+    {
+      "name": "isolated_server_started",
+      "health": {
+        "ok": true,
+        "service": "wechat-article-studio-core",
+        "workspaceScope": "596d82106ae0"
+      },
+      "pid": 111540
+    },
+    {
+      "name": "fixture_loaded",
+      "workspaceId": "c762920e-6923-44d4-b0d4-be314bd4c041",
+      "sessionId": "research_74fc0c8fcb96",
+      "version": 4,
+      "mode": "verified_materials",
+      "provider": "human_curated"
+    },
+    {
+      "name": "save_high_open_annotation",
+      "version": 5,
+      "reviewStatus": "review_required",
+      "annotationStatuses": [
+        {
+          "annotationId": "47ddc20c-44ca-4c6c-b5f7-f22ff39d312e",
+          "status": "resolved"
+        },
+        {
+          "annotationId": "acceptance-high-open-20260904",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "name": "empty_annotation_save",
+      "version": 6,
+      "reviewStatus": "review_required"
+    },
+    {
+      "name": "side_effect_free_review",
+      "version": null,
+      "reviewStatus": "review_required"
+    },
+    {
+      "name": "finalize_with_open_high_rejected",
+      "status": 400,
+      "error": "review_required"
+    },
+    {
+      "name": "restart_restore_check",
+      "version": 6,
+      "reviewStatus": "review_required",
+      "openHighCount": 1
+    },
+    {
+      "name": "explicit_resolve",
+      "version": 7,
+      "reviewStatus": "approved",
+      "humanApproval": null
+    },
+    {
+      "name": "export_with_forged_approved_flag",
+      "status": 200,
+      "contentType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "disposition": "attachment; filename=\"article.docx\"; filename*=UTF-8''%E5%87%B9%E5%87%B8%E6%A3%92%E7%9F%B3%E8%BF%9B%E5%85%A5%E7%94%B5%E6%B1%A0%E6%9D%90%E6%96%99%EF%BC%9A%E4%B8%89%E6%9D%A1%E7%A0%94%E7%A9%B6%E8%B7%AF%E7%BA%BF%E4%B8%8E%E4%B8%80%E9%81%93%E4%BA%A7%E4%B8%9A%E5%8C%96%E8%BE%B9%E7%95%8C_%E5%AE%A1%E9%98%85%E7%A8%BF.docx",
+      "decodedFilename": "凹凸棒石进入电池材料：三条研究路线与一道产业化边界_审阅稿.docx",
+      "bytes": 41616
+    },
+    {
+      "name": "finalize_after_resolution",
+      "version": 8,
+      "humanApproval": {
+        "version": 8,
+        "draftHash": "e91848336130439480b7417233e50bf5d842e2deccf913b710525a4eed253f74",
+        "fingerprint": "423c38e59bec40bb6a9d5e71e4fc4e62295687962af6b28d5b706ec11e39d8cd",
+        "approvedAt": "2026-09-04T04:30:34.847Z"
+      }
+    },
+    {
+      "name": "edit_after_finalize",
+      "previousVersion": 8,
+      "version": 9,
+      "previousDraftHash": "e91848336130439480b7417233e50bf5d842e2deccf913b710525a4eed253f74",
+      "draftHash": "d1d08d50270ad9521fb2856ca65fcf0a7c8155c595b78217f018e5817e5e32d8",
+      "revision": 4,
+      "revisionHistoryCount": 3
+    },
+    {
+      "name": "stale_version_rejected",
+      "status": 409,
+      "error": "workspace_conflict"
+    },
+    {
+      "name": "writer_missing_executable",
+      "status": 503,
+      "error": "writer_unavailable",
+      "details": {
+        "executable": "C:\\Users\\ironman\\Documents\\公众号\\wechat-article-studio\\data\\.acceptance-workspace-gates-20260904-run1\\missing-codex.exe",
+        "source": "env:CODEX_BIN"
+      }
+    },
+    {
+      "name": "writer_failure_audit",
+      "path": "data\\.acceptance-workspace-gates-20260904-run1\\server-audit.jsonl",
+      "code": "writer_unavailable",
+      "executable": "C:\\Users\\ironman\\Documents\\公众号\\wechat-article-studio\\data\\.acceptance-workspace-gates-20260904-run1\\missing-codex.exe",
+      "source": "env:CODEX_BIN"
+    }
+  ],
+  "assertions": [
+    {
+      "name": "fixture_workspace_topic_is_exact",
+      "passed": true,
+      "candidates": [
+        {
+          "workspaceId": "c762920e-6923-44d4-b0d4-be314bd4c041",
+          "version": 4
+        }
+      ]
+    },
+    {
+      "name": "fixture_is_human_verified_only",
+      "passed": true,
+      "provider": "human_curated"
+    },
+    {
+      "name": "fixture_has_confirmed_argument_map",
+      "passed": true
+    },
+    {
+      "name": "high_open_annotation_blocks_review",
+      "passed": true
+    },
+    {
+      "name": "high_open_annotation_is_persisted",
+      "passed": true
+    },
+    {
+      "name": "empty_annotation_save_does_not_clear_gate",
+      "passed": true
+    },
+    {
+      "name": "empty_annotation_review_remains_blocked",
+      "passed": true
+    },
+    {
+      "name": "review_route_preserves_high_gate",
+      "passed": true
+    },
+    {
+      "name": "review_route_preserves_full_annotation_history",
+      "passed": true
+    },
+    {
+      "name": "finalize_rejects_open_high",
+      "passed": true,
+      "status": 400,
+      "error": "review_required"
+    },
+    {
+      "name": "restart_restores_open_high_gate",
+      "passed": true
+    },
+    {
+      "name": "restart_restores_review_required",
+      "passed": true
+    },
+    {
+      "name": "explicit_resolve_recomputes_approved",
+      "passed": true
+    },
+    {
+      "name": "explicit_resolve_does_not_fake_human_approval",
+      "passed": true
+    },
+    {
+      "name": "resolved_annotation_is_persisted",
+      "passed": true
+    },
+    {
+      "name": "forged_approved_export_is_still_review_draft",
+      "passed": true,
+      "decodedFilename": "凹凸棒石进入电池材料：三条研究路线与一道产业化边界_审阅稿.docx"
+    },
+    {
+      "name": "export_is_docx",
+      "passed": true
+    },
+    {
+      "name": "server_records_human_approval_only_on_finalize",
+      "passed": true
+    },
+    {
+      "name": "content_edit_invalidates_human_approval",
+      "passed": true
+    },
+    {
+      "name": "content_edit_increments_revision",
+      "passed": true,
+      "previousRevision": 3,
+      "revision": 4
+    },
+    {
+      "name": "old_draft_is_retained_in_history",
+      "passed": true
+    },
+    {
+      "name": "stale_version_cannot_overwrite_current_edit",
+      "passed": true,
+      "status": 409,
+      "error": "workspace_conflict"
+    },
+    {
+      "name": "writer_missing_executable_fails_closed",
+      "passed": true,
+      "status": 503,
+      "error": "writer_unavailable"
+    },
+    {
+      "name": "writer_failure_returns_no_draft",
+      "passed": true
+    },
+    {
+      "name": "writer_failure_is_audited",
+      "passed": true
+    },
+    {
+      "name": "writer_audit_keeps_explicit_path_source",
+      "passed": true
+    }
+  ],
+  "status": "passed",
+  "serverPid": 111540,
+  "serverPidAfterRestart": 130248,
+  "finishedAt": "2026-09-04T04:30:34.880Z",
+  "serverLogs": {
+    "stdoutTail": "wechat-article-studio listening on http://127.0.0.1:43211\n",
+    "stderrTail": ""
+  },
+  "auditEvidence": "evaluation\\acceptance-workspace-gates-20260904.audit.jsonl",
+  "isolatedDataRemoved": true
+}

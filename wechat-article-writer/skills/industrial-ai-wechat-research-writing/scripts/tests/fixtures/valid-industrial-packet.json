@@ -1,0 +1,33 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "fixture-valid-001",
+  "topic": "约束排程建模示例",
+  "content_type": "tool_review",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Job Shop Scheduling",
+      "organization": "Google for Developers",
+      "url": "https://developers.google.com/optimization/scheduling/job_shop",
+      "source_level": "official",
+      "access_status": "accessible",
+      "usage_status": "allowed",
+      "retrieved_at": "2026-02-01",
+      "usage_notes": "页面标注 CC BY 4.0；实际取回仍需以页面当前许可文本为准。"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "text": "Google 的 Job Shop 页面展示了带约束的排程建模。",
+      "kind": "fact",
+      "source_ids": ["S1"],
+      "evidence_class": "independent",
+      "evidence_quotes": [{"source_id": "S1", "text": "Job Shop Scheduling"}]
+    }
+  ],
+  "uncertainties": []
+}

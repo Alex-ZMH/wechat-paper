@@ -1,0 +1,29 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-user-material-evidence-class",
+  "topic": "用户 benchmark 冒充独立事实",
+  "content_type": "tool_review",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {
+      "id": "M1",
+      "title": "用户 benchmark",
+      "organization": "用户提供",
+      "source_level": "user_material",
+      "access_status": "accessible",
+      "usage_status": "allowed",
+      "material_id": "bench-bad-class",
+      "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "as_of": "2026-01-20",
+      "rights_confirmed": true,
+      "sensitivity_reviewed": true,
+      "retrieved_at": "2026-02-01"
+    }
+  ],
+  "claims": [
+    {"id": "C1", "text": "benchmark 显示速度提升 20%", "kind": "metric", "source_ids": ["M1"], "evidence_class": "independent", "evidence_quotes": [{"source_id": "M1", "text": "用户 benchmark"}]}
+  ],
+  "uncertainties": [{"id": "U1", "text": "用户材料未独立复现", "claim_ids": ["C1"]}]
+}

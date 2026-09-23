@@ -1,0 +1,14 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-no-source-fact",
+  "topic": "没有来源的事实",
+  "content_type": "flash",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [],
+  "claims": [
+    {"id": "C1", "text": "这是一个事实", "kind": "fact", "source_ids": [], "evidence_quotes": []}
+  ],
+  "uncertainties": []
+}

@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/codex-bridge/content-review.schema.json",
+  "title": "Codex long-form review metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "mode",
+    "draftHash",
+    "receipts",
+    "diagnostics",
+    "editorialMemo",
+    "qualityReview",
+    "warnings"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "codex.bridge.review.v1" },
+    "status": { "type": "string", "enum": ["succeeded", "succeeded_with_warnings", "review_required"] },
+    "mode": { "type": "string", "enum": ["initial_generation", "annotation_regeneration", "source_rewrite"] },
+    "draftHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "receipts": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "message"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "status": { "type": "string", "enum": ["applied", "partially_applied", "blocked"] },
+          "message": { "type": "string", "minLength": 1, "maxLength": 500 }
+        }
+      }
+    },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["humanized", "changes", "remainingFlags", "engine", "rulesVersion", "model", "passes", "preservedUserEdits"],
+      "properties": {
+        "humanized": { "type": "boolean" },
+        "changes": { "type": "array", "maxItems": 30, "items": { "type": "string", "maxLength": 500 } },
+        "remainingFlags": { "type": "array", "maxItems": 30, "items": { "type": "string", "maxLength": 500 } },
+        "engine": { "type": "string", "const": "codex-cli" },
+        "rulesVersion": { "type": "string", "enum": ["industrial-process-control.v1", "nonfiction-editorial.v1"] },
+        "model": { "type": "string", "maxLength": 100 },
+        "passes": { "type": "integer", "minimum": 2, "maximum": 2 },
+        "preservedUserEdits": { "type": "array", "maxItems": 30, "items": { "type": "string", "maxLength": 500 } }
+      }
+    },
+    "editorialMemo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["preservedUserEdits", "unresolved"],
+      "properties": {
+        "preservedUserEdits": { "type": "array", "maxItems": 30, "items": { "type": "string", "maxLength": 500 } },
+        "unresolved": { "type": "array", "maxItems": 30, "items": { "type": "string", "maxLength": 500 } }
+      }
+    },
+    "qualityReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["passed", "issues", "checks", "editorialScore"],
+      "properties": {
+        "passed": { "type": "boolean" },
+        "issues": {
+          "type": "array",
+          "maxItems": 30,
+          "items": { "type": "string", "maxLength": 500 }
+        },
+        "checks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "accuracy", "annotationCoverage", "humanVoice", "mobileReadability",
+            "industrialData", "crossSiteReasoning", "workflowIntegration", "actionAuthority",
+            "pilotAcceptance", "terminology"
+          ],
+          "properties": {
+            "accuracy": { "type": "boolean" },
+            "annotationCoverage": { "type": "boolean" },
+            "humanVoice": { "type": "boolean" },
+            "mobileReadability": { "type": "boolean" },
+            "industrialData": { "type": ["boolean", "null"] },
+            "crossSiteReasoning": { "type": ["boolean", "null"] },
+            "workflowIntegration": { "type": ["boolean", "null"] },
+            "actionAuthority": { "type": ["boolean", "null"] },
+            "pilotAcceptance": { "type": ["boolean", "null"] },
+            "terminology": { "type": ["boolean", "null"] }
+          }
+        },
+        "editorialScore": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["total", "threshold", "dimensions", "deductions"],
+          "properties": {
+            "total": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "threshold": { "type": "integer", "const": 99 },
+            "dimensions": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "factualBoundaries", "specificActionability", "authorVoiceContinuation",
+                "antiTemplateVariation", "mobileClarity"
+              ],
+              "properties": {
+                "factualBoundaries": { "$ref": "#/$defs/editorialDimension25" },
+                "specificActionability": { "$ref": "#/$defs/editorialDimension25" },
+                "authorVoiceContinuation": { "$ref": "#/$defs/editorialDimension20" },
+                "antiTemplateVariation": { "$ref": "#/$defs/editorialDimension20" },
+                "mobileClarity": { "$ref": "#/$defs/editorialDimension10" }
+              }
+            },
+            "deductions": {
+              "type": "array",
+              "maxItems": 30,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["dimension", "points", "reason"],
+                "properties": {
+                  "dimension": {
+                    "type": "string",
+                    "enum": [
+                      "factualBoundaries", "specificActionability", "authorVoiceContinuation",
+                      "antiTemplateVariation", "mobileClarity"
+                    ]
+                  },
+                  "points": { "type": "integer", "minimum": 1, "maximum": 100 },
+                  "reason": { "type": "string", "minLength": 1, "maxLength": 500 }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "warnings": { "type": "array", "maxItems": 16, "items": { "type": "string", "maxLength": 500 } }
+  },
+  "$defs": {
+    "editorialReasons": {
+      "type": "array",
+      "maxItems": 8,
+      "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+    },
+    "editorialDimension25": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "max", "reasons"],
+      "properties": {
+        "score": { "type": "integer", "minimum": 0, "maximum": 25 },
+        "max": { "type": "integer", "const": 25 },
+        "reasons": { "$ref": "#/$defs/editorialReasons" }
+      }
+    },
+    "editorialDimension20": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "max", "reasons"],
+      "properties": {
+        "score": { "type": "integer", "minimum": 0, "maximum": 20 },
+        "max": { "type": "integer", "const": 20 },
+        "reasons": { "$ref": "#/$defs/editorialReasons" }
+      }
+    },
+    "editorialDimension10": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "max", "reasons"],
+      "properties": {
+        "score": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "max": { "type": "integer", "const": 10 },
+        "reasons": { "$ref": "#/$defs/editorialReasons" }
+      }
+    }
+  }
+}

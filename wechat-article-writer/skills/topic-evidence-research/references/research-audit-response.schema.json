@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/content-desk/research-audit-response.schema.json",
+  "title": "Content Desk research audit response v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "status", "auditorModel", "auditedAt", "sourceChecks", "claimChecks", "issues", "summary", "independence"],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "content-desk.research-audit.v1" },
+    "status": { "type": "string", "enum": ["passed", "failed"] },
+    "auditorModel": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "auditedAt": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "sourceChecks": {
+      "type": "array",
+      "maxItems": 40,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sourceId", "status", "issues"],
+        "properties": {
+          "sourceId": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "status": { "type": "string", "enum": ["pass", "fail", "manual"] },
+          "issues": { "type": "array", "maxItems": 20, "items": { "type": "string", "maxLength": 500 } }
+        }
+      }
+    },
+    "claimChecks": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claimId", "status", "issues"],
+        "properties": {
+          "claimId": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "status": { "type": "string", "enum": ["supported", "mixed", "unverified", "rejected"] },
+          "issues": { "type": "array", "maxItems": 20, "items": { "type": "string", "maxLength": 500 } }
+        }
+      }
+    },
+    "issues": { "type": "array", "maxItems": 30, "items": { "type": "string", "maxLength": 500 } },
+    "summary": { "type": "string", "maxLength": 2000 },
+    "independence": { "type": "string", "maxLength": 1000 }
+  }
+}

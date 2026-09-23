@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "language", "echo", "ready"],
+  "properties": {
+    "schemaVersion": { "const": "content-desk.model-probe.v1" },
+    "language": { "const": "zh-CN" },
+    "echo": { "const": "质量门禁" },
+    "ready": { "const": true }
+  }
+}

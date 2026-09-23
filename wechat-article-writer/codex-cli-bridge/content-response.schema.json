@@ -1,0 +1,509 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/codex-bridge/content-response.schema.json",
+  "title": "Codex content bridge response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "mode",
+    "versionId",
+    "draft",
+    "titleCandidates",
+    "recommendedTitle",
+    "outline",
+    "tags",
+    "receipts",
+    "diagnostics",
+    "editorialMemo",
+    "evidencePacketId",
+    "evidencePacketHash",
+    "qualityReview",
+    "documentId",
+    "revisionId",
+    "contentHash",
+    "contentStatus",
+    "blockingReasons",
+    "deliveryStatus",
+    "runStatus",
+    "dnaUsage",
+    "skillUsage",
+    "memoryPromotion",
+    "warnings",
+    "dnaUsages",
+    "workflowReceipt",
+    "reviewAudit"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "enum": ["codex.bridge.response.v1", "content-desk.response.v2"] },
+    "status": { "type": "string", "enum": ["succeeded", "succeeded_with_warnings", "review_required"] },
+    "mode": { "type": "string", "enum": ["initial_generation", "annotation_regeneration", "source_rewrite"] },
+    "versionId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "draft": { "type": "string", "minLength": 1, "maxLength": 100000 },
+    "titleCandidates": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 8,
+      "items": { "type": "string", "minLength": 1, "maxLength": 120 }
+    },
+    "recommendedTitle": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "outline": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 12,
+      "items": { "type": "string", "minLength": 1, "maxLength": 300 }
+    },
+    "tags": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 8,
+      "items": { "type": "string", "minLength": 1, "maxLength": 40 }
+    },
+    "receipts": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "message"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "status": { "type": "string", "enum": ["applied", "partially_applied", "blocked"] },
+          "message": { "type": "string", "minLength": 1, "maxLength": 500 }
+        }
+      }
+    },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "humanized",
+        "changes",
+        "remainingFlags",
+        "engine",
+        "rulesVersion",
+        "model",
+        "passes",
+        "writerPasses",
+        "reviewPasses",
+        "preservedUserEdits"
+      ],
+      "properties": {
+        "humanized": { "type": "boolean" },
+        "changes": {
+          "type": "array",
+          "maxItems": 30,
+          "items": { "type": "string", "maxLength": 500 }
+        },
+        "remainingFlags": {
+          "type": "array",
+          "maxItems": 30,
+          "items": { "type": "string", "maxLength": 500 }
+        },
+        "engine": { "type": "string", "const": "codex-cli" },
+        "rulesVersion": { "type": "string", "enum": ["industrial-process-control.v1", "nonfiction-editorial.v1"] },
+        "model": { "type": "string", "maxLength": 100 },
+        "passes": { "type": "integer", "minimum": 2, "maximum": 11 },
+        "writerPasses": { "type": ["integer", "null"], "minimum": 1, "maximum": 9 },
+        "reviewPasses": { "type": "integer", "minimum": 1, "maximum": 2 },
+        "preservedUserEdits": {
+          "type": "array",
+          "maxItems": 30,
+          "items": { "type": "string", "maxLength": 500 }
+        }
+      }
+    },
+    "editorialMemo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["preservedUserEdits", "unresolved"],
+      "properties": {
+        "preservedUserEdits": {
+          "type": "array",
+          "maxItems": 30,
+          "items": { "type": "string", "maxLength": 500 }
+        },
+        "unresolved": {
+          "type": "array",
+          "maxItems": 30,
+          "items": { "type": "string", "maxLength": 500 }
+        }
+      }
+    },
+    "qualityReview": {
+      "type": "object",
+      "additionalProperties": false,
+        "required": ["passed", "issues", "checks", "editorialScore"],
+      "properties": {
+        "passed": { "type": "boolean" },
+        "issues": {
+          "type": "array",
+          "maxItems": 30,
+          "items": { "type": "string", "maxLength": 500 }
+        },
+          "checks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "accuracy",
+            "annotationCoverage",
+            "humanVoice",
+            "mobileReadability",
+            "industrialData",
+            "crossSiteReasoning",
+            "workflowIntegration",
+            "actionAuthority",
+            "pilotAcceptance",
+            "terminology"
+          ],
+          "properties": {
+            "accuracy": { "type": "boolean" },
+            "annotationCoverage": { "type": "boolean" },
+            "humanVoice": { "type": "boolean" },
+            "mobileReadability": { "type": "boolean" },
+            "industrialData": { "type": ["boolean", "null"] },
+            "crossSiteReasoning": { "type": ["boolean", "null"] },
+            "workflowIntegration": { "type": ["boolean", "null"] },
+            "actionAuthority": { "type": ["boolean", "null"] },
+            "pilotAcceptance": { "type": ["boolean", "null"] },
+            "terminology": { "type": ["boolean", "null"] }
+          }
+        },
+        "editorialScore": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "可解释的编辑评分，不是 AI 检测概率；两位独立审核的保守结果必须达到 99 分。",
+          "required": ["total", "threshold", "dimensions", "deductions"],
+          "properties": {
+            "total": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "threshold": { "type": "integer", "const": 99 },
+            "dimensions": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "factualBoundaries",
+                "specificActionability",
+                "authorVoiceContinuation",
+                "antiTemplateVariation",
+                "mobileClarity"
+              ],
+              "properties": {
+                "factualBoundaries": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["score", "max", "reasons"],
+                  "properties": {
+                    "score": { "type": "integer", "minimum": 0, "maximum": 25 },
+                    "max": { "type": "integer", "const": 25 },
+                    "reasons": {
+                      "type": "array",
+                      "maxItems": 8,
+                      "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+                    }
+                  }
+                },
+                "specificActionability": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["score", "max", "reasons"],
+                  "properties": {
+                    "score": { "type": "integer", "minimum": 0, "maximum": 25 },
+                    "max": { "type": "integer", "const": 25 },
+                    "reasons": {
+                      "type": "array",
+                      "maxItems": 8,
+                      "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+                    }
+                  }
+                },
+                "authorVoiceContinuation": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["score", "max", "reasons"],
+                  "properties": {
+                    "score": { "type": "integer", "minimum": 0, "maximum": 20 },
+                    "max": { "type": "integer", "const": 20 },
+                    "reasons": {
+                      "type": "array",
+                      "maxItems": 8,
+                      "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+                    }
+                  }
+                },
+                "antiTemplateVariation": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["score", "max", "reasons"],
+                  "properties": {
+                    "score": { "type": "integer", "minimum": 0, "maximum": 20 },
+                    "max": { "type": "integer", "const": 20 },
+                    "reasons": {
+                      "type": "array",
+                      "maxItems": 8,
+                      "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+                    }
+                  }
+                },
+                "mobileClarity": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["score", "max", "reasons"],
+                  "properties": {
+                    "score": { "type": "integer", "minimum": 0, "maximum": 10 },
+                    "max": { "type": "integer", "const": 10 },
+                    "reasons": {
+                      "type": "array",
+                      "maxItems": 8,
+                      "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+                    }
+                  }
+                }
+              }
+            },
+            "deductions": {
+              "type": "array",
+              "maxItems": 30,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["dimension", "points", "reason"],
+                "properties": {
+                  "dimension": {
+                    "type": "string",
+                    "enum": [
+                      "factualBoundaries",
+                      "specificActionability",
+                      "authorVoiceContinuation",
+                      "antiTemplateVariation",
+                      "mobileClarity"
+                    ]
+                  },
+                  "points": { "type": "integer", "minimum": 1, "maximum": 100 },
+                  "reason": { "type": "string", "minLength": 1, "maxLength": 500 }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "reviewAudit": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["schemaVersion", "required", "frozen", "exactMatch", "conservativeScore", "reviewers"],
+      "properties": {
+        "schemaVersion": { "type": "string", "const": "content-desk.review-audit.v1" },
+        "required": { "type": "boolean" },
+        "frozen": { "type": "boolean" },
+        "exactMatch": { "type": "boolean" },
+        "conservativeScore": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "reviewers": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["pass", "model", "score", "draftHash"],
+            "properties": {
+              "pass": { "type": "integer", "enum": [1, 2] },
+              "model": { "type": "string", "minLength": 1, "maxLength": 100 },
+              "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+              "draftHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+            }
+          }
+        }
+      }
+    },
+    "evidencePacketId": { "type": ["string", "null"], "pattern": "^ep-[A-Za-z0-9][A-Za-z0-9_:-]*$" },
+    "evidencePacketHash": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "documentId": { "type": ["string", "null"], "maxLength": 128 },
+    "revisionId": { "type": ["string", "null"], "maxLength": 128 },
+    "contentHash": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "contentStatus": {
+      "type": ["string", "null"],
+      "enum": ["working", "review_required", "assets_pending", "ready_to_export", "archived", null]
+    },
+    "blockingReasons": {
+      "type": ["array", "null"],
+      "maxItems": 20,
+      "items": { "type": "string", "maxLength": 200 }
+    },
+    "deliveryStatus": {
+      "type": ["string", "null"],
+      "enum": ["not_started", "prepared", "submitted", "succeeded", "partial_failed", "failed", "cancelled", null]
+    },
+    "runStatus": {
+      "type": ["string", "null"],
+      "enum": ["running", "succeeded", "failed", null]
+    },
+    "dnaUsage": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["mode", "ready", "artifact"],
+      "properties": {
+        "mode": { "type": "string", "enum": ["none", "writing", "academic"] },
+        "ready": { "type": "boolean" },
+        "artifact": { "type": ["string", "null"], "minLength": 1, "maxLength": 240 }
+      }
+    },
+    "dnaUsages": {
+      "type": ["array", "null"],
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "mode", "ready", "artifact", "artifactHash", "jobId", "receipt"],
+        "properties": {
+          "id": { "type": "string", "enum": ["writing-dna", "academic-writing-dna"] },
+          "mode": { "type": "string", "enum": ["writing", "academic"] },
+          "ready": { "type": "boolean" },
+          "artifact": { "type": ["string", "null"], "minLength": 1, "maxLength": 240 },
+          "artifactHash": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+          "jobId": { "type": ["string", "null"], "minLength": 1, "maxLength": 128 },
+          "receipt": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "required": ["schemaVersion", "jobId", "mode", "state", "artifactHash", "artifactManifest", "completedAt"],
+            "properties": {
+              "schemaVersion": { "type": "string", "const": "content-desk.dna-receipt.v1" },
+              "jobId": { "type": "string", "minLength": 1, "maxLength": 128 },
+              "mode": { "type": "string", "enum": ["writing", "academic"] },
+              "state": { "type": "string", "const": "succeeded" },
+              "artifactHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+              "artifactManifest": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["schemaVersion", "mode", "workspace", "files", "sha256", "artifactHash"],
+                "properties": {
+                  "schemaVersion": { "type": "string", "const": "content-desk.dna-artifact.v1" },
+                  "mode": { "type": "string", "enum": ["writing", "academic"] },
+                  "workspace": { "type": "string", "minLength": 1, "maxLength": 240 },
+                  "files": {
+                    "type": "array",
+                    "maxItems": 512,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["path", "bytes", "sha256"],
+                      "properties": {
+                        "path": { "type": "string", "minLength": 1, "maxLength": 240 },
+                        "bytes": { "type": "integer", "minimum": 0 },
+                        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+                      }
+                    }
+                  },
+                  "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+                  "artifactHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+                }
+              },
+              "completedAt": { "type": "string", "minLength": 1, "maxLength": 64 }
+            }
+          }
+        }
+      }
+    },
+    "workflowReceipt": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["schemaVersion", "executionPlanHash", "inputSnapshotHash", "nodes", "reviewAudit"],
+      "properties": {
+        "schemaVersion": { "type": "string", "const": "content-desk.workflow-receipt.v1" },
+        "executionPlanHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "inputSnapshotHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "nodes": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["nodeId", "verb", "status", "artifactHash", "outcome"],
+            "properties": {
+              "nodeId": { "type": "string", "minLength": 1, "maxLength": 160 },
+              "verb": { "type": "string", "enum": ["prepared", "context_supplied", "loaded", "drafted", "reviewed", "evaluated", "passed", "committed"] },
+              "status": { "type": "string", "const": "succeeded" },
+              "artifactHash": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+              "outcome": { "type": ["string", "null"], "enum": ["passed", "review_required", null] }
+            }
+          }
+        },
+        "reviewAudit": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["schemaVersion", "required", "frozen", "exactMatch", "conservativeScore", "reviewers"],
+          "properties": {
+            "schemaVersion": { "type": "string", "const": "content-desk.review-audit.v1" },
+            "required": { "type": "boolean" },
+            "frozen": { "type": "boolean" },
+            "exactMatch": { "type": "boolean" },
+            "conservativeScore": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "reviewers": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["pass", "model", "score", "draftHash"],
+                "properties": {
+                  "pass": { "type": "integer", "enum": [1, 2] },
+                  "model": { "type": "string", "minLength": 1, "maxLength": 100 },
+                  "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+                  "draftHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "skillUsage": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["schemaVersion", "chain", "core"],
+      "properties": {
+        "schemaVersion": { "type": "string", "const": "content-desk.skill-usage.v1" },
+        "chain": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "order", "status", "artifact"],
+            "properties": {
+              "id": { "type": "string", "enum": ["topic-evidence-research", "industrial-ai-wechat-research-writing", "writing-dna", "academic-writing-dna"] },
+              "order": { "type": "integer", "minimum": 1, "maximum": 4 },
+              "status": { "type": "string", "const": "applied" },
+              "artifact": { "type": ["string", "null"], "minLength": 1, "maxLength": 240 }
+            }
+          }
+        },
+        "core": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["writer", "reviewer", "qualityGate"],
+          "properties": {
+            "writer": { "type": "string", "const": "completed" },
+            "reviewer": { "type": "string", "const": "completed" },
+            "qualityGate": { "type": "string", "const": "completed" }
+          }
+        }
+      }
+    },
+    "memoryPromotion": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["promotedAnnotationIds"],
+      "properties": {
+        "promotedAnnotationIds": { "type": "array", "maxItems": 100, "items": { "type": "string", "minLength": 1, "maxLength": 128 } }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "maxItems": 30,
+      "items": { "type": "string", "maxLength": 500 }
+    }
+  }
+}

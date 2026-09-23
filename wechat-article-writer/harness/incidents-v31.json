@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "content-desk.incident-harness.v1",
+  "release": "v31",
+  "rule": "An incident is closed only when its original reproduction fails, the corrected path passes, and the evidence is repeatable.",
+  "incidents": [
+    {
+      "id": "INC-001-fake-button",
+      "reproduction": "A visible start/regenerate/stop button has no reachable request and state transition.",
+      "guard": "Every interactive control has a success case and a disabled-or-failure case.",
+      "evidence": ["browser.click", "network.request", "network.response", "state.assertion"],
+      "sourceRegexIsSufficient": false
+    },
+    {
+      "id": "INC-002-false-connected",
+      "reproduction": "The UI reports Codex connected when only the page or Bridge is reachable.",
+      "guard": "Surface, Bridge, CLI discovery, authentication, model schema probe and Skill readiness remain separate.",
+      "evidence": ["health.layers", "modelCatalog.probe", "skill.readiness"]
+    },
+    {
+      "id": "INC-003-input-leak",
+      "reproduction": "Typing a topic changes generated content or final output before model completion.",
+      "guard": "Only a validated model response may create a working revision.",
+      "evidence": ["contentHash.before", "contentHash.afterInput", "revision.afterCommit"]
+    },
+    {
+      "id": "INC-004-stale-overwrite",
+      "reproduction": "A cached or late result overwrites a newer topic, manual edit, annotation or graph.",
+      "guard": "Write-back requires run ID, execution-plan hash, input-snapshot hash and current revision CAS.",
+      "evidence": ["cleanSession", "dirtySession", "lateResultRejected"]
+    },
+    {
+      "id": "INC-005-manual-edit-loss",
+      "reproduction": "Annotation regeneration reads the previous generated draft but drops the current human-edited draft.",
+      "guard": "currentDraft is authoritative and every active annotation receives a receipt.",
+      "evidence": ["manualEditPreserved", "annotationReceiptsComplete", "failedRunKeepsRevision"]
+    },
+    {
+      "id": "INC-006-dna-fake-fallback",
+      "reproduction": "A connected DNA node runs without the original skill, confirmed corpus snapshot or immutable artifact.",
+      "guard": "Missing original distillation evidence blocks execution; no summary-rule fallback exists.",
+      "evidence": ["snapshotId", "artifactHash", "artifactVersion", "workflowReceipt"]
+    },
+    {
+      "id": "INC-007-self-score-release",
+      "reproduction": "One model writes a draft, self-reports 95 or 100, and releases it without independent review.",
+      "guard": "Two independent reviews target one frozen draft; release score is the conservative minimum and hard vetoes override it.",
+      "evidence": ["frozenDraftHash", "reviewerA.receipt", "reviewerB.receipt", "gate.decision"]
+    },
+    {
+      "id": "INC-008-fake-e2e",
+      "reproduction": "A test searches page source for button labels and is reported as UI E2E.",
+      "guard": "Static source tests are labelled static; publication requires an isolated real-browser run against the Bridge.",
+      "evidence": ["browserSessionId", "requestId", "serverRunReceipt", "screenshot"]
+    },
+    {
+      "id": "INC-009-model-selector-placeholder",
+      "reproduction": "A model appears selectable although it is missing, unconfigured, unreachable or cannot satisfy the schema.",
+      "guard": "Writer and Reviewer profiles expose installed/configured/reachable/schemaProbe/ready independently.",
+      "evidence": ["modelCatalog", "schemaProbe", "unknownModelRejected"]
+    },
+    {
+      "id": "INC-010-detector-misrepresentation",
+      "reproduction": "An editorial or detector score is shown as the probability that a human wrote the text.",
+      "guard": "The product calls it an editorial release score and treats external detectors as optional side signals only.",
+      "evidence": ["uiLabel", "responseSchema", "hardVetoAudit"]
+    },
+    {
+      "id": "INC-011-timeout-false-failure",
+      "reproduction": "A long model task is declared failed at the old HTTP timeout while its process is still running.",
+      "guard": "Model stages have no application wall-clock deadline; the run remains queryable and only an explicit matching cancel may stop it.",
+      "evidence": ["runId", "elapsedBeyondLegacyTimeout", "runLedger", "oldRevisionUnchanged"]
+    },
+    {
+      "id": "INC-012-release-state-confusion",
+      "reproduction": "A saved build, URL query parameter, Git tag or local marker is reported as a deployed release.",
+      "guard": "local_candidate, validated, tagged and deployed are separately evidenced states.",
+      "evidence": ["releaseManifest", "commit", "artifactHash", "deploymentReceipt"]
+    },
+    {
+      "id": "INC-013-rule-false-positive",
+      "reproduction": "A necessary professional list, model number, formula, unit or ordinary Chinese phrase is blocked as AI flavor.",
+      "guard": "Single tokens never hard-veto; grouped patterns require positive, negative and adversarial cases.",
+      "evidence": ["positiveCases", "negativeCases", "adversarialCases", "falsePositiveReport"]
+    },
+    {
+      "id": "INC-014-hidden-generation-gate",
+      "reproduction": "The start button shows a forbidden cursor without a visible reason or recovery action.",
+      "guard": "Every blocker exposes a stable code, node id, Chinese explanation and recovery action, and the server enforces the same gate.",
+      "evidence": ["blockerCodes", "nodeIds", "visibleReasons", "server409", "recoveryClick"]
+    },
+    {
+      "id": "INC-015-model-silent-fallback",
+      "reproduction": "An unavailable selected model silently falls back to another model while the UI keeps the old label.",
+      "guard": "Provider and model profile are hashed and receipted; unavailable profiles fail closed and late results are rejected.",
+      "evidence": ["modelCatalog", "executionHash", "modelReceipt", "unknownModelRejected", "lateResultRejected"]
+    },
+    {
+      "id": "INC-016-unsupported-claim-release",
+      "reproduction": "Specific numbers, models, quotes or cases pass review without a frozen evidence link.",
+      "guard": "Every verifiable claim is supported, an explicit assumption or unsupported; unsupported claims hard-veto.",
+      "evidence": ["claimLedger", "sourceSegmentIds", "unsupportedHardVeto", "technicalPreservationTests"]
+    },
+    {
+      "id": "INC-017-content-run-recovery-gap",
+      "reproduction": "A browser disconnect, refresh or Bridge restart loses the status or result of an ordinary writing run.",
+      "guard": "Writing runs use a persistent ledger, restart marks interrupted state, cancel kills only the exact process tree and late output cannot commit.",
+      "evidence": ["clientRunId", "refreshRecovery", "restartRecovery", "cancelReceipt", "lateCommitRejected"]
+    },
+    {
+      "id": "INC-018-localhost-security-gap",
+      "reproduction": "An untrusted web origin, prompt-injected reference or disguised local file crosses the Bridge boundary.",
+      "guard": "Origin/session gates, prompt-data separation, secret redaction and file-content/path checks fail closed.",
+      "evidence": ["originRejected", "csrfOrSessionReceipt", "promptInjectionCase", "secretScan", "fileMagicAndPathChecks"]
+    },
+    {
+      "id": "INC-019-openai-schema-required-mismatch",
+      "reproduction": "A newly added structured-output property is marked locally optional, so OpenAI rejects the entire schema before writing begins.",
+      "guard": "Every property of every closed object in the model-facing schema is required; optional Bridge-owned values are nullable instead of omitted.",
+      "evidence": ["invalidJsonSchemaRequestId", "directCliSchemaProbe", "schemaContractTest", "realContentSmoke"]
+    },
+    {
+      "id": "INC-020-honest-review-treated-as-contract-failure",
+      "reproduction": "A reviewer honestly returns humanized=false and the Bridge treats it as malformed output rather than a review-required candidate.",
+      "guard": "The contract accepts both boolean values; false is retained and closes the quality gate without discarding a structurally valid draft.",
+      "evidence": ["failedReviewRequestId", "humanizedFalseTest", "candidateStatusAssertion"]
+    },
+    {
+      "id": "INC-021-model-invents-empty-receipts",
+      "reproduction": "An initial run has no annotations, but the model invents a receipt and the Bridge discards the whole draft.",
+      "guard": "When the server-owned annotation ID set is empty, receipts are deterministically normalized to an empty array; non-empty annotation runs remain exact and strict.",
+      "evidence": ["failedWriterRequestId", "emptyReceiptNormalizationTest", "realContentSmoke"]
+    },
+    {
+      "id": "INC-022-monolithic-schema-latency",
+      "reproduction": "Writer and both reviewers each regenerate one large delivery-shaped object, causing a 300-character smoke run to take more than fifteen minutes.",
+      "guard": "Use stage-specific schemas and receipts, expose review_a/review_b timing, and benchmark each model/reasoning profile before calling the quick workflow usable.",
+      "evidence": ["elapsedMsByStage", "modelProfileReceipt", "stageSpecificSchemaBenchmark", "stopWithoutOverwrite"]
+    }
+  ]
+}

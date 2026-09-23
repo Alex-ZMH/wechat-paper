@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v32",
+  "productVersion": "0.32.0",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v32",
+  "bridgeVersion": "codex-bridge.v32-20260901",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "status": "deployed",
+  "sourceCommit": "2c92356feeaa3b125ea9fa8cd6aeb640c988b4be",
+  "sourceTag": "content-desk-v32",
+  "siteVersion": 31,
+  "siteVersionId": "appgprj_6a8e546836b88191b3ded519fc5d233e~appgver_5aa48e904e0c8191ad7796c3f8540a1f",
+  "deploymentId": "appgdep_6a96c52d6ef48191a6ab7542d63e15cb",
+  "publicUrl": "https://gongzhonghao-content-desk.abellmosleynce.chatgpt.site",
+  "validation": {
+    "studioTests": "126/126",
+    "bridgeTests": "189/189",
+    "researchContractTests": "7/7",
+    "typescript": "passed",
+    "lint": "passed_without_warnings",
+    "build": "passed",
+    "bridgeSyntax": "passed",
+    "codexSearchCliParser": "passed",
+    "evidencePacketValidator": "passed",
+    "realTopicResearchSmoke": {
+      "status": "passed",
+      "clientRunId": "v32-real-research-20260901-004",
+      "topic": "NIST AI 600-1 对 confabulation 风险的定义与建议的降低措施",
+      "depth": "direct",
+      "researcherModel": "codex-luna",
+      "auditorModel": "codex-sol",
+      "packetId": "ep-mtimi398-98e479a3",
+      "packetHash": "ff00fae716f0da08800057858c5df63282bd1908d2af7db77f77f9e23458c1e0",
+      "researchStatus": "complete",
+      "retrievalStatus": "complete",
+      "auditStatus": "passed",
+      "sourceCount": 3,
+      "claimCount": 9,
+      "uncertaintyCount": 4,
+      "roundTripHashMatched": true,
+      "primarySource": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+    },
+    "realEvidenceWritingSmoke": "pending",
+    "realBrowserE2E": "pending",
+    "publicHttpStatus": 200,
+    "publicBuildMarker": "CONTENT_DESK_BUILD=v32",
+    "publicReleaseManifest": "0.32.0"
+  },
+  "researchSkill": {
+    "path": "skills/topic-evidence-research",
+    "schemaVersion": "content-desk.evidence-packet.v1",
+    "runtime": "codex-cli-search_two_stage",
+    "upstream": {
+      "repository": "https://github.com/dimayip/research-agent",
+      "commit": "5fab4dc258315e9680064b565ba49a5a07ae7895",
+      "license": "MIT",
+      "vendoredPath": "skills/research-agent-upstream",
+      "skillFileSha256": "2da1ebbbf6b0905244a0abcdcdd4a3b5cbeb2846c56e0d1214f512d2449e90e8"
+    }
+  },
+  "closedDeterministicRisks": [
+    "Codex CLI search flag is emitted before the exec subcommand",
+    "research and audit Structured Output schemas define every nested object and array item",
+    "retrieval clock, access time, execution mode, packet id and packet hash are Bridge-owned",
+    "month-only publication dates become null instead of invented calendar dates",
+    "research skill is pinned first and emits exactly one packet_frozen receipt",
+    "raw browser researchPacket, wrong id, wrong hash and failed audit cannot authorize writing"
+  ],
+  "openReleaseBlockers": [
+    "A real /v1/content run using the frozen evidence packet has not yet been recorded.",
+    "A clean real-browser click run from topic input through research summary and writing unlock has not yet been recorded.",
+    "Research currently uses a synchronous cancellable request; refresh/restart recovery is not a persistent research job.",
+    "The v31 99-point editorial rubric still lacks completed human-labelled blind calibration."
+  ],
+  "deployment": {
+    "savedToSites": true,
+    "deployed": true,
+    "publicBaseline": "v32",
+    "sitesVersionNumber": 31,
+    "accessMode": "public"
+  },
+  "notes": [
+    "v32 was formally deployed at the user's explicit request for hands-on testing.",
+    "The public URL remains a launcher-only surface; model execution and evidence packet storage stay on the local workbench.",
+    "Deterministic tests did not close the research gate; a real Codex search, isolated audit, persisted packet readback and hash match were required."
+  ]
+}

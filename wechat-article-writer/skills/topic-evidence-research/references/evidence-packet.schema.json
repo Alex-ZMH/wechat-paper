@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/content-desk/evidence-packet.schema.json",
+  "title": "Content Desk evidence packet v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "packetId", "topic", "scope", "retrieval", "researchStatus", "retrievalStatus", "createdAt", "sources", "claims", "uncertainties", "audit"],
+  "properties": {
+    "schemaVersion": { "const": "content-desk.evidence-packet.v1" },
+    "packetId": { "type": "string", "pattern": "^ep-[A-Za-z0-9][A-Za-z0-9_:-]*$" },
+    "packetHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "topic": { "type": "string", "minLength": 1, "maxLength": 12000 },
+    "scope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["cutoff"],
+      "properties": {
+        "question": { "type": ["string", "null"], "maxLength": 4000 },
+        "audience": { "type": ["string", "null"], "maxLength": 500 },
+        "domain": { "type": ["string", "null"], "maxLength": 500 },
+        "genre": { "type": ["string", "null"], "maxLength": 500 },
+        "channel": { "type": ["string", "null"], "maxLength": 500 },
+        "jurisdiction": { "type": ["string", "null"], "maxLength": 500 },
+        "include": { "type": "array", "maxItems": 20, "items": { "type": "string", "minLength": 1, "maxLength": 500 } },
+        "exclude": { "type": "array", "maxItems": 20, "items": { "type": "string", "minLength": 1, "maxLength": 500 } },
+        "cutoff": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "sourceTypes": { "type": "array", "maxItems": 12, "items": { "type": "string", "maxLength": 64 } }
+      }
+    },
+    "retrieval": {
+      "type": "object", "additionalProperties": false,
+      "required": ["queries", "mode", "startedAt", "completedAt"],
+      "properties": {
+        "queries": { "type": "array", "minItems": 1, "maxItems": 40, "items": { "type": "string", "minLength": 1, "maxLength": 500 } },
+        "mode": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "startedAt": { "type": "string", "format": "date-time" },
+        "completedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "researchStatus": { "enum": ["complete", "partial", "blocked", "manual_required"] },
+    "retrievalStatus": { "enum": ["complete", "partial", "blocked", "manual_required"] },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "sources": {
+      "type": "array", "maxItems": 40,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["sourceId", "title", "url", "publisher", "sourceType", "authority", "accessedAt", "accessStatus", "usageStatus"],
+        "properties": {
+          "sourceId": { "type": "string", "pattern": "^s-[A-Za-z0-9][A-Za-z0-9_:-]*$" },
+          "title": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "url": { "type": "string", "format": "uri", "pattern": "^https?://" },
+          "publisher": { "type": "string", "minLength": 1, "maxLength": 300 },
+          "sourceType": { "type": "string", "maxLength": 64 },
+          "authority": { "enum": ["A", "B", "C", "U"] },
+          "publishedAt": { "type": ["string", "null"] },
+          "accessedAt": { "type": "string" },
+          "sourceFamilyId": { "type": ["string", "null"], "maxLength": 128 },
+          "accessStatus": { "enum": ["accessible", "partial", "blocked", "manual_required"] },
+          "usageStatus": { "enum": ["allowed", "metadata_only", "manual_required", "unknown"] },
+          "excerpt": { "type": ["string", "null"], "maxLength": 1200 },
+          "locator": { "type": ["string", "null"], "maxLength": 500 },
+          "contentHash": { "type": ["string", "null"], "maxLength": 128 }
+        }
+      }
+    },
+    "claims": {
+      "type": "array", "maxItems": 100,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["claimId", "text", "kind", "sourceIds", "evidence", "confidence", "status"],
+        "properties": {
+          "claimId": { "type": "string", "pattern": "^c-[A-Za-z0-9][A-Za-z0-9_:-]*$" },
+          "text": { "type": "string", "minLength": 1, "maxLength": 1500 },
+          "kind": { "enum": ["fact", "definition", "metric", "case_result", "vendor_claim", "inference", "opinion"] },
+          "sourceIds": { "type": "array", "maxItems": 40, "items": { "type": "string" } },
+          "evidence": { "type": "array", "maxItems": 40, "items": { "type": "object", "additionalProperties": false, "required": ["sourceId", "excerpt"], "properties": { "sourceId": { "type": "string" }, "excerpt": { "type": "string", "minLength": 1, "maxLength": 1200 }, "locator": { "type": ["string", "null"], "maxLength": 500 } } } },
+          "confidence": { "enum": ["high", "medium", "low", "disputed"] },
+          "status": { "enum": ["supported", "mixed", "unverified", "rejected"] },
+          "basis": { "type": ["string", "null"], "maxLength": 1000 }
+        }
+      }
+    },
+    "uncertainties": {
+      "type": "array", "maxItems": 80,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["uncertaintyId", "text", "claimIds"],
+        "properties": {
+          "uncertaintyId": { "type": "string", "pattern": "^u-[A-Za-z0-9][A-Za-z0-9_:-]*$" },
+          "text": { "type": "string", "minLength": 1, "maxLength": 1000 },
+          "claimIds": { "type": "array", "maxItems": 100, "items": { "type": "string" } },
+          "action": { "type": ["string", "null"], "maxLength": 1000 }
+        }
+      }
+    },
+    "audit": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "auditorModel", "auditedAt", "sourceChecks", "claimChecks", "issues"],
+      "properties": {
+        "status": { "enum": ["passed", "failed"] },
+        "auditorModel": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "auditedAt": { "type": "string", "format": "date-time" },
+        "sourceChecks": { "type": "array", "maxItems": 40 },
+        "claimChecks": { "type": "array", "maxItems": 100 },
+        "issues": { "type": "array", "maxItems": 30, "items": { "type": "string", "maxLength": 500 } },
+        "summary": { "type": ["string", "null"], "maxLength": 2000 },
+        "independence": { "type": ["string", "null"], "maxLength": 1000 }
+      }
+    }
+  }
+}

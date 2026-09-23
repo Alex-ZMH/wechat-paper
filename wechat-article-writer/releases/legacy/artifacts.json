@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "content-desk.legacy-artifacts.v1",
+  "status": "isolated",
+  "artifacts": [
+    {
+      "name": "content-desk-v7-8912556.tar.gz",
+      "bytes": 2473089,
+      "sha256": "3ddfd2c3c8578463ab8624e827cbdaa2ee993a72f5e4dc5e60f0c0f8b86e2e40"
+    },
+    {
+      "name": "content-desk-v8-d1d3193.tar.gz",
+      "bytes": 2474038,
+      "sha256": "bbe708c1e8e5ea35471cabef71f30b37846ce284e3238bd12d4cb99909237532"
+    },
+    {
+      "name": "site-package-v10-52ccc10.tar.gz",
+      "bytes": 2478892,
+      "sha256": "a53c8598d6220a0768ffc5dae033f26552ec2ac23a3f59a0df6e62501a11acfe"
+    },
+    {
+      "name": "site-package-v11-a2ab4f6.tar.gz",
+      "bytes": 2478909,
+      "sha256": "76564d0983010078495de8ac9854032027a433b591de84e0f1fdca1a825a426c"
+    },
+    {
+      "name": "site-package-v12-15702c3.tar.gz",
+      "bytes": 2478934,
+      "sha256": "8be39239165f7e7c248e28f4c159aa602a3454eb9b96bf1d8c7f418b23a238f8"
+    }
+  ],
+  "isolatedStaging": [
+    "site-package-v7-8912556/",
+    "site-package-v7-8912556b/",
+    "site-package-v8-d1d3193/",
+    "site-package-v9-ae10ab1/",
+    "site-package-v9b-ae10ab1/",
+    "site-stage-v10-52ccc10/"
+  ],
+  "failedPackaging": [
+    "failed-packaging/v26/site-package-v26-c4f11de/",
+    "failed-packaging/v26/content-desk-v26-c4f11de.tar.gz",
+    "failed-packaging/v26/site-package-v26-c4f11de-final/",
+    "failed-packaging/v26/content-desk-v26-c4f11de-final.tar.gz"
+  ],
+  "notes": [
+    "压缩发布物移入 releases/legacy/artifacts/，不再参与运行或发布。",
+    "重复解包和 staging 目录移入 releases/legacy/discarded-staging/；原 outputs 运行目录只保留 qa。",
+    "递归删除被当前执行策略阻止，未使用跨 shell 或绕过方式强删。"
+  ]
+}

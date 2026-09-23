@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "outline-without-materials",
+  "description": "检查智能体能在缺少事实材料时给出公众号选题和大纲，同时标出假设而不虚构证据。",
+  "input": {
+    "message": "我想写一篇关于‘周末给自己留出两小时’的公众号文章，读者是忙碌的上班族。请给我选题角度和大纲，不要编造研究或数据。"
+  },
+  "expect": {
+    "mustContain": ["角度", "大纲", "假设"],
+    "mustNotContain": ["研究表明", "保证"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/outline-quality.md"
+}

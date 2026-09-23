@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-fema-manufacturing-normalize",
+  "description": "制造质量强语境下识别 FEMA 拼写转位，透明规范为 FMEA，并保持方法边界。",
+  "input": {
+    "message": "给汽车零部件质量工程师写一段“FEMA 七步法”与 8D 的对比。现场材料还提到 DFMEA、PFMEA、S/O/D、AP 和控制计划。先把术语问题处理清楚，再给可用的内容框架。"
+  },
+  "expect": {
+    "mustContain": ["FMEA", "FEMA", "风险", "策划与准备", "DFMEA", "PFMEA", "RPN", "AP"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-fema-manufacturing-normalize.md"
+}

@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v30",
+  "productVersion": "0.30.0",
+  "siteVersion": 30,
+  "siteVersionId": "appgprj_6a8e546836b88191b3ded519fc5d233e~appgver_43101531b8d88191a676b26b72e2ec15",
+  "deploymentId": "appgdep_6a96632a02d48191a7aaa0914e51999b",
+  "publicUrl": "https://gongzhonghao-content-desk.abellmosleynce.chatgpt.site",
+  "sourceCommit": "f43afe99c84c51edc2f6ea666a7d25e470ec329f",
+  "sourceTag": "content-desk-v30",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v30",
+  "bridgeVersion": "codex-bridge.v30-20260901",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "archive": {
+    "path": "outputs/content-desk-v30-sites-f43afe9.tar.gz",
+    "sha256": "6077eeeb439f5a3ac56936bab227f99396b548bd51edcc036c6822d2ffb224cb",
+    "sizeBytes": 2570594,
+    "localEntryCount": 75,
+    "sitesContentHash": "sha256:b4f9560e5701ac705dbce066a0a596db79cae4406b0d04f41795d7b75d82f628",
+    "sitesFileCount": 58,
+    "layout": "dist/server/index.js + dist/.openai/hosting.json"
+  },
+  "validation": {
+    "studioTests": "114/114",
+    "bridgeTests": "170/170",
+    "typescript": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "gitDiffCheck": "passed",
+    "strictAudit": "three_rounds_go_no_p0_p1",
+    "publicHttpStatus": 200,
+    "publicMarker": "CONTENT_DESK_BUILD=v30",
+    "publicSurface": "launcher_only",
+    "bridgeHealth": {
+      "code": "ready",
+      "authenticated": true,
+      "cliVersion": "codex-cli 0.151.0-alpha.7.2"
+    },
+    "realCorpusE2E": {
+      "engine": "codex-cli",
+      "sourceFiles": 2,
+      "sourceBytes": 1421,
+      "writingPackageId": "21298a6d-d2f2-42d2-9267-38c7e49f0a71",
+      "academicPackageId": "1ac8f755-59f0-4934-913d-6a9b40fbd9d5",
+      "writingSnapshotId": "120d534b-0b47-4ff1-bdc3-e02642c74106",
+      "academicSnapshotId": "2d6b8ee9-3be3-448e-ad38-c41b14477665",
+      "modeIsolation": "passed",
+      "crossModeStatusIsolation": "passed"
+    },
+    "realAcademicDnaJob": {
+      "jobId": "e67e6c04-3005-4cf2-82b0-e42487cd1e83",
+      "mode": "academic",
+      "status": "succeeded",
+      "corpusSnapshotId": "2d6b8ee9-3be3-448e-ad38-c41b14477665",
+      "artifactSha256": "b5373774d964a8059b0f356f1170425bab2531c9ad2c8380de3db3c501a7871d",
+      "receiptHashesMatch": true,
+      "completedAt": "2026-09-01T05:24:17.524Z",
+      "durationApproxSeconds": 590,
+      "ready": true,
+      "corpusCount": 2
+    }
+  },
+  "cleanup": {
+    "status": "version_isolated",
+    "preservedRollback": "outputs/content-desk-v29-sites-0c4202f.tar.gz",
+    "preservedCurrent": "outputs/content-desk-v30-sites-f43afe9.tar.gz",
+    "legacyCleanup": "blocked_by_host_policy",
+    "reason": "递归旧目录清理仍被当前主机策略在进程启动前拒绝；未改用其他 shell 绕过。"
+  },
+  "status": "deployed",
+  "notes": [
+    "v30 只开放严格 UTF-8 的 MD/TXT；DOCX、PDF、HTML、ZIP、OCR 和公开 URL 均未实现。",
+    "Writing 与 Academic 语料包、确认快照、状态和幂等键按 mode 隔离。",
+    "真实 Academic DNA 任务由本机 Codex CLI 完成，job、snapshot、receipt 和 artifact manifest 可相互核对。",
+    "公开 Sites 页面只负责本机工作台启动导航，不读取本地草稿、记忆或 DNA 语料。",
+    "v29 是 v30 的唯一紧急回退基线。"
+  ]
+}

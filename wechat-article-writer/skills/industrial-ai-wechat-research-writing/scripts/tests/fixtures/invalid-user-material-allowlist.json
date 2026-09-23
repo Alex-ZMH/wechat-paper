@@ -1,0 +1,39 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-user-material-allowlist",
+  "topic": "夹带原始内容和本地路径的用户材料",
+  "content_type": "deep_research",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {
+      "id": "M1",
+      "title": "用户测试记录",
+      "organization": "用户提供",
+      "source_level": "user_material",
+      "access_status": "accessible",
+      "usage_status": "allowed",
+      "retrieved_at": "2026-02-01",
+      "material_id": "test-record-1",
+      "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "as_of": "2026-01-20",
+      "rights_confirmed": true,
+      "sensitivity_reviewed": true,
+      "raw_content": "不要进入模型的原始记录",
+      "metadata": {"local_path": "C:\\private\\record.pdf"},
+      "notes": "C:\\private\\record.pdf"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "text": "测试记录由用户提供，未独立核验。",
+      "kind": "fact",
+      "source_ids": ["M1"],
+      "evidence_class": "user_material",
+      "evidence_quotes": [{"source_id": "M1", "text": "用户测试记录"}]
+    }
+  ],
+  "uncertainties": [{"id": "U1", "text": "原始内容和路径均应留在本地，不得进入 packet。", "claim_ids": ["C1"]}]
+}

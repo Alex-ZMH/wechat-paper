@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["targets", "editorialIssues"],
+  "properties": {
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "verdict", "reason", "quote"],
+        "properties": {
+          "id": { "type": "string" },
+          "verdict": { "type": "string", "enum": ["supported", "contradicted", "insufficient"] },
+          "reason": { "type": "string" },
+          "quote": { "type": "string" }
+        }
+      }
+    },
+    "editorialIssues": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["dimension", "message", "location", "severity"],
+        "properties": {
+          "dimension": { "type": "string", "enum": ["logic", "repetition", "style", "readability"] },
+          "message": { "type": "string" },
+          "location": { "type": "string" },
+          "severity": { "type": "string", "enum": ["error", "warning"] }
+        }
+      }
+    }
+  }
+}

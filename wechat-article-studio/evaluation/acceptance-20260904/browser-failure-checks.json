@@ -1,0 +1,49 @@
+{
+  "kind": "agent_browser_automation",
+  "networkFaults": "explicitly_injected",
+  "notUserAcceptance": true,
+  "results": [
+    {
+      "name": "resolved_comment_survives_restart_automatic_pass_is_not_human_approval",
+      "status": "passed"
+    },
+    {
+      "name": "current_saved_version_word_download",
+      "status": "passed",
+      "version": 3,
+      "file": "凹凸棒石进入电池材料：三条研究路线与一道产业化边界_审阅稿.docx"
+    },
+    {
+      "name": "injected_save_failure_preserves_edit_and_refresh_local_recovery",
+      "status": "passed"
+    },
+    {
+      "name": "purpose_auto_grows_no_internal_scroll",
+      "status": "passed",
+      "client": 888,
+      "scroll": 890,
+      "height": 890
+    },
+    {
+      "name": "new_topic_failed_research_no_old_content_and_step_preconditions",
+      "status": "passed"
+    },
+    {
+      "name": "ambiguous_import_requires_selection_and_mismatch_confirmation",
+      "status": "passed"
+    },
+    {
+      "name": "injected_writer_failure_no_sample_fallback_and_retry_available",
+      "status": "passed"
+    },
+    {
+      "name": "saved_workspace_switch_restores_topic_outline_evidence_article_together",
+      "status": "passed"
+    },
+    {
+      "name": "reader_ui_clean_no_script_errors",
+      "status": "passed"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v24",
+  "productVersion": "0.24.0",
+  "siteVersion": 24,
+  "siteVersionId": "appgprj_6a8e546836b88191b3ded519fc5d233e~appgver_92b226f860808191a9966b82ca2c57f7",
+  "sourceCommit": "3efcc3ff890a41ca92fa3452645122e2f2d6ec93",
+  "sourceTag": "content-desk-v24",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v24",
+  "bridgeVersion": "codex-bridge.v24-20260831",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "responseSchemaVersion": "content-desk.response.v2",
+  "archive": {
+    "path": "outputs/content-desk-v24-3efcc3f.tar.gz",
+    "sha256": "c4436dd44a8c3bc2fbeb00260bc7f2fc98d1ef323fdcafa61d951a3db9bfe754"
+  },
+  "validation": {
+    "studioTests": "55/55",
+    "bridgeTests": "115/115",
+    "typescript": "passed",
+    "lint": "passed",
+    "build": "passed"
+  },
+  "status": "saved_not_deployed",
+  "notes": [
+    "通用非虚构任务默认 Skill 链为空；工业研发只在显式选择后接入。",
+    "工作稿、文字定稿和待补外部图片是分离状态。",
+    "定稿采用 revisionId + contentHash 比较并交换；历史 Manifest 按 manifestId 不可变可追溯。",
+    "公开站点仍保持 v23，v24 仅作为隔离的可回滚 Sites 版本保存。"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "industrial-boundaries-2026-01",
+  "topic": "MES、MOM 与 APS 如何分工",
+  "content_type": "standard_analysis",
+  "cutoff": "2026-01-31",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Job Shop Scheduling",
+      "organization": "Google for Developers",
+      "url": "https://developers.google.com/optimization/scheduling/job_shop",
+      "source_level": "official",
+      "access_status": "accessible",
+      "usage_status": "allowed",
+      "retrieved_at": "2026-01-31",
+      "usage_notes": "页面标注 CC BY 4.0；实际取回仍需以页面当前许可文本为准。",
+      "notes": "允许使用的官方示例；只支持约束调度建模，不支持工厂 ROI 结论。"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "text": "Google 的 Job Shop 页面展示了带约束的排程建模。",
+      "kind": "fact",
+      "source_ids": ["S1"],
+      "evidence_class": "independent",
+      "evidence_quotes": [{"source_id": "S1", "text": "Job Shop Scheduling"}]
+    },
+    {
+      "id": "C2",
+      "text": "实际边界要结合工厂的数据和实施范围判断。",
+      "kind": "opinion",
+      "source_ids": [],
+      "evidence_class": "author_opinion",
+      "basis": "基于前述边界和实施经验的待核对建议，不是来源事实。",
+      "evidence_quotes": []
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "text": "不同厂商对 MOM 的模块边界并不完全一致，需查实施清单。",
+      "claim_ids": ["C1"]
+    }
+  ],
+  "notes": "这是保守示例：没有将厂商页面写成独立 ROI 证据，也没有声称覆盖全部产品。"
+}

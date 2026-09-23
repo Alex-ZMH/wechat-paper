@@ -1,0 +1,16 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-vendor",
+  "topic": "厂商主张误标独立证据",
+  "content_type": "tool_review",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {"id": "S1", "title": "Vendor product page", "organization": "Acme", "url": "https://example.com/acme", "source_level": "vendor", "access_status": "accessible", "usage_status": "allowed", "retrieved_at": "2026-02-01"}
+  ],
+  "claims": [
+    {"id": "C1", "text": "Acme 宣称可提升 30% 效率", "kind": "vendor_claim", "source_ids": ["S1"], "evidence_class": "independent", "independent_evidence": true, "evidence_quotes": [{"source_id": "S1", "text": "提升 30% 效率"}]}
+  ],
+  "uncertainties": []
+}

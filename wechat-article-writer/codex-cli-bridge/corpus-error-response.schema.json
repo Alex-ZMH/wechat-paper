@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "content-desk.corpus-error-response.v1",
+  "title": "Content Desk corpus error response v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "error", "code", "stage"],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "content-desk.corpus-error-response.v1" },
+    "error": { "type": "string", "minLength": 1, "maxLength": 240 },
+    "code": { "type": "string", "minLength": 2, "maxLength": 64 },
+    "stage": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "issues": { "type": "array", "maxItems": 8, "items": { "type": "string", "pattern": "^[a-z0-9_]+$" } }
+  },
+  "x-optional": ["issues"]
+}

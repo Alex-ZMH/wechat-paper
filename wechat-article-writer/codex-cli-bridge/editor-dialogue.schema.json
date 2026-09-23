@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Content Desk editor dialogue model response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "reply",
+    "replacementText",
+    "formattedDraft"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "content-desk.editor-dialogue.model.v1"
+    },
+    "reply": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8000
+    },
+    "replacementText": {
+      "type": "string",
+      "maxLength": 80000
+    },
+    "formattedDraft": {
+      "type": "string",
+      "maxLength": 100000
+    }
+  }
+}

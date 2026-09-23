@@ -1,0 +1,15 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-duplicate",
+  "topic": "重复来源 id",
+  "content_type": "flash",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {"id": "S1", "title": "A", "organization": "A", "url": "https://example.com/a", "source_level": "official", "access_status": "accessible", "usage_status": "allowed", "retrieved_at": "2026-02-01"},
+    {"id": "S1", "title": "B", "organization": "B", "url": "https://example.com/b", "source_level": "official", "access_status": "accessible", "usage_status": "allowed", "retrieved_at": "2026-02-01"}
+  ],
+  "claims": [],
+  "uncertainties": []
+}

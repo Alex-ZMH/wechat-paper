@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v23-legacy",
+  "productVersion": null,
+  "siteVersion": 23,
+  "sourceCommit": "cbb3263924bbdf8c13877fd7aa3157be4a83d4a9",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v16-DNA-CONTROLS",
+  "bridgeVersion": "codex-bridge.v16-20260831",
+  "draftStorageKey": "content-desk-state-v8-node-workflow",
+  "status": "frozen_legacy",
+  "notes": [
+    "Sites 版本号、源码提交、Studio 标记和 Bridge 标记未统一。",
+    "只作为迁移输入和问题追溯，不得自动覆盖 v24 及后续工作区。"
+  ]
+}

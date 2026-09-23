@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v29",
+  "productVersion": "0.29.0",
+  "siteVersion": 29,
+  "siteVersionId": "appgprj_6a8e546836b88191b3ded519fc5d233e~appgver_9506dc3c01b88191bc502844406b3c7b",
+  "deploymentId": "appgdep_6a96511066288191995d2510d8d45662",
+  "publicUrl": "https://gongzhonghao-content-desk.abellmosleynce.chatgpt.site",
+  "sourceCommit": "0c4202f18325fd0333d10ee4ded16ba534ca2f33",
+  "sourceTag": "content-desk-v29",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v29",
+  "bridgeVersion": "codex-bridge.v29-20260901",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "archive": {
+    "path": "outputs/content-desk-v29-sites-0c4202f.tar.gz",
+    "sha256": "072fcbd1797f53953caf4e5cdc5c0c45530e224ebe1855c89e6d53ff4072e773",
+    "sizeBytes": 2560643,
+    "sitesContentHash": "sha256:8018bf5f594649b833401a0e27e1ba1e8d31f9a117b8312b1f861fa4cf373782",
+    "sitesFileCount": 58,
+    "layout": "dist/server/index.js + dist/.openai/hosting.json"
+  },
+  "validation": {
+    "studioTests": "105/105",
+    "bridgeTests": "160/160",
+    "typescript": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "skillValidation": "passed",
+    "publicHttpStatus": 200,
+    "publicMarker": "CONTENT_DESK_BUILD=v29",
+    "publicSurface": "launcher_only",
+    "bridgeHealth": {
+      "code": "ready",
+      "authenticated": true,
+      "cliVersion": "codex-cli 0.151.0-alpha.7.2"
+    },
+    "realStop": {
+      "engine": "codex-cli",
+      "status": "cancelled",
+      "preservedOldDraft": true
+    },
+    "realInitialGeneration": {
+      "engine": "codex-cli",
+      "status": "review_required",
+      "workDraftVersion": 1,
+      "editorialScore": 100,
+      "finalizeDisabled": true,
+      "durationSeconds": 175
+    },
+    "realAnnotationRegeneration": {
+      "engine": "codex-cli",
+      "requestId": "b8900c5b-5589-410a-823b-987a46b1fc9c",
+      "status": "review_required",
+      "workDraftVersion": 2,
+      "appliedAnnotations": 1,
+      "partiallyAppliedAnnotations": 0,
+      "unappliedAnnotations": 0,
+      "preservedUserEdit": true,
+      "durationSeconds": 126
+    },
+    "realDnaJob": {
+      "jobId": "3c6f219e-feb9-42c7-b94c-99140c0fa504",
+      "mode": "academic",
+      "observedRunning": true,
+      "cancelledPrecisely": true,
+      "preservedExistingArtifact": true
+    },
+    "schemaDefectRegression": {
+      "observedError": "invalid_json_schema",
+      "cause": "workflowReceipt node outcome was optional in a strict structured-output schema",
+      "fix": "outcome is required and nullable; only the quality gate may emit a non-null outcome",
+      "directCliProbe": "passed"
+    }
+  },
+  "cleanup": {
+    "status": "partially_isolated",
+    "preservedRollback": "outputs/content-desk-v28-3febe49.tar.gz",
+    "preservedCurrent": "outputs/content-desk-v29-sites-0c4202f.tar.gz",
+    "invalidPackageToRemove": "outputs/content-desk-v29-0c4202f.tar.gz",
+    "legacyCleanup": "blocked_by_host_policy",
+    "reason": "递归旧目录清理仍被当前主机策略在进程启动前拒绝；未改用其他 shell 绕过。"
+  },
+  "status": "deployed",
+  "notes": [
+    "快速页和高级页共享单一 typed workflow graph，布局坐标不影响执行哈希。",
+    "恢复结果必须同时匹配 executionPlanHash 与 inputSnapshotHash，旧结果不能覆盖新输入。",
+    "Writing DNA 与 Academic Writing DNA 使用持久 job；真实 Academic 任务已验证运行与精确取消。",
+    "质量分为 100 的合成材料稿仍按证据限制保持 review_required，没有冒充文字定稿。",
+    "第一次 Sites 保存发现旧打包布局缺少 dist/ 前缀；已改为官方要求的 dist/server/index.js 布局并成功发布。",
+    "v28 是 v29 的唯一紧急回退基线；v30 任务边界继续由 ROADMAP.md 独立维护。"
+  ]
+}

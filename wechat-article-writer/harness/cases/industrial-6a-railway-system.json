@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-6a-railway-system",
+  "description": "铁路机车安全线索将 6A 路由到机车车载安全防护系统。",
+  "input": {
+    "message": "铁路资料说机车加装了 6A，随后列出制动、防火、高压绝缘、列车供电、走行部和视频监控。这个 6A 是不是通用质量六步法？"
+  },
+  "expect": {
+    "mustContain": ["6A系统", "机车车载安全防护系统", "制动", "列车供电", "走行部"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-6a-railway-system.md"
+}

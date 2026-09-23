@@ -1,0 +1,65 @@
+{
+  "kind": "real_chromium_acceptance",
+  "dataDir": "C:\\Users\\ironman\\Documents\\公众号\\wechat-article-studio\\data\\acceptance-20260904-run3",
+  "origin": "http://127.0.0.1:43210",
+  "notUserAcceptance": true,
+  "results": [
+    {
+      "name": "fixed_entry_isolated_server_started",
+      "status": "passed",
+      "health": {
+        "ok": true,
+        "service": "wechat-article-studio-core",
+        "workspaceScope": "fd9930fdecec"
+      },
+      "stdout": "wechat-article-studio listening on http://127.0.0.1:43210"
+    },
+    {
+      "name": "new_topic_and_requirements_entered",
+      "status": "passed"
+    },
+    {
+      "name": "verified_materials_selected_and_sources_visible",
+      "status": "passed"
+    },
+    {
+      "name": "outline_edited_and_confirmed",
+      "status": "passed"
+    },
+    {
+      "name": "real_structured_writer_generated_draft",
+      "status": "passed"
+    },
+    {
+      "name": "paragraph_edit_and_evidence_view",
+      "status": "passed"
+    },
+    {
+      "name": "high_priority_annotation_added_and_dirty",
+      "status": "passed"
+    },
+    {
+      "name": "high_annotation_saved_and_blocks_finalization",
+      "status": "passed"
+    },
+    {
+      "name": "refresh_restores_article_edit_and_open_annotation",
+      "status": "passed"
+    },
+    {
+      "name": "service_restart_restores_article_and_open_annotation_gate",
+      "status": "passed"
+    },
+    {
+      "name": "resolved_annotation_requires_rereview_and_save_before_delivery",
+      "status": "passed"
+    },
+    {
+      "name": "current_version_word_download_and_reader_ui_clean",
+      "status": "passed",
+      "file": "C:\\Users\\ironman\\Documents\\公众号\\wechat-article-studio\\evaluation\\acceptance-20260904\\凹凸棒石进电池：三条研究路线，应用边界要分清（编辑版）_审阅稿.docx",
+      "filename": "凹凸棒石进电池：三条研究路线，应用边界要分清（编辑版）_审阅稿.docx"
+    }
+  ],
+  "errors": []
+}

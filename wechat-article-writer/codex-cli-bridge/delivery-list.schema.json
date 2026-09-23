@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/content-desk/delivery-list.schema.json",
+  "title": "Content Desk MultiPost delivery list v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "integration", "deliveries"],
+  "properties": {
+    "schemaVersion": { "const": "content-desk.delivery-list.v1", "type": "string" },
+    "integration": { "const": "multipost-desktop", "type": "string" },
+    "deliveries": { "type": "array", "maxItems": 10000, "items": { "$ref": "delivery-response.schema.json" } }
+  }
+}

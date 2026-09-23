@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/codex-bridge/content-request.schema.json",
+  "title": "Content Desk v2 request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "task", "mode", "brief"],
+  "allOf": [
+    {
+      "if": { "properties": { "mode": { "const": "source_rewrite" } } },
+      "then": { "required": ["currentDraft"] }
+    }
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "content-desk.request.v2" },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "domain", "genre", "channel", "purpose"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "domain": { "type": "string", "maxLength": 200 },
+        "genre": { "type": "string", "maxLength": 200 },
+        "channel": { "type": "string", "maxLength": 200 },
+        "purpose": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "mode": { "type": "string", "enum": ["initial_generation", "annotation_regeneration", "source_rewrite"] },
+    "brief": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["topic"],
+      "properties": {
+        "topic": { "type": "string", "minLength": 1, "maxLength": 12000 },
+        "audience": { "type": "string", "maxLength": 12000 },
+        "format": { "type": "string", "maxLength": 12000 },
+        "tone": { "type": "string", "maxLength": 12000 },
+        "targetLength": { "type": "string", "maxLength": 12000 },
+        "materials": { "type": "string", "maxLength": 12000 }
+      }
+    },
+    "previousGeneratedDraft": { "type": "string", "maxLength": 80000 },
+    "currentDraft": { "type": "string", "maxLength": 80000 },
+    "annotations": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "note"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "kind": { "type": "string", "maxLength": 100 },
+          "note": { "type": "string", "minLength": 1, "maxLength": 2000 },
+          "quote": { "type": "string", "maxLength": 1000 },
+          "anchor": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["start", "end", "before", "after"],
+            "properties": {
+              "start": { "type": "integer", "minimum": 0 },
+              "end": { "type": "integer", "minimum": 0 },
+              "before": { "type": "string", "maxLength": 200 },
+              "after": { "type": "string", "maxLength": 200 }
+            }
+          },
+          "resolved": { "type": "boolean" },
+          "remember": { "type": "boolean" }
+        }
+      }
+    },
+    "voiceProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tone": { "type": "string", "maxLength": 200 },
+        "traits": {
+          "type": "array",
+          "maxItems": 20,
+          "items": { "type": "string", "maxLength": 200 }
+        }
+      }
+    },
+    "protectedFacts": { "type": "array", "maxItems": 100, "items": { "type": "string", "minLength": 1, "maxLength": 500 } },
+    "versionId": { "type": "string", "maxLength": 128 },
+    "draftVersionId": { "type": "string", "maxLength": 128 },
+    "targetLength": { "type": "integer", "minimum": 300, "maximum": 20000 },
+    "humanize": { "type": "boolean" },
+    "dualReview": { "type": "boolean", "description": "要求第二位审核针对冻结稿只审不改" },
+    "writerModel": { "type": "string", "enum": ["codex-sol", "codex-terra", "codex-luna", "ollama-qwen3-8b"] },
+    "reviewerModel": { "type": "string", "enum": ["codex-sol", "codex-terra", "codex-luna", "ollama-qwen3-8b"] },
+    "researchPacket": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "sources": { "type": "array", "maxItems": 200 },
+        "claims": { "type": "array", "maxItems": 200 },
+        "uncertainties": { "type": "array", "maxItems": 200 },
+        "retrieval_status": { "type": "string", "maxLength": 120 },
+        "research_status": { "type": "string", "maxLength": 120 },
+        "cutoff": { "type": "string", "maxLength": 120 }
+      }
+    },
+    "evidencePacketId": { "type": "string", "pattern": "^ep-[A-Za-z0-9][A-Za-z0-9_:-]*$" },
+    "evidencePacketHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "referenceText": { "type": "string", "maxLength": 20000 },
+    "dnaMode": { "type": "string", "enum": ["none", "writing", "academic"] },
+    "skillChain": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "string",
+        "enum": ["topic-evidence-research", "industrial-ai-wechat-research-writing", "writing-dna", "academic-writing-dna"]
+      }
+    },
+    "clientRunId": { "type": "string", "maxLength": 128 },
+    "documentId": { "type": "string", "maxLength": 128 },
+    "baseRevisionId": { "type": "string", "maxLength": 128 },
+    "revisionId": { "type": "string", "maxLength": 128 },
+    "workflowExecution": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["schemaVersion", "executionPlanHash", "inputSnapshotHash"],
+      "properties": {
+        "schemaVersion": { "type": "string", "const": "content-desk.execution-request.v1" },
+        "executionPlanHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "inputSnapshotHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    }
+  }
+}

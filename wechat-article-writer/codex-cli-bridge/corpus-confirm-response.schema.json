@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "content-desk.corpus-confirm-response.v1",
+  "title": "Content Desk immutable corpus confirmation response v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "package", "snapshot", "idempotent"],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "content-desk.corpus-confirm-response.v1" },
+    "package": { "$ref": "content-desk.corpus-package.v1" },
+    "snapshot": { "$ref": "content-desk.corpus-snapshot.v1" },
+    "idempotent": { "type": "boolean" }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-blocked",
+  "topic": "被拦截的事实",
+  "content_type": "deep_research",
+  "cutoff": "2026-02-01",
+  "research_status": "blocked",
+  "retrieval_status": "blocked",
+  "sources": [
+    {"id": "S1", "title": "Blocked source", "organization": "Example", "url": "https://example.com/blocked", "source_level": "official", "access_status": "blocked", "usage_status": "manual_required", "retrieved_at": "2026-02-01"}
+  ],
+  "claims": [
+    {"id": "C1", "text": "某系统已经提升效率", "kind": "fact", "source_ids": ["S1"], "evidence_quotes": [{"source_id": "S1", "text": "提升效率"}]}
+  ],
+  "uncertainties": []
+}

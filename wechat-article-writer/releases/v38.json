@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v38",
+  "productVersion": "0.38.0",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v38",
+  "bridgeVersion": "codex-bridge.v38-20260903",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "status": "local_candidate",
+  "features": [
+    "preserves the v37 single-canvas frontend and exact Bridge-stage node status mapping",
+    "assembles 20,000-character jobs with bounded section-only continuation instead of repeated whole-draft replacement",
+    "uses 18,000 through 20,000 visible characters as the hard range for a 20,000-character request and excludes zero-width padding",
+    "rejects repeated or low-diversity padding in the initial writer output, each continuation and the frozen manuscript",
+    "requires research-backed drafts to close body claim markers through packet sourceIds to human-readable reference entries",
+    "requires every used reference entry to contain the frozen packet title, original URL and DOI when present",
+    "reviews long manuscripts through compact metadata bound to a server-computed frozen draft hash",
+    "keeps the existing document revision, latest pointer and hash unchanged when any continuation or reviewer fails"
+  ],
+  "validation": {
+    "studioTests": "137/137",
+    "bridgeTests": "222/222",
+    "typescript": "passed_by_production_build",
+    "lint": "passed_without_warnings",
+    "build": "passed",
+    "independentAdversarialReview": "passed_no_release_blockers",
+    "browserWorkflow": {
+      "status": "pending",
+      "topic": "双金属MOF的合成难点与突破及其应用前景如何",
+      "requestedLength": 20000,
+      "previousLiveFailure": {
+        "requestId": "81e488d1-a364-477c-8072-f4ee2b14f735",
+        "stage": "writing",
+        "visibleLength": 16572,
+        "writerPasses": 4,
+        "code": "length_target_unmet",
+        "oldDraftPreserved": true
+      }
+    }
+  },
+  "deployment": {
+    "savedToSites": false,
+    "deployed": false,
+    "accessMode": "local_only"
+  },
+  "openReleaseBlockers": [
+    "The same MOF task must complete through the real UI and Codex CLI after the v38 process restart.",
+    "Manual save, annotation regeneration, annotation deletion and editor dialogue must be exercised against the resulting real revision."
+  ]
+}

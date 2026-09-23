@@ -1,0 +1,16 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-vendor-only-metric",
+  "topic": "厂商 ROI 指标误标独立证据",
+  "content_type": "tool_review",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {"id": "S1", "title": "Vendor ROI page", "organization": "Acme", "url": "https://example.com/roi", "source_level": "vendor", "access_status": "accessible", "usage_status": "allowed", "retrieved_at": "2026-02-01"}
+  ],
+  "claims": [
+    {"id": "C1", "text": "Acme 宣称 ROI 提升 37%", "kind": "metric", "source_ids": ["S1"], "evidence_class": "independent", "evidence_quotes": [{"source_id": "S1", "text": "ROI 提升 37%"}]}
+  ],
+  "uncertainties": []
+}

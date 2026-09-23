@@ -1,0 +1,14 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-access-status",
+  "topic": "错误访问状态",
+  "content_type": "flash",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {"id": "S1", "title": "Official page", "organization": "Example", "url": "https://example.com/page", "source_level": "official", "access_status": "complete", "usage_status": "allowed", "retrieved_at": "2026-02-01"}
+  ],
+  "claims": [],
+  "uncertainties": []
+}

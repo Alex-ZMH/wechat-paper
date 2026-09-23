@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "humanizer-zh-false-positive",
+  "description": "验证正式中文、专业术语、必要列表和单个常见词不会被机械判成 AI 味。",
+  "input": {
+    "message": "按 humanizer-zh 的 embedded 模式审校并尽量保留：‘本轮试验比较三组边界条件：入口温度、总压和组分。计算采用 VASP；实验结果仍需复核。’ 不得把专业名词改成口语，不得把三项真实并列视为强凑三点。"
+  },
+  "expect": {
+    "mustContain": ["入口温度", "总压", "组分", "VASP", "仍需复核"],
+    "mustNotContain": ["赋能", "闭环", "彻底验证", "已经证明", "AI 文本"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/humanizer-zh.md"
+}

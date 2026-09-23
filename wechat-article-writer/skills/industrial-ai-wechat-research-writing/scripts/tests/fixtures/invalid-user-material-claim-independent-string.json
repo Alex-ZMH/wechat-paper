@@ -1,0 +1,37 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-user-material-claim-independent-string",
+  "topic": "claim 使用字符串 independent_evidence",
+  "content_type": "deep_research",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {
+      "id": "M1",
+      "title": "用户提供的报价记录",
+      "organization": "用户提供",
+      "source_level": "user_material",
+      "access_status": "accessible",
+      "usage_status": "allowed",
+      "retrieved_at": "2026-02-01",
+      "material_id": "claim-independent-1",
+      "sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+      "as_of": "2026-01-20",
+      "rights_confirmed": true,
+      "sensitivity_reviewed": true,
+      "material_kind": "quotation"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "text": "报价记录由用户提供，未独立核验。",
+      "kind": "fact",
+      "source_ids": ["M1"],
+      "evidence_class": "user_material",
+      "independent_evidence": "true"
+    }
+  ],
+  "uncertainties": [{"id": "U1", "text": "independent_evidence 必须是 false 布尔值或省略。", "claim_ids": ["C1"]}]
+}

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>AI4S 2026 Visuals</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #10151c; color: #f5f7fa; font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+  .canvas { width: 2400px; height: 1600px; position: relative; overflow: hidden; background: #071019; margin: 0 0 40px; }
+  .kicker { font-size: 30px; font-weight: 800; letter-spacing: 5px; color: #44e1e6; }
+  .title { font-size: 92px; line-height: 1.08; font-weight: 900; letter-spacing: -3px; }
+  .sub { font-size: 36px; line-height: 1.55; color: #becbd8; }
+  .tiny { font-size: 22px; color: #8da0b3; }
+  .red { color: #ff535d; }
+  .cyan { color: #49e4e8; }
+  .gold { color: #ffc95c; }
+  .chip { display: inline-flex; align-items: center; border: 2px solid rgba(255,255,255,.18); border-radius: 999px; padding: 12px 24px; font-size: 23px; color: #ced8e2; background: rgba(4,12,20,.5); }
+
+  /* cover */
+  #cover { background-image: linear-gradient(90deg, rgba(2,8,15,.96) 0%, rgba(2,8,15,.82) 42%, rgba(2,8,15,.18) 72%, rgba(2,8,15,.45) 100%), url("images/ai4s-cover-background.png"); background-size: cover; background-position: center; }
+  #cover .rule { position:absolute; top:130px; left:130px; width:190px; height:10px; background:#ff4b55; }
+  #cover .content { position:absolute; left:130px; top:185px; width:1320px; }
+  #cover .headline { font-size:142px; line-height:1.03; margin-top:80px; font-weight:950; letter-spacing:-7px; text-shadow: 0 5px 34px rgba(0,0,0,.55); }
+  #cover .headline .line2 { color:#ff4b55; }
+  #cover .deck { font-size:43px; line-height:1.45; color:#dae5ee; margin-top:55px; font-weight:600; }
+  #cover .footer { position:absolute; left:130px; bottom:110px; display:flex; gap:20px; }
+  #cover .mark { position:absolute; right:100px; top:90px; writing-mode:vertical-rl; font-size:26px; letter-spacing:4px; color:rgba(255,255,255,.65); }
+
+  /* evidence ladder */
+  .head { position:absolute; top:86px; left:110px; right:110px; }
+  .head .title { margin-top:22px; }
+  #ladder { background: radial-gradient(circle at 80% 15%, #12354a 0, #071019 45%), #071019; }
+  .ladder { position:absolute; left:120px; right:120px; top:430px; height:920px; display:grid; grid-template-columns: repeat(5,1fr); gap:24px; align-items:end; }
+  .step { position:relative; border:2px solid rgba(255,255,255,.13); border-radius:34px 34px 18px 18px; padding:42px 36px; background:linear-gradient(180deg, rgba(28,47,61,.92), rgba(10,20,29,.95)); box-shadow:0 25px 60px rgba(0,0,0,.28); }
+  .step:nth-child(1){height:430px}.step:nth-child(2){height:535px}.step:nth-child(3){height:640px}.step:nth-child(4){height:745px}.step:nth-child(5){height:850px;border-color:#ff535d;background:linear-gradient(180deg, rgba(77,27,32,.9), rgba(15,18,24,.98))}
+  .num { font-size:72px; font-weight:950; color:#49e4e8; }
+  .step:nth-child(5) .num { color:#ff535d; }
+  .step h3 { font-size:42px; margin:20px 0 18px; }
+  .step p { font-size:26px; color:#b7c5d2; line-height:1.55; margin:0; }
+  .verdict { position:absolute; bottom:72px; left:120px; right:120px; font-size:31px; font-weight:800; color:#fff; text-align:center; }
+
+  /* matrix */
+  #matrix { background:linear-gradient(135deg,#08121c,#0a1721 55%,#101216); }
+  .matrix-wrap { position:absolute; left:100px; right:100px; top:390px; bottom:105px; border:2px solid rgba(255,255,255,.14); border-radius:26px; overflow:hidden; }
+  .mrow { display:grid; grid-template-columns: 430px repeat(4,1fr) 260px; min-height:166px; border-bottom:1px solid rgba(255,255,255,.11); align-items:center; padding:0 32px; }
+  .mrow.header { min-height:105px; background:rgba(73,228,232,.07); color:#9fb3c6; font-size:25px; font-weight:800; }
+  .mrow:last-child { border-bottom:none; }
+  .company { font-size:31px; font-weight:900; }
+  .company small { display:block; color:#8599ac; font-size:20px; margin-top:7px; font-weight:600; }
+  .score { display:flex; gap:9px; justify-content:center; }
+  .dot { width:24px; height:24px; border-radius:50%; background:#263747; border:1px solid #395168; }
+  .dot.on { background:#49e4e8; border-color:#49e4e8; box-shadow:0 0 18px rgba(73,228,232,.4); }
+  .dot.warn { background:#ffc95c; border-color:#ffc95c; }
+  .grade { justify-self:center; font-size:37px; font-weight:950; border:2px solid currentColor; border-radius:18px; padding:10px 20px; }
+  .grade.a { color:#49e4e8; }.grade.b{color:#ffc95c}.grade.c{color:#ff7a80}
+  #matrix .note { position:absolute; left:108px; bottom:50px; font-size:23px; color:#8da0b3; }
+
+  /* quadrant */
+  #quadrant { background:radial-gradient(circle at 68% 35%,#183d4c 0,#071019 48%); }
+  .plot { position:absolute; left:190px; right:150px; top:420px; bottom:170px; border-left:4px solid #73879a; border-bottom:4px solid #73879a; }
+  .grid-v,.grid-h { position:absolute; background:rgba(255,255,255,.1); }
+  .grid-v { top:0; bottom:0; width:2px; left:50%; }
+  .grid-h { left:0; right:0; height:2px; top:50%; }
+  .axis-x { position:absolute; right:-10px; bottom:-70px; font-size:28px; color:#a9bac8; }
+  .axis-y { position:absolute; left:-148px; top:-20px; width:120px; font-size:28px; line-height:1.35; color:#a9bac8; text-align:right; }
+  .q { position:absolute; font-size:26px; font-weight:800; color:rgba(255,255,255,.32); letter-spacing:2px; }
+  .q.q1{right:40px;top:30px}.q.q2{left:35px;top:30px}.q.q3{left:35px;bottom:35px}.q.q4{right:40px;bottom:35px}
+  .bubble { position:absolute; transform:translate(-50%,-50%); border-radius:50%; display:flex; align-items:center; justify-content:center; text-align:center; font-size:25px; font-weight:900; line-height:1.25; border:3px solid rgba(255,255,255,.7); box-shadow:0 16px 45px rgba(0,0,0,.4); padding:15px; }
+  .b-a { background:rgba(38,187,187,.82); }.b-b{background:rgba(223,164,48,.82)}.b-c{background:rgba(238,76,87,.82)}.b-neutral{background:rgba(89,111,132,.88)}
+  #quadrant .foot { position:absolute; left:190px; bottom:68px; font-size:23px; color:#8da0b3; }
+
+  /* red flags */
+  #redflags { background:linear-gradient(145deg,#190b0d,#090f16 58%,#071019); }
+  #redflags .stamp { position:absolute; right:95px; top:90px; font-size:31px; font-weight:900; color:#ff535d; border:4px solid #ff535d; padding:14px 24px; transform:rotate(4deg); letter-spacing:3px; }
+  .questions { position:absolute; left:110px; right:110px; top:405px; display:grid; grid-template-columns:1fr 1fr; gap:24px 28px; }
+  .question { min-height:260px; padding:34px 42px; border:2px solid rgba(255,255,255,.14); border-radius:24px; background:rgba(10,19,28,.85); display:grid; grid-template-columns:88px 1fr; gap:22px; align-items:start; }
+  .question:nth-child(5) { grid-column:1 / 3; min-height:220px; }
+  .qnum { width:76px;height:76px;border-radius:20px;background:#ff535d;display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:950; }
+  .question h3 { margin:0 0 14px; font-size:39px; }
+  .question p { margin:0; color:#bdcbd6; font-size:27px; line-height:1.5; }
+  #redflags .bottomline { position:absolute; bottom:54px; left:110px; right:110px; text-align:center; font-size:32px; font-weight:900; color:#fff; }
+
+  /* industry stack */
+  #stack { background:radial-gradient(circle at 76% 18%,#123b4b 0,#071019 48%), linear-gradient(135deg,#071019,#0b1822); }
+  .stack-wrap { position:absolute; left:130px; right:130px; top:395px; height:900px; display:grid; grid-template-rows:repeat(5,1fr); gap:16px; }
+  .stack-layer { position:relative; display:grid; grid-template-columns:150px 430px 1fr 400px; align-items:center; padding:0 38px; border:2px solid rgba(255,255,255,.14); border-radius:24px; background:linear-gradient(100deg,rgba(24,48,63,.96),rgba(9,20,29,.95)); box-shadow:0 18px 44px rgba(0,0,0,.24); }
+  .stack-layer:nth-child(1) { border-color:rgba(255,83,93,.7); background:linear-gradient(100deg,rgba(85,31,37,.9),rgba(23,20,27,.96)); }
+  .stack-layer:nth-child(2) { border-color:rgba(255,201,92,.58); }
+  .stack-layer:nth-child(3) { border-color:rgba(73,228,232,.62); }
+  .stack-layer:nth-child(4) { border-color:rgba(73,228,232,.45); }
+  .stack-layer:nth-child(5) { border-color:rgba(73,228,232,.3); }
+  .stack-level { font-size:68px; font-weight:950; color:#49e4e8; line-height:1; }
+  .stack-layer:nth-child(1) .stack-level { color:#ff535d; }
+  .stack-name { font-size:40px; font-weight:900; }
+  .stack-name small { display:block; margin-top:8px; color:#8da0b3; font-size:22px; font-weight:700; letter-spacing:1px; }
+  .stack-body { color:#bdcbd6; font-size:27px; line-height:1.45; padding-right:24px; }
+  .stack-proof { justify-self:end; width:100%; border-left:2px solid rgba(255,255,255,.14); padding-left:28px; color:#dce6ee; font-size:25px; line-height:1.45; }
+  .stack-proof strong { color:#ffc95c; font-size:22px; letter-spacing:2px; }
+  .stack-layer:nth-child(1) .stack-proof strong { color:#ff7a80; }
+  #stack .stack-bottomline { position:absolute; left:130px; right:130px; bottom:63px; text-align:center; font-size:32px; font-weight:900; color:#fff; }
+
+  /* commercial loop */
+  #loop { background:radial-gradient(circle at 50% 30%,#12354a 0,#071019 50%), linear-gradient(145deg,#071019,#0d1820); }
+  .loop-track { position:absolute; left:115px; right:115px; top:410px; display:grid; grid-template-columns:repeat(7,1fr); gap:24px; }
+  .loop-node { position:relative; min-height:525px; padding:30px 25px 28px; border:2px solid rgba(73,228,232,.38); border-radius:26px; background:linear-gradient(180deg,rgba(22,48,64,.95),rgba(8,18,27,.97)); box-shadow:0 18px 44px rgba(0,0,0,.24); }
+  .loop-node:nth-child(4), .loop-node:nth-child(5) { border-color:rgba(255,201,92,.58); }
+  .loop-node:nth-child(6), .loop-node:nth-child(7) { border-color:rgba(255,83,93,.65); background:linear-gradient(180deg,rgba(67,28,34,.9),rgba(17,19,26,.98)); }
+  .loop-node:not(:last-child)::after { content:'→'; position:absolute; right:-47px; top:43%; color:#49e4e8; font-size:56px; font-weight:900; text-shadow:0 0 18px rgba(73,228,232,.35); }
+  .loop-node:nth-child(4)::after, .loop-node:nth-child(5)::after { color:#ffc95c; }
+  .loop-node:nth-child(6)::after { color:#ff535d; }
+  .loop-index { width:70px; height:70px; display:flex; align-items:center; justify-content:center; border-radius:20px; background:#123746; color:#49e4e8; font-size:36px; font-weight:950; }
+  .loop-node:nth-child(4) .loop-index, .loop-node:nth-child(5) .loop-index { background:#4a3a1c; color:#ffc95c; }
+  .loop-node:nth-child(6) .loop-index, .loop-node:nth-child(7) .loop-index { background:#56262e; color:#ff7a80; }
+  .loop-node h3 { margin:24px 0 16px; font-size:34px; line-height:1.2; }
+  .loop-node p { min-height:104px; margin:0; color:#bdcbd6; font-size:24px; line-height:1.45; }
+  .loop-check { margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.16); color:#dce6ee; font-size:23px; line-height:1.45; }
+  .loop-check strong { display:block; margin-bottom:7px; color:#49e4e8; font-size:20px; letter-spacing:2px; }
+  .loop-node:nth-child(4) .loop-check strong, .loop-node:nth-child(5) .loop-check strong { color:#ffc95c; }
+  .loop-node:nth-child(6) .loop-check strong, .loop-node:nth-child(7) .loop-check strong { color:#ff7a80; }
+  #loop .loop-bottomline { position:absolute; left:110px; right:110px; bottom:65px; text-align:center; font-size:35px; font-weight:900; color:#fff; }
+</style>
+</head>
+<body>
+
+<section class="canvas" id="cover">
+  <div class="rule"></div>
+  <div class="mark">AI FOR SCIENCE · 2026 证据体检</div>
+  <div class="content">
+    <div class="kicker">AI FOR SCIENCE · 大浪淘沙</div>
+    <div class="headline"><div>退潮之后</div><div class="line2">谁还穿着底裤？</div></div>
+    <div class="deck">不看模型跑分<br>看实验、复购与现金流</div>
+  </div>
+  <div class="footer">
+    <span class="chip">28 家公司/品牌</span><span class="chip">10 类科研平台</span><span class="chip">融资 · 估值 · 落地证据</span>
+  </div>
+</section>
+
+<section class="canvas" id="ladder">
+  <div class="head"><div class="kicker">AI4S 证据阶梯</div><div class="title">越靠近物理世界，<span class="red">谎言越贵</span></div><div class="sub">从模型跑分到审计现金流，是五张完全不同的成绩单。</div></div>
+  <div class="ladder">
+    <div class="step"><div class="num">01</div><h3>跑分 / Demo</h3><p>论文指标、发布会视频、候选数量。能证明“模型会跑”，不能证明产品有效。</p></div>
+    <div class="step"><div class="num">02</div><h3>代码 / 数据</h3><p>可复现、强基线、OOD 测试、失败案例。开始进入科学讨论。</p></div>
+    <div class="step"><div class="num">03</div><h3>湿实验</h3><p>合成、表征、产率、寿命、批次差异。物理世界开始收费。</p></div>
+    <div class="step"><div class="num">04</div><h3>第三方 / 生产</h3><p>客户盲测、独立复验、中试、器件或临床终点。可复制性浮出水面。</p></div>
+    <div class="step"><div class="num">05</div><h3>复购 / 现金流</h3><p>验收回款、续费、审计收入、单位经济性。商业闭环才真正成立。</p></div>
+  </div>
+  <div class="verdict">一句话：<span class="cyan">候选数量</span>是漏斗顶端，<span class="red">客户第二年还付不付钱</span>才是硬地板。</div>
+</section>
+
+<section class="canvas" id="matrix">
+  <div class="head"><div class="kicker">重点对象公开证据矩阵</div><div class="title">“真技术”与“真生意”，<span class="gold">不是一回事</span></div><div class="sub">圆点越多，公开证据越强；评分只衡量公开材料，不是投资评级。</div></div>
+  <div class="matrix-wrap">
+    <div class="mrow header"><div>对象</div><div style="text-align:center">技术可复现</div><div style="text-align:center">实验/临床</div><div style="text-align:center">商业兑现</div><div style="text-align:center">资本透明</div><div style="text-align:center">证据级</div></div>
+    <div class="mrow"><div class="company">晶泰科技<small>审计收入最硬</small></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></div><div class="grade a">A-</div></div>
+    <div class="mrow"><div class="company">深势科技<small>开源底座最厚</small></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="grade b">B+</div></div>
+    <div class="mrow"><div class="company">深度原理<small>论文强，订单早期</small></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="grade b">B</div></div>
+    <div class="mrow"><div class="company">开物纪<small>履历强，公司新</small></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="grade c">C+</div></div>
+    <div class="mrow"><div class="company">材科源图<small>首单自报，待验收</small></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="grade c">C</div></div>
+    <div class="mrow"><div class="company">苏州国家实验室<small>公共科研基础设施</small></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="score"><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="grade b">B+</div></div>
+  </div>
+  <div class="note">注：研究机构的“商业兑现”不代表科研质量；它只说明公开产业 ROI 尚少。未披露不等于没有。</div>
+</section>
+
+<section class="canvas" id="quadrant">
+  <div class="head"><div class="kicker">资本热度 × 证据成熟度</div><div class="title">融资越大，<span class="red">不代表物理世界已经交付</span></div><div class="sub">示意象限：纵轴混合公开融资/市值想象，只看相对热度，不作精确量化。</div></div>
+  <div class="plot">
+    <div class="grid-v"></div><div class="grid-h"></div>
+    <div class="q q1">资本热 · 证据硬</div><div class="q q2">资本热 · 证据待补</div><div class="q q3">资本冷 · 早期探索</div><div class="q q4">资本稳 · 真正卖铲子</div>
+    <div class="axis-x">公开证据成熟度 →</div><div class="axis-y">资本规模 /<br>估值想象 ↑</div>
+    <div class="bubble b-a" style="left:82%;top:16%;width:190px;height:190px">晶泰<br>科技</div>
+    <div class="bubble b-a" style="left:88%;top:42%;width:160px;height:160px">Schrö-<br>dinger</div>
+    <div class="bubble b-b" style="left:65%;top:29%;width:178px;height:178px">深势<br>科技</div>
+    <div class="bubble b-b" style="left:53%;top:24%;width:166px;height:166px">深度<br>原理</div>
+    <div class="bubble b-c" style="left:30%;top:27%;width:180px;height:180px">开物纪</div>
+    <div class="bubble b-c" style="left:18%;top:42%;width:150px;height:150px">材科<br>源图</div>
+    <div class="bubble b-neutral" style="left:74%;top:69%;width:160px;height:160px">龙讯<br>旷腾</div>
+    <div class="bubble b-neutral" style="left:61%;top:74%;width:145px;height:145px">武汉<br>智化</div>
+    <div class="bubble b-b" style="left:79%;top:55%;width:164px;height:164px">镁伽<br>科技</div>
+  </div>
+  <div class="foot">市值、融资额、投后估值不可直接换算；位置综合公开资本事件与证据等级，仅用于呈现叙事张力。</div>
+</section>
+
+<section class="canvas" id="redflags">
+  <div class="head"><div class="kicker">听到这 5 句话，先别鼓掌</div><div class="title">AI4S 尽调的<span class="red">五句追问</span></div><div class="sub">最有争议的数字，往往只差一个分母、一个基线，或一个“最高可达”。</div></div>
+  <div class="stamp">证据不足 ≠ 骗子</div>
+  <div class="questions">
+    <div class="question"><div class="qnum">1</div><div><h3>“发现了百万候选”</h3><p>实际合成多少？合成成功多少？性能达标多少？是不是新材料？</p></div></div>
+    <div class="question"><div class="qnum">2</div><div><h3>“研发加速 1000 倍”</h3><p>相对什么基线？只算模型推理，还是连实验、返工和中试都算？</p></div></div>
+    <div class="question"><div class="qnum">3</div><div><h3>“合作最高 10 亿美元”</h3><p>首付款多少？近期里程碑多少？最远端销售里程碑占多少？</p></div></div>
+    <div class="question"><div class="qnum">4</div><div><h3>“服务 300 万科学家”</h3><p>注册、活跃、付费、续费分别多少？高校试用能不能变成企业采购？</p></div></div>
+    <div class="question"><div class="qnum">5</div><div><h3>“模型—实验—量产闭环”</h3><p>请公开推荐数、失败数、验收数、复购数，以及停止融资 18 个月后的现金流。</p></div></div>
+  </div>
+  <div class="bottomline">真正的分水岭：<span class="cyan">我推荐了多少</span> · <span class="gold">做出来多少</span> · <span class="red">客户第二年还付不付</span></div>
+</section>
+
+<section class="canvas" id="stack">
+  <div class="head"><div class="kicker">AI4S 产业落地地图</div><div class="title">AI4S <span class="cyan">产业落地五层栈</span></div><div class="sub">从底层能力到可交付 IP，每一层都要有采购理由与验收边界。</div></div>
+  <div class="stack-wrap">
+    <div class="stack-layer"><div class="stack-level">05</div><div class="stack-name">材料 / 药物 IP<small>高价值 · 长周期</small></div><div class="stack-body">新材料、候选药物与工艺配方，把研发结果变成产品资产。</div><div class="stack-proof"><strong>验收</strong>性能 · 产率 · 稳定性 · 临床终点</div></div>
+    <div class="stack-layer"><div class="stack-level">04</div><div class="stack-name">实验自动化<small>把建议变成样品</small></div><div class="stack-body">机器人、仪器与工作流，缩短“推荐—合成—表征”的循环。</div><div class="stack-proof"><strong>验收</strong>成功率 · 批次差异 · 设备利用率</div></div>
+    <div class="stack-layer"><div class="stack-level">03</div><div class="stack-name">研发软件<small>让工程师少走弯路</small></div><div class="stack-body">模拟、筛选、设计与协同工具，嵌入研发团队的日常决策。</div><div class="stack-proof"><strong>验收</strong>命中率 · 研发周期 · 续费率</div></div>
+    <div class="stack-layer"><div class="stack-level">02</div><div class="stack-name">物理 / 化学模型<small>把规律变成可计算能力</small></div><div class="stack-body">分子、原子、反应与材料模型，先过复现、基线与分布外测试。</div><div class="stack-proof"><strong>验收</strong>OOD 误差 · 基线提升 · 失败案例</div></div>
+    <div class="stack-layer"><div class="stack-level">01</div><div class="stack-name">数据与算力<small>产业基础设施</small></div><div class="stack-body">高质量数据、算力调度与治理，让每一次实验都能追溯、复用。</div><div class="stack-proof"><strong>验收</strong>数据覆盖 · 成本 / 样本 · 可追溯性</div></div>
+  </div>
+  <div class="stack-bottomline">最先形成现金流的，往往是<span class="cyan">软件、数据、算力编排与实验自动化</span></div>
+</section>
+
+<section class="canvas" id="loop">
+  <div class="head"><div class="kicker">AI4S 商业化路径</div><div class="title">从模型到回款，<span class="red">才算产业闭环</span></div><div class="sub">每一环都要把推荐转成可验证动作，最后回到客户的下一次采购。</div></div>
+  <div class="loop-track">
+    <div class="loop-node"><div class="loop-index">01</div><h3>科学问题</h3><p>把“想做什么”变成可量化的目标、约束和优先级。</p><div class="loop-check"><strong>验收指标</strong>目标可复述 · 约束已备案</div></div>
+    <div class="loop-node"><div class="loop-index">02</div><h3>模型推荐</h3><p>模型给出候选、排序与不确定性，保留基线和失败案例。</p><div class="loop-check"><strong>验收指标</strong>Top-k · OOD 误差 · 基线</div></div>
+    <div class="loop-node"><div class="loop-index">03</div><h3>湿实验</h3><p>把计算候选送进合成、表征与复验，记录真实批次差异。</p><div class="loop-check"><strong>验收指标</strong>合成成功率 · 表征完整</div></div>
+    <div class="loop-node"><div class="loop-index">04</div><h3>工程验证</h3><p>从实验室样品走向稳定性、工艺窗口和可重复制造。</p><div class="loop-check"><strong>验收指标</strong>寿命 · 稳定性 · 复验率</div></div>
+    <div class="loop-node"><div class="loop-index">05</div><h3>试产量产</h3><p>验证设备、产率、单位成本与安全边界，准备交付。</p><div class="loop-check"><strong>验收指标</strong>产率 · 成本 · 批次一致性</div></div>
+    <div class="loop-node"><div class="loop-index">06</div><h3>客户验收</h3><p>按合同指标交付，确认结果、责任边界与付款节点。</p><div class="loop-check"><strong>验收指标</strong>合同 KPI · 回款 · 责任人</div></div>
+    <div class="loop-node"><div class="loop-index">07</div><h3>复购回款</h3><p>客户第二年是否继续付费，决定项目能否从故事变成生意。</p><div class="loop-check"><strong>验收指标</strong>续费率 · 毛利 · 现金流</div></div>
+  </div>
+  <div class="loop-bottomline"><span class="cyan">推荐多少</span> · <span class="gold">做出多少</span> · <span class="red">卖了多少</span> · <span class="red">复购多少</span></div>
+</section>
+
+</body>
+</html>

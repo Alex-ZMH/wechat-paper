@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v34",
+  "productVersion": "0.34.0",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v34",
+  "bridgeVersion": "codex-bridge.v34-20260902",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "status": "local_candidate",
+  "sourceCommit": "29fc3e74ab8744c32133afad379353fc5e816700",
+  "sourceTag": null,
+  "siteVersion": null,
+  "siteVersionId": null,
+  "deploymentId": null,
+  "publicUrl": null,
+  "features": [
+    "advanced mode uses a full-width left-to-right workflow as the primary surface",
+    "mouse-wheel and explicit controls zoom the workflow canvas",
+    "high-contrast colors distinguish input, skill, writer, review, gate, draft, and human-edit stages",
+    "human editing and model collaboration is a first-class node in the main chain",
+    "node configuration appears below the canvas instead of in a cramped right rail",
+    "a permanent current-stage output surface shows actual content, evidence, decisions, or receipts"
+  ],
+  "validation": {
+    "studioTests": "132/132",
+    "bridgeTests": "193/193",
+    "typescript": "passed by production build",
+    "lint": "passed_without_warnings",
+    "build": "passed",
+    "browserWorkflowLayout": {
+      "status": "passed",
+      "qaSession": "v34-layout",
+      "graphIsFirstVisualSurface": true,
+      "explicitZoomReached": "110%",
+      "nodeSelectionChangedActualOutput": true,
+      "topicUnlockedStartGate": true,
+      "topicDidNotMasqueradeAsWriterOutput": true,
+      "browserConsoleErrors": 0
+    }
+  },
+  "openReleaseBlockers": [
+    "The v31 99-point editorial rubric still lacks completed human-labelled blind calibration."
+  ],
+  "deployment": {
+    "savedToSites": false,
+    "deployed": false,
+    "publicBaseline": "v32",
+    "accessMode": "local_only"
+  },
+  "notes": [
+    "v34 changes the Studio interaction and layout while retaining the validated v33 Bridge API contract; the synchronized v34 Bridge build marker prevents stale pairing.",
+    "v34 has passed local browser layout validation but remains a candidate until the separate editorial calibration blocker is closed."
+  ]
+}

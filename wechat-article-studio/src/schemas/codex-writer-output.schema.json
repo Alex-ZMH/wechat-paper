@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wechat-article-studio.local/schemas/codex-writer-output.v1.json",
+  "title": "Wechat Article Studio structured writer output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "title",
+    "digest",
+    "lead",
+    "sections",
+    "closingCta",
+    "tags",
+    "assetSlots"
+  ],
+  "properties": {
+    "title": { "type": "string", "minLength": 1 },
+    "digest": { "type": "string", "minLength": 1 },
+    "lead": { "type": "string", "minLength": 1 },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/section"
+      }
+    },
+    "closingCta": { "type": "string", "minLength": 1 },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "assetSlots": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/assetSlot"
+      }
+    }
+  },
+  "$defs": {
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sectionId", "order", "heading", "paragraphs"],
+      "properties": {
+        "sectionId": { "type": "string", "minLength": 1 },
+        "order": { "type": "integer" },
+        "heading": { "type": "string", "minLength": 1 },
+        "paragraphs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/paragraph"
+          }
+        }
+      }
+    },
+    "paragraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["paragraphId", "text", "claimIds"],
+      "properties": {
+        "paragraphId": { "type": "string", "minLength": 1 },
+        "text": { "type": "string", "minLength": 1 },
+        "claimIds": {
+          "type": "array",
+          "minItems": 0,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "assetSlot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slotId", "purpose", "alt"],
+      "properties": {
+        "slotId": { "type": "string", "minLength": 1 },
+        "purpose": { "type": "string", "minLength": 1 },
+        "alt": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/codex-bridge/dna-job.schema.json",
+  "title": "Content Desk DNA execution job",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "jobId",
+    "mode",
+    "requestHash",
+    "state",
+    "stage",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "content-desk.dna-job.v1" },
+    "jobId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "mode": { "type": "string", "enum": ["writing", "academic"] },
+    "corpusSnapshotId": { "type": ["string", "null"], "minLength": 1, "maxLength": 128 },
+    "requestHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "state": { "type": "string", "enum": ["queued", "running", "cancelling", "succeeded", "failed", "cancelled", "interrupted"] },
+    "stage": { "type": "string", "enum": ["validating_inputs", "staging", "executing", "validating_outputs", "committing"] },
+    "createdAt": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "updatedAt": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "startedAt": { "type": ["string", "null"], "maxLength": 64 },
+    "finishedAt": { "type": ["string", "null"], "maxLength": 64 },
+    "resumedAt": { "type": ["string", "null"], "maxLength": 64 },
+    "cancelRequestedAt": { "type": ["string", "null"], "maxLength": 64 },
+    "interruptedAt": { "type": ["string", "null"], "maxLength": 64 },
+    "summary": { "type": ["string", "null"], "maxLength": 1000 },
+    "outputFiles": { "type": "array", "maxItems": 512, "items": { "type": "string", "minLength": 1, "maxLength": 240 } },
+    "artifactHash": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "artifactManifest": { "$ref": "#/definitions/artifactManifest" },
+    "receipt": { "$ref": "#/definitions/receipt" },
+    "error": { "$ref": "#/definitions/error" },
+    "created": { "type": "boolean" },
+    "idempotent": { "type": "boolean" }
+  },
+  "definitions": {
+    "error": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["code", "stage", "message"],
+      "properties": {
+        "code": { "type": "string", "minLength": 2, "maxLength": 64 },
+        "stage": { "type": "string", "maxLength": 64 },
+        "message": { "type": "string", "minLength": 1, "maxLength": 240 }
+      }
+    },
+    "artifactFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "artifactManifest": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["schemaVersion", "mode", "workspace", "files", "sha256", "artifactHash"],
+      "properties": {
+        "schemaVersion": { "type": "string", "const": "content-desk.dna-artifact.v1" },
+        "mode": { "type": "string", "enum": ["writing", "academic"] },
+        "workspace": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "files": { "type": "array", "maxItems": 512, "items": { "$ref": "#/definitions/artifactFile" } },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "artifactHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "receipt": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["schemaVersion", "jobId", "mode", "state", "artifactHash", "artifactManifest", "completedAt"],
+      "properties": {
+        "schemaVersion": { "type": "string", "const": "content-desk.dna-receipt.v1" },
+        "jobId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "mode": { "type": "string", "enum": ["writing", "academic"] },
+        "corpusSnapshotId": { "type": ["string", "null"], "minLength": 1, "maxLength": 128 },
+        "state": { "type": "string", "const": "succeeded" },
+        "artifactHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "artifactManifest": { "$ref": "#/definitions/artifactManifest" },
+        "completedAt": { "type": "string", "minLength": 1, "maxLength": 64 }
+      }
+    }
+  }
+}

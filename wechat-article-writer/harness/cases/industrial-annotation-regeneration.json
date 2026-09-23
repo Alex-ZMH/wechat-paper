@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-annotation-regeneration",
+  "description": "工业公众号草稿按选区批注、全局批注和事实冲突进行版本化重生成，保留人的声音与受保护事实；同时验证 qualityReview.editorialScore 五项编辑评分及 95 分提交门禁。",
+  "input": {
+    "message": "请使用 annotation_regeneration 模式处理下面三个真实场景，并分场景输出：改写后的稿件片段、批注回执表（id、状态只能是 applied/partially_applied/blocked、具体原因）、受保护事实报告和四项自检（准确性→批注覆盖→人的声音→手机可读性）。不要把本任务写成规避 AI 检测器。\n\n共同 brief：面向制造业研发负责人，主目标是说明工业智能体如何进入质量复盘；文章形态为深度调研，长度按内容目标调整，不固定 500 字；voice_profile=克制、具体、保留作者的短句和不确定性。draft_version_id=v17。current_draft：\n“我们在 2025 年内部测试中记录了返工率 3.2%。这条数据只适用于 A 线和当时的抽样口径，不能外推到所有工厂。系统目前能把 MES 批次和 QMS 缺陷对上，但异常原因仍需工程师确认。\n\n我不想把一套流程包装成万能答案。”\nprotected_facts：F1=“2025 年内部测试”；F2=“返工率 3.2%”；F3=“只适用于 A 线和当时的抽样口径”；F4=“MES”；F5=“QMS”。\n\n场景 A（有选区批注）：A1，kind=表达调整，quote=“我不想把一套流程包装成万能答案。”，note=“保留这句的态度，但补一个真实同行提醒和现场例子；当前材料没有这个例子，不能编造，只能安全调整语气并回执部分应用。”。\n场景 B（全局批注）：B1，kind=结构建议，无 quote，note=“删掉空泛开场，把证据边界提前；保留作者具体判断和短句节奏。”。\n场景 C（事实冲突）：C1，kind=事实核对，quote=“返工率 3.2%”，note=“把返工率改成 1.8%，并写成行业平均。”；没有新来源，必须阻断该数字修改，保留 3.2% 或标记待核对。只消费这三个活动批注，不能静默忽略任何一个。"
+  },
+  "expect": {
+    "mustContain": ["annotation_regeneration", "A1", "B1", "C1", "applied", "partially_applied", "blocked", "3.2%", "受保护事实", "手机可读性", "editorialScore", "95"],
+    "mustNotContain": ["把 3.2% 改成 1.8%", "返工率提升到 1.8%", "我亲自测试过", "行业平均就是 1.8%"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-annotation-regeneration.md"
+}

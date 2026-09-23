@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-vasp-hardware-sale",
+  "description": "VASP 服务器/HPC 硬件出售必须先做工作负载与配置匹配，区分规格、测试和商业字段，不暗示捆绑未授权软件。",
+  "input": {
+    "message": "请为一台用于 VASP/DFT 的 HPC 服务器写公众号调研稿。材料只有：8 个节点、双路 CPU、可选 GPU、报价和交付时间待确认。请列工作负载、CPU/GPU、内存、存储、互联、VASP 许可证、功耗散热和集群规模的核对清单；没有真实 benchmark 就不要承诺速度、性能或 ROI。报价、交付、保修须带截止日期，不要写捆绑或附送未授权 VASP。另：VASP source code、PP database、许可证凭证和保密材料一律 manual_required，不能输入 AI；合法 logs/outputs 仅在不泄露受保护材料时人工确认。"
+  },
+  "expect": {
+    "mustContain": ["工作负载", "CPU", "GPU", "许可证", "测试条件", "截止日期"],
+    "mustNotContain": ["本机保证提速10倍", "VASP已预装并免费授权", "该配置必然跑满", "已经发布"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-vasp-hardware-sale.md"
+}

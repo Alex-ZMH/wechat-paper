@@ -1,0 +1,18 @@
+{
+  "kind": "agent_browser_automation",
+  "networkFaults": "none",
+  "notUserAcceptance": true,
+  "results": [
+    {
+      "name": "resolved_comment_survives_restart_automatic_pass_is_not_human_approval",
+      "status": "passed"
+    },
+    {
+      "name": "current_saved_version_word_download",
+      "status": "passed",
+      "version": 4,
+      "file": "凹凸棒石进入电池材料：三条研究路线与一道产业化边界_审阅稿.docx"
+    }
+  ],
+  "errors": []
+}

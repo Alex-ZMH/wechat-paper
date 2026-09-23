@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "content-desk.corpus-snapshot.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "corpusSnapshotId", "snapshotId", "packageId", "mode", "rightsAttestation", "createdAt", "manifestHash", "totalBytes", "fileCount", "files"],
+  "properties": {
+    "schemaVersion": { "const": "content-desk.corpus-snapshot.v1" },
+    "corpusSnapshotId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "packageId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "mode": { "enum": ["writing", "academic"] },
+    "rightsAttestation": { "enum": ["self_authored", "permission_granted", "licensed", "public_domain"] },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "manifestHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "totalBytes": { "type": "integer", "minimum": 1 },
+    "snapshotId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "fileCount": { "type": "integer", "minimum": 1, "maximum": 64 },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "bytes", "sha256", "normalizedTextHash", "parserVersion", "issues", "charCount", "lineCount"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1, "maxLength": 180 },
+          "mediaType": { "type": "string" },
+          "mimeType": { "type": "string" },
+          "bytes": { "type": "integer", "minimum": 1 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "normalizedTextHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "parserVersion": { "type": "string" },
+          "issues": { "type": "array", "items": { "type": "string" } },
+          "charCount": { "type": "integer", "minimum": 0 },
+          "characterCount": { "type": "integer", "minimum": 0 },
+          "lineCount": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

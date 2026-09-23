@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v28",
+  "productVersion": "0.28.0",
+  "siteVersion": 28,
+  "siteVersionId": "appgprj_6a8e546836b88191b3ded519fc5d233e~appgver_b8fb3a6f733081919b0a4f088b4bdbf1",
+  "deploymentId": "appgdep_6a963a07afb48191b686ae0ce008af92",
+  "publicUrl": "https://gongzhonghao-content-desk.abellmosleynce.chatgpt.site",
+  "sourceCommit": "3febe497ecf5d56d315f6882dd31e8e93b26862c",
+  "sourceTag": "content-desk-v28",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v28",
+  "bridgeVersion": "codex-bridge.v28-20260901",
+  "adapterSchemaVersion": "multipost-desktop.v1",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "archive": {
+    "path": "outputs/content-desk-v28-3febe49.tar.gz",
+    "sha256": "ecd7687a5a7af2475ca6841abc5aa8302d578993bff33650d31974e3403bb684",
+    "sitesContentHash": "sha256:4589f3a40e5dd47a3351e9c614eece626285487dffa49a6fefa8b9725bf12bf6"
+  },
+  "validation": {
+    "studioTests": "90/90",
+    "bridgeTests": "155/155",
+    "typescript": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "publicMarker": "CONTENT_DESK_BUILD=v28",
+    "publicSurface": "launcher_only",
+    "bridgeHealth": {
+      "code": "ready",
+      "authenticated": true,
+      "cliVersion": "codex-cli 0.151.0-alpha.7.2"
+    },
+    "realStop": {
+      "engine": "codex-cli",
+      "requestId": "b78c44d7-f006-485d-9896-baef3a41cb12",
+      "status": "cancelled",
+      "durationSeconds": 1,
+      "preservedOldDraft": true
+    },
+    "realInitialGeneration": {
+      "engine": "codex-cli",
+      "clientRunId": "3f516deb-81b2-42c0-b17a-f59f39357164",
+      "documentId": "dd407ad2-b4c6-4707-abfc-16fdbfb0f18c",
+      "status": "review_required",
+      "editorialScore": 98,
+      "draftWrittenAfterReview": true
+    },
+    "realAnnotationRegeneration": {
+      "engine": "codex-cli",
+      "requestId": "3e7d7a05-d5f8-4178-8b99-02c279f48ce4",
+      "revisionId": "f5b8e8d2-68aa-47ff-a5c6-0fd2af874889",
+      "status": "review_required",
+      "receipt": "applied",
+      "preservedUserEdit": true,
+      "annotationDeletionVerified": true,
+      "editorialScore": 99,
+      "durationSeconds": 129
+    },
+    "realSourceRewrite": {
+      "engine": "codex-cli",
+      "requestId": "89a3c6df-c640-4e01-9af5-a192b085837f",
+      "documentId": "5bc52589-6445-4f14-9880-8eee21f858f9",
+      "mode": "source_rewrite",
+      "status": "review_required",
+      "protectedFactsPreserved": true,
+      "styleReferencePreserved": true,
+      "editorialScore": 98,
+      "durationSeconds": 173
+    },
+    "dnaReadiness": {
+      "academic": "ready_1_of_1",
+      "writing": "blocked_2_of_20",
+      "disconnectRestoredRun": true
+    }
+  },
+  "cleanup": {
+    "status": "blocked_by_host_policy",
+    "manualScript": "cleanup-old-builds-v28.ps1",
+    "preservedRollback": "outputs/content-desk-v27-b61d880.tar.gz",
+    "preservedCurrent": "outputs/content-desk-v28-3febe49.tar.gz",
+    "pendingTargets": [
+      "releases/build-staging/site-package-v26-c4f11de-final2",
+      "releases/legacy/artifacts",
+      "releases/legacy/discarded-staging",
+      "releases/legacy/failed-packaging",
+      "outputs/content-desk-v24-3efcc3f.tar.gz",
+      "outputs/content-desk-v25-b422018.tar.gz",
+      "outputs/content-desk-v26-c4f11de-final2.tar.gz"
+    ],
+    "reason": "当前 Codex 主机策略在进程启动前拒绝递归 Remove-Item；未改用其他 shell 或绕过方式。"
+  },
+  "status": "deployed",
+  "notes": [
+    "公开 Sites 只保留本地启动说明；完整工作台只在 127.0.0.1 同源执行。",
+    "Bridge 会在 Codex CLI 安装路径失效、可执行文件变化、兼容性或登录探测异常时重新发现 CLI。",
+    "快速页、画布运行栏和 Codex 写作器共用 generationGate；source_rewrite 与仅导入路径明确分离。",
+    "真实验收发现中文不定量词“一个、一条、一套”被误判为未授权数据；修正规则并增加回归测试后，同一任务成功生成。",
+    "真实验收材料为合成测试且无外部现场证据，因此 98/99 分候选稿保持 review_required，未标记文字定稿，也未进入 MultiPost。",
+    "v27 作为唯一紧急回退基线；v29 和 v30 目标在 ROADMAP.md 中独立维护。"
+  ]
+}

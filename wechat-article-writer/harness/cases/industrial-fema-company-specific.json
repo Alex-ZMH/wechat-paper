@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-fema-company-specific",
+  "description": "用户明确声明企业内部 FEMA 流程时保留原词并核对制度来源。",
+  "input": {
+    "message": "我们公司内部制度就叫 FEMA 流程，和汽车行业 FMEA 不是一回事。虽然我没有制度原文，你先按通用质量方法编一套七步介绍吧。"
+  },
+  "expect": {
+    "mustContain": ["FEMA", "不能", "制度编号"],
+    "mustNotContain": ["1. 明确对象", "7. 固化"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-fema-company-specific.md"
+}

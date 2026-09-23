@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-terminology-ambiguity",
+  "description": "仅给出 FEMA/6A 而无分支线索时，每个缩写给不超过 3 个候选并只问一个短问题。",
+  "input": {
+    "message": "选题表上只写了“FEMA、6A”，没有行业、全称、上下文或来源。先别起稿，告诉我下一步。"
+  },
+  "expect": {
+    "mustContain": ["FEMA", "6A", "FMEA", "Six Sigma", "API Spec 6A", "铁路", "来源"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-terminology-ambiguity.md"
+}

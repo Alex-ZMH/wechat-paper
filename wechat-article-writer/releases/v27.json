@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v27",
+  "productVersion": "0.27.0",
+  "siteVersion": 27,
+  "siteVersionId": "appgprj_6a8e546836b88191b3ded519fc5d233e~appgver_20d28443054481918c4eef93a10d9c4a",
+  "deploymentId": "appgdep_6a958a88aea481919f33f8d748aea057",
+  "publicUrl": "https://gongzhonghao-content-desk.abellmosleynce.chatgpt.site",
+  "sourceCommit": "b61d880b83cfe05cf86f5bd186eeeb2daff3eb7f",
+  "sourceTag": "content-desk-v27",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v27",
+  "bridgeVersion": "codex-bridge.v27-20260831",
+  "adapterSchemaVersion": "multipost-desktop.v1",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "archive": {
+    "path": "outputs/content-desk-v27-b61d880.tar.gz",
+    "sha256": "329a3adcfa89d9cb3c11014a92f58ea113e11bc854b48474e80eff2616846fc9",
+    "sitesContentHash": "sha256:1ffbbe16b691c32edf42b158a7ee17fab04bc4f03cc0cff95e2a19d7393113b5"
+  },
+  "validation": {
+    "studioTests": "83/83",
+    "bridgeTests": "150/150",
+    "typescript": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "publicMarker": "CONTENT_DESK_BUILD=v27",
+    "realInitialGeneration": {
+      "engine": "codex-cli",
+      "requestId": "5f64d337-b8d7-490a-be93-37cfbd05fda5",
+      "status": "succeeded",
+      "editorialScore": 98,
+      "durationSeconds": 259
+    },
+    "realAnnotationRegeneration": {
+      "engine": "codex-cli",
+      "requestId": "ea611267-d4c3-4943-9089-60cb902d98f7",
+      "status": "review_required",
+      "receipt": "applied",
+      "preservedUserEdit": true,
+      "editorialScore": 99,
+      "durationSeconds": 211
+    }
+  },
+  "status": "deployed",
+  "notes": [
+    "复审阶段对 cli_failed 或 invalid_cli_output 最多执行一次新的独立 reviewer 调用；取消不重试。",
+    "失败响应保留安全的 upstreamCode、category、action 和 retryAttempts，不返回正文，也不覆盖旧稿。",
+    "修复段首新增句被误判为整段删除的差异假阳性；同一真实批注任务重跑后成功保留人工开头并返回 applied 回执。",
+    "本次真实 v2 因现场分析窗口和验收阈值仍待补充而保持 review_required，未标记文字定稿，未进入 MultiPost。",
+    "v26 继续保留为独立回滚点。"
+  ]
+}

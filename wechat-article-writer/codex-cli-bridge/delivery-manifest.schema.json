@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/content-desk/delivery-manifest.schema.json",
+  "title": "Content Desk immutable delivery manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "deliveryManifestId", "sourceManifestId", "documentId", "revisionId", "contentHash", "assetsHash", "content", "assets", "assetRecords", "state", "createdAt"],
+  "properties": {
+    "schemaVersion": { "const": "content-desk.delivery-manifest.v1", "type": "string" },
+    "deliveryManifestId": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "sourceManifestId": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "documentId": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "revisionId": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "contentHash": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+    "assetsHash": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "markdownContent"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "markdownContent": { "type": "string", "minLength": 1, "maxLength": 100000 }
+      }
+    },
+    "assets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cover", "images"],
+      "properties": {
+        "cover": { "type": "string", "minLength": 3, "maxLength": 4096 },
+        "images": { "type": "array", "maxItems": 100, "items": { "type": "string", "minLength": 3, "maxLength": 4096 } }
+      }
+    },
+    "assetRecords": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cover", "images"],
+      "properties": {
+        "cover": { "$ref": "#/$defs/assetRecord" },
+        "images": { "type": "array", "maxItems": 100, "items": { "$ref": "#/$defs/assetRecord" } }
+      }
+    },
+    "state": { "const": "ready_to_send", "type": "string" },
+    "createdAt": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "assetRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "sha256", "bytes", "mtimeMs"],
+      "properties": {
+        "kind": { "const": "local_file", "type": "string" },
+        "sha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "mtimeMs": { "type": "number", "minimum": 0 }
+      }
+    }
+  }
+}

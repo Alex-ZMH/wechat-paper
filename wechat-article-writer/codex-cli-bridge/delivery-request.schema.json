@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/content-desk/delivery-request.schema.json",
+  "title": "Content Desk MultiPost delivery request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "deliveryManifestId", "accountIds", "contentType"],
+  "properties": {
+    "schemaVersion": { "const": "content-desk.delivery-request.v1", "type": "string" },
+    "deliveryManifestId": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "accountIds": { "type": "array", "minItems": 1, "maxItems": 50, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 256 } },
+    "contentType": { "const": "ARTICLE", "type": "string" }
+  }
+}

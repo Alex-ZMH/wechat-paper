@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/codex-bridge/dna-distill-response.schema.json",
+  "title": "Codex DNA distillation response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "status", "mode", "summary", "outputFiles"],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "codex.dna.distill.v1" },
+    "status": { "type": "string", "const": "succeeded" },
+    "mode": { "enum": ["writing", "academic"] },
+    "summary": { "type": "string", "minLength": 1, "maxLength": 1000 },
+    "outputFiles": {
+      "type": "array",
+      "maxItems": 512,
+      "items": { "type": "string", "minLength": 1, "maxLength": 200 }
+    }
+  }
+}

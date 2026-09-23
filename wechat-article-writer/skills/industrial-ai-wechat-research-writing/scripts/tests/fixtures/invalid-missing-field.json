@@ -1,0 +1,11 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-missing",
+  "topic": "缺少截止日期",
+  "content_type": "flash",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [],
+  "claims": [],
+  "uncertainties": []
+}

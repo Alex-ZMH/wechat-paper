@@ -1,0 +1,17 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-partial-mixed-access",
+  "topic": "可用与部分来源混用但未登记范围",
+  "content_type": "standard_analysis",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {"id": "S1", "title": "Complete page", "organization": "Example", "url": "https://example.com/complete", "source_level": "official", "access_status": "accessible", "usage_status": "allowed", "retrieved_at": "2026-02-01"},
+    {"id": "S2", "title": "Partial page", "organization": "Example", "url": "https://example.com/partial", "source_level": "official", "access_status": "partial", "usage_status": "allowed", "retrieved_at": "2026-02-01"}
+  ],
+  "claims": [
+    {"id": "C1", "text": "两个页面都支持这个定义", "kind": "definition", "source_ids": ["S1", "S2"], "evidence_class": "independent", "evidence_quotes": [{"source_id": "S1", "text": "这个定义"}]}
+  ],
+  "uncertainties": []
+}

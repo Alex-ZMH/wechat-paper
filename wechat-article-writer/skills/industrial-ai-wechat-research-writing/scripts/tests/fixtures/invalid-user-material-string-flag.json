@@ -1,0 +1,37 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-user-material-string-flag",
+  "topic": "字符串形式的受保护材料标志",
+  "content_type": "tool_review",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {
+      "id": "M1",
+      "title": "用户提供的硬件记录",
+      "organization": "用户提供",
+      "source_level": "user_material",
+      "access_status": "accessible",
+      "usage_status": "allowed",
+      "retrieved_at": "2026-02-01",
+      "material_id": "flag-string-1",
+      "sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "as_of": "2026-01-20",
+      "rights_confirmed": true,
+      "sensitivity_reviewed": true,
+      "contains_restricted_vasp_material": "true"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "text": "硬件记录由用户提供，未独立核验。",
+      "kind": "fact",
+      "source_ids": ["M1"],
+      "evidence_class": "user_material",
+      "evidence_quotes": [{"source_id": "M1", "text": "用户提供的硬件记录"}]
+    }
+  ],
+  "uncertainties": [{"id": "U1", "text": "受保护标志必须是布尔值。", "claim_ids": ["C1"]}]
+}

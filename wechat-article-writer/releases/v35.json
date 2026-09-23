@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v35",
+  "productVersion": "0.35.0",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v35",
+  "bridgeVersion": "codex-bridge.v35-20260902",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "status": "local_candidate",
+  "sourceCommit": null,
+  "sourceTag": null,
+  "siteVersion": null,
+  "siteVersionId": null,
+  "deploymentId": null,
+  "publicUrl": null,
+  "features": [
+    "replaces the quick/advanced dual frontend with one single-surface workbench",
+    "uses a left-to-right zoomable workflow with distinct colors and independently connectable Skill nodes",
+    "shows selected-node configuration and the actual stage artifact together without modal windows or collapsed functional panels",
+    "keeps one persistent working draft, explicit manual revision save and undo, annotation deletion, model dialogue, candidate adoption and annotation regeneration",
+    "routes research, raw Writing DNA, raw Academic Writing DNA, writing, independent review, finalization and MultiPost through their real Bridge APIs",
+    "preserves requested lengths from 300 through 20000 characters without the removed 5000-character frontend clamp",
+    "isolates browser persistence under content_desk_v35_single_surface and does not load older frontend caches"
+  ],
+  "validation": {
+    "studioTests": "131/131",
+    "bridgeTests": "196/196",
+    "typescript": "passed by production build",
+    "lint": "passed_without_warnings",
+    "build": "passed",
+    "browserWorkflow": {
+      "status": "passed_with_editorial_blockers",
+      "qaSession": "v35-single-surface",
+      "pageLoads": true,
+      "bridgeConnected": true,
+      "researchStartedThroughUi": true,
+      "researchArtifactVisible": false,
+      "researchAuditFailureWasFailClosed": true,
+      "quarantinedResearchCandidateContractVerified": true,
+      "writingArtifactVisible": true,
+      "workingRevision": "v3",
+      "conservativeEditorialScore": 97,
+      "manualSaveVerified": true,
+      "manualEditPreservedAfterRegeneration": true,
+      "annotationRegenerationVerified": true,
+      "annotationReceipt": "applied",
+      "annotationDeleteVerified": true,
+      "modelDialogueVerifiedWithoutDraftMutation": true,
+      "writingDnaReadinessVerified": "blocked_at_3_of_20",
+      "academicDnaReadinessVerified": "ready_at_2_of_1",
+      "removedSkillSelectionFallbackVerified": true,
+      "canvasZoomAndResetVerified": true,
+      "oldFrontendModesAbsent": true,
+      "productionRestartVerified": true
+    }
+  },
+  "openReleaseBlockers": [
+    "The live research run reached independent source audit but did not produce a frozen evidence packet; the rejected candidate remains quarantined and cannot enter writing.",
+    "The live v3 annotation regeneration scored 97/100, so it remains an editable working draft and cannot be finalized under the 99-point policy.",
+    "The 99-point editorial rubric still requires a human-labelled blind calibration set before it can be treated as a quality guarantee."
+  ],
+  "deployment": {
+    "savedToSites": false,
+    "deployed": false,
+    "publicBaseline": "v32",
+    "accessMode": "local_only"
+  },
+  "notes": [
+    "The old quick and advanced page implementations are no longer reachable or retained in the v35 Studio source; v35 has one React page and one workspace state namespace.",
+    "Historical release manifests remain as an audit trail, but no earlier frontend is loaded at runtime."
+  ]
+}

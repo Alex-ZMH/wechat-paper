@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "humanizer-zh-ai-slop",
+  "description": "验证中文去模板规范会删除空泛拔高、黑话和无来源效果，但不会为追求具体而编造事实。",
+  "input": {
+    "message": "按 humanizer-zh 的 embedded 模式审校：‘在当今快速变化的时代，本方案以智能体为核心抓手，深度赋能质量管理，打造端到端闭环，从而显著提升效率并开启高质量发展新篇章。’ 用户只提供了这一句话，没有数据、案例或来源。"
+  },
+  "expect": {
+    "mustContain": ["智能体", "质量管理", "没有", "具体"],
+    "mustNotContain": ["在当今快速变化的时代", "核心抓手", "深度赋能", "端到端闭环", "显著提升效率", "开启高质量发展新篇章", "客户案例", "提升37%"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/humanizer-zh.md"
+}

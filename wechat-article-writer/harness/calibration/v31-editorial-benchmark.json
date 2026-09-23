@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "content-desk.editorial-benchmark.v1",
+  "release": "v31",
+  "status": "pending_human_calibration",
+  "threshold": 99,
+  "truthLabel": "editorial_defects_not_authorship",
+  "minimumCases": 20,
+  "minimumHumanReviewersPerCase": 2,
+  "blinding": {
+    "hideWriterModel": true,
+    "hideReviewerScores": true,
+    "reviewerASeesReviewerB": false,
+    "reviewerBSeesReviewerA": false
+  },
+  "requiredStrata": [
+    "human_high_quality",
+    "model_template_heavy",
+    "professional_fact_bound",
+    "unsupported_qualitative_claim",
+    "necessary_numbered_list",
+    "formula_model_unit_preservation",
+    "short_300_500_chars",
+    "long_3000_5000_chars",
+    "authorized_first_person",
+    "unauthorized_first_person",
+    "authorized_100_percent_literal",
+    "generic_authority_without_source",
+    "valid_doi_or_url",
+    "fabricated_doi_or_url",
+    "annotation_regeneration",
+    "source_rewrite",
+    "single_manual_edit",
+    "multi_hunk_manual_edit",
+    "non_industrial_topic",
+    "industrial_or_scientific_topic"
+  ],
+  "seedCases": [
+    "../cases/humanizer-zh-ai-slop.json",
+    "../cases/humanizer-zh-false-positive.json"
+  ],
+  "releaseMetricsRequired": [
+    "hardVetoFalseAcceptRate",
+    "falseRejectRate",
+    "scoreVariance",
+    "score99Or100Saturation",
+    "reviewerDisagreementRate",
+    "humanRankingCorrelation"
+  ],
+  "releaseConstraints": {
+    "hardVetoFalseAcceptRate": 0,
+    "allCasesHaveTextHash": true,
+    "allCasesHaveRubricHash": true,
+    "allCasesHaveHumanLabels": true
+  },
+  "currentEvidence": {
+    "caseCount": 2,
+    "humanLabelCount": 0,
+    "calibrated": false,
+    "releaseAllowed": false
+  }
+}

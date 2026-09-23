@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v33",
+  "productVersion": "0.33.0",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v33",
+  "bridgeVersion": "codex-bridge.v33-20260902",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "status": "local_candidate",
+  "sourceCommit": null,
+  "sourceTag": null,
+  "siteVersion": null,
+  "siteVersionId": null,
+  "deploymentId": null,
+  "publicUrl": null,
+  "features": [
+    "permanent manual-edit and model-dialogue panel in both workspace views",
+    "append-only manual_edit revisions with revision/hash compare-and-swap",
+    "restore previous saved text by appending a new revision",
+    "Codex discuss, selection rewrite, and reformat actions",
+    "candidate preview and explicit adopt-then-save boundary",
+    "precise editor-dialogue cancellation"
+  ],
+  "validation": {
+    "studioTests": "131/131",
+    "bridgeTests": "193/193",
+    "typescript": "passed by production build",
+    "lint": "passed_without_warnings",
+    "build": "passed",
+    "bridgeSyntax": "passed",
+    "manualRevisionHttp": "passed with injected store",
+    "editorDialogueHttp": "passed with injected model runner",
+    "realCodexEditorDialogue": {
+      "status": "passed",
+      "qaSession": "v33-collab",
+      "actions": ["discuss", "rewrite_selection", "reformat"],
+      "discussReturnedNoCandidate": true,
+      "candidateDidNotMutateDraft": true,
+      "selectionRewriteReturnedCandidate": true
+    },
+    "realBrowserManualSave": {
+      "status": "passed",
+      "createdRevisionId": "9b3dc772-423c-4b2b-a42e-7c7c5203f79b",
+      "candidateRevisionId": "63cd43eb-17ba-413f-9e49-3646fcc7a1b2",
+      "restoreRevisionId": "9a936856-419d-4691-96d9-2e471ec64627"
+    },
+    "realBrowserCandidateAdoption": {
+      "status": "passed",
+      "explicitAdoptRequired": true,
+      "explicitSecondSaveRequired": true,
+      "advancedViewPreservedDraft": true,
+      "browserConsoleErrors": 0
+    }
+  },
+  "openReleaseBlockers": [
+    "The v31 99-point editorial rubric still lacks completed human-labelled blind calibration."
+  ],
+  "deployment": {
+    "savedToSites": false,
+    "deployed": false,
+    "publicBaseline": "v32",
+    "accessMode": "local_only"
+  },
+  "notes": [
+    "v33 does not replace the deployed v32 baseline until real local-browser validation closes its blockers.",
+    "Model dialogue never mutates the current revision. A returned candidate must be explicitly adopted and saved as a new revision."
+  ]
+}

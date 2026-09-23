@@ -1,0 +1,53 @@
+{
+  "topic": "凹凸棒石在新能源领域面临的挑战与实际应用",
+  "auditNote": "显式导入路径的独立资料。由主代理于2026-09-04检索原始论文页面并整理，不是工作台实时研究结果；仅用于隔离验收。第三篇仅核对出版信息与摘要，不使用其性能数值。",
+  "evidencePacket": {
+    "sources": [
+      {
+        "sourceId": "attp-separator-2020",
+        "title": "Attapulgite nanorods assisted surface engineering for separator to achieve high-performance lithium–sulfur batteries",
+        "url": "https://doi.org/10.1016/j.jechem.2020.02.030",
+        "publisher": "Wenhao Sun et al. · Journal of Energy Chemistry",
+        "publishedAt": "2020-02-26",
+        "accessedAt": "2026-09-04",
+        "sourceType": "paper",
+        "sourceOrigin": "human_curated",
+        "authority": "原始科研论文，已读取全文方法与结果",
+        "locator": "https://cdn.sciengine.com/doi/pdf/D5EBF2FB83CF4093ACBDE49EDA56EA1B；2.5节和图3g",
+        "excerpt": "原文：All electrochemical measurements were performed at room temperature. 资料摘要：凹凸棒石/乙炔黑/PVDF涂覆PP隔膜，在锂硫CR2025扣式电池、室温、硫载量1.5 mg cm⁻²、40 μL液态电解液、1.7—2.8 V窗口、0.5 C条件下，首次和第200次循环放电比容量分别为1059.4与792.5 mAh g⁻¹。涂层采用刮涂与真空干燥；增加凹凸棒石比例并非总能改善结果，过量会增大阻抗。"
+      },
+      {
+        "sourceId": "attp-sulfur-host",
+        "title": "Graphene functionalized attapulgite/sulfur composite as cathode of lithium–sulfur batteries for energy storage",
+        "url": "https://doi.org/10.1016/j.micromeso.2015.11.049",
+        "publisher": "Qinxing Xie et al. · Microporous and Mesoporous Materials",
+        "publishedAt": "2016",
+        "accessedAt": "2026-09-04",
+        "sourceType": "paper",
+        "sourceOrigin": "human_curated",
+        "authority": "原始科研论文摘要，非产业量产证据",
+        "locator": "出版方摘要 https://www.sciencedirect.com/science/article/pii/S1387181115006563",
+        "excerpt": "原文：Graphene functionalized attapulgite/sulfur (ATTP@GNs/S) composite was prepared. 资料摘要：研究将石墨烯功能化凹凸棒石与硫构成复合正极，讨论吸附和限域对锂硫电池的作用。本文仅使用路线存在这一事实；未完整核对全部电池条件，不引用性能数字，也不推断已经量产。"
+      },
+      {
+        "sourceId": "attp-multilayer-2024",
+        "title": "Microfiber/Nanofiber/Attapulgite Multilayer Separator with a Pore-Size Gradient for High-Performance and Safe Lithium-Ion Batteries",
+        "url": "https://doi.org/10.3390/molecules29143277",
+        "publisher": "Molecules 29(14), 3277",
+        "publishedAt": "2024-07-11",
+        "accessedAt": "2026-09-04",
+        "sourceType": "paper",
+        "sourceOrigin": "human_curated",
+        "authority": "原始论文的出版信息与摘要，完整测试条件本次未核对",
+        "locator": "https://www.mdpi.com/1420-3049/29/14/3277；https://pmc.ncbi.nlm.nih.gov/articles/PMC11279044/",
+        "excerpt": "资料摘要：该论文研究微米纤维、纳米纤维与凹凸棒石的孔径梯度多层隔膜，并考察多孔结构、电解液润湿性、机械与热性质及电池表现。这里仅据其论文题名与摘要确认存在此研究路线，不引用未核实条件的具体性能数据。"
+      }
+    ],
+    "claims": [
+      { "claimId": "attp-role-separator", "text": "凹凸棒石的电池用途之一是与导电碳复合修饰隔膜；锂硫扣式电池实验支持其在特定条件下改善循环表现，而非证明电池材料已经商业化。", "evidenceIds": ["attp-separator-2020"], "kind": "fact", "caveat": "引用性能必须同时列出室温、0.5 C、CR2025、硫载量1.5 mg cm⁻²、40 μL液态电解液与循环次数；不能称全固态电池。" },
+      { "claimId": "attp-role-host", "text": "石墨烯功能化凹凸棒石/硫复合正极也是已发表研究路线，应用角色与隔膜涂层不同。", "evidenceIds": ["attp-sulfur-host"], "kind": "fact", "caveat": "仅确认路线和吸附限域机制，不采用该摘要的性能数字；未完成全条件核验。" },
+      { "claimId": "attp-role-multilayer", "text": "微米纤维/纳米纤维/凹凸棒石多层隔膜也被用于锂离子电池研究，说明其价值须放在具体复合结构中理解。", "evidenceIds": ["attp-multilayer-2024"], "kind": "fact", "caveat": "仅确认论文研究对象，不能外推其性能、安全认证或规模制造。" },
+      { "claimId": "attp-application-boundary", "text": "更稳妥的判断是把凹凸棒石视为需要与其他材料及工艺共同优化的功能组分；导电网络、涂层配比和制造验证不可省略。本次资料未提供客户定点、量产成本或长期供货证据。", "evidenceIds": ["attp-separator-2020", "attp-sulfur-host", "attp-multilayer-2024"], "kind": "inference", "caveat": "这是基于本次有限资料的判断，不能称整个行业没有相关进展，也不覆盖新能源全部应用。" }
+    ]
+  }
+}

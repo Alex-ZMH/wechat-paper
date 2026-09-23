@@ -1,0 +1,16 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-vendor-source-level",
+  "topic": "协会来源冒充厂商声称",
+  "content_type": "tool_review",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {"id": "S1", "title": "Independent report", "organization": "Research Institute", "url": "https://example.com/report", "source_level": "research_institution", "access_status": "accessible", "usage_status": "allowed", "retrieved_at": "2026-02-01"}
+  ],
+  "claims": [
+    {"id": "C1", "text": "Acme 宣称拥有某能力", "kind": "vendor_claim", "source_ids": ["S1"], "vendor": "Acme", "evidence_class": "vendor_claim", "evidence_quotes": [{"source_id": "S1", "text": "某能力"}]}
+  ],
+  "uncertainties": []
+}

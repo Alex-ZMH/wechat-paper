@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-6a-company-specific",
+  "description": "企业命名的 6A 服务只按厂商自定义案例标记，不外推行业标准。",
+  "input": {
+    "message": "英威腾把自己的售后体系叫“6A服务”。我想在标题里写成“制造业统一6A服务标准”，这样可以吗？请给证据分级和安全改法。"
+  },
+  "expect": {
+    "mustContain": ["英威腾", "自定义", "厂商", "不能", "行业标准"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-6a-company-specific.md"
+}

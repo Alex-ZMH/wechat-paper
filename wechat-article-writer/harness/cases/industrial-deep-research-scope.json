@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-deep-research-scope",
+  "description": "深度调研根据问题和证据决定篇幅，带来源台账与截止日期，不把 500 字当固定模板。",
+  "input": {
+    "message": "截至 2026-06-30，调研工业科研大模型与材料模拟工具，形成一篇可供研发负责人阅读的深度公众号稿。请保留来源台账、claim ledger、未决问题和覆盖范围；篇幅按证据决定，不要固定 500 字，也不要声称覆盖全部市场。"
+  },
+  "expect": {
+    "mustContain": ["2026-06-30", "来源台账", "claim ledger", "未决", "覆盖范围"],
+    "mustNotContain": ["固定 500 字", "覆盖全部市场", "所有工具"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-deep-research-scope.md"
+}

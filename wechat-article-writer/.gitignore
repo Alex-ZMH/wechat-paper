@@ -1,0 +1,15 @@
+# Local credentials and runtime state
+.env
+.env.*
+!.env.example
+.wechat-token-cache.json
+articles/*.wechat-draft.json
+articles/*.wechat-images.json
+
+# Node diagnostics
+npm-debug.log*
+
+# Local evaluation reports
+.matterai-agent-kit/
+harness/*-eval-report-*.json
+outputs/qa/*.json

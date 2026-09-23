@@ -1,0 +1,15 @@
+{
+  "name": "wechat-article-studio-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Evidence-first modular workflow for high-quality WeChat articles.",
+  "scripts": {
+    "start": "node src/server.mjs",
+    "test": "node --test",
+    "sample": "node src/index.mjs",
+    "check": "node --check src/server.mjs && node --check src/orchestrator.mjs && node --check src/adapters/codex-research.mjs && node --check public/app.js && node --check src/lib/research-jobs.mjs && node --check src/lib/source-verification.mjs && node --check src/lib/content-review.mjs && node --check src/export/word-exporter.mjs",
+    "eval:writer": "node scripts/run-real-writer-eval.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

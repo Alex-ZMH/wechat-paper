@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-6a-api-spec",
+  "description": "石油天然气井口/采油树/PSL 语境将 6A 路由到 API Spec 6A。",
+  "input": {
+    "message": "客户问我们的井口、采油树和阀门是否符合“6A”，还追问 PSL 等级。请解释这里的 6A，并告诉我写公众号时哪些版本信息必须核对。"
+  },
+  "expect": {
+    "mustContain": ["API Spec 6A", "井口", "采油树", "PSL", "Addendum", "Errata", "核对"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-6a-api-spec.md"
+}

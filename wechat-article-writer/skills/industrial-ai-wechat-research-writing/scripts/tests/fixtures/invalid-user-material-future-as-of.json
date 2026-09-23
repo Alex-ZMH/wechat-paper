@@ -1,0 +1,40 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-user-material-future-as-of",
+  "topic": "截止日之后的用户 benchmark",
+  "content_type": "deep_research",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {
+      "id": "M1",
+      "title": "用户提供的测试记录",
+      "organization": "用户提供",
+      "source_level": "user_material",
+      "access_status": "accessible",
+      "usage_status": "allowed",
+      "retrieved_at": "2026-02-01",
+      "material_id": "bench-future-2026-02",
+      "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "as_of": "2026-02-02",
+      "rights_confirmed": true,
+      "sensitivity_reviewed": true,
+      "material_kind": "benchmark",
+      "usage_notes": "时间晚于研究截止日，不能用于本包事实。"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "text": "测试记录由用户提供，未独立核验。",
+      "kind": "metric",
+      "source_ids": ["M1"],
+      "evidence_class": "user_material",
+      "evidence_quotes": [{"source_id": "M1", "text": "用户提供的测试记录"}]
+    }
+  ],
+  "uncertainties": [
+    {"id": "U1", "text": "该材料 as_of 晚于 cutoff，需改用较早记录或更新截止日。", "claim_ids": ["C1"]}
+  ]
+}

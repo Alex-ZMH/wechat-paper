@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v26",
+  "productVersion": "0.26.0",
+  "siteVersion": 26,
+  "siteVersionId": "appgprj_6a8e546836b88191b3ded519fc5d233e~appgver_67a941fea5a48191ada4bb49589e662f",
+  "deploymentId": "appgdep_6a955ef7a0e88191af28610ee495c5c7",
+  "publicUrl": "https://gongzhonghao-content-desk.abellmosleynce.chatgpt.site",
+  "sourceCommit": "c4f11de02c26b438962a428c1323e447be6f1045",
+  "sourceTag": "content-desk-v26",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v26",
+  "bridgeVersion": "codex-bridge.v26-20260831",
+  "adapterSchemaVersion": "multipost-desktop.v1",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "archive": {
+    "path": "outputs/content-desk-v26-c4f11de-final2.tar.gz",
+    "sha256": "5f3184a7c1edda0dde9c5260bd0bf6417b23ddb4db98f62324c4496990e9dda9",
+    "sitesContentHash": "sha256:d71294c60d2ca07545808526debf947ce6c72fe93c8ca20bcb7db94bea93c75e"
+  },
+  "validation": {
+    "studioTests": "80/80",
+    "bridgeTests": "145/145",
+    "typescript": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "independentAudit": "GO",
+    "browserConsole": "no errors or warnings",
+    "realInitialGeneration": {
+      "engine": "codex-cli",
+      "status": "review_required",
+      "editorialScore": 100,
+      "draftLength": 879
+    },
+    "realAnnotationRegeneration": {
+      "engine": "codex-cli",
+      "httpStatus": 200,
+      "receipt": "applied",
+      "preservedUserEdit": true,
+      "editorialScore": 100,
+      "draftLength": 450
+    },
+    "localMultiPostProbe": "multipost_unavailable"
+  },
+  "status": "deployed",
+  "notes": [
+    "MultiPost Desktop 0.3.6 已安装，但本机 API 未启用、未配置 Token、没有可用账号，因此未执行真实 publish/submit/retry。",
+    "发送链只接受 Bridge 冻结的 Windows 本机图片副本；文字定稿、素材清单和发送回执彼此独立。",
+    "失败归档和解包目录已移入 releases/legacy/failed-packaging/v26 与 releases/build-staging，不参与运行或发布。",
+    "旧 v23 保留为 legacy 记录；v24、v25 保留为独立回滚点。"
+  ]
+}

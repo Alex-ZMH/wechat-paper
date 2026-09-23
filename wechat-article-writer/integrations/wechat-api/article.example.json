@@ -1,0 +1,11 @@
+{
+  "title": "周末，给自己留出两小时",
+  "author": "你的公众号名称",
+  "digest": "不必把周末安排得密不透风。试着留出两小时，把注意力还给自己。",
+  "content": "<section><p>把这段替换成已经审核过的 HTML 正文。</p><h2>从一个小空档开始</h2><p>正文图片请先用 upload-article-image.mjs 上传，再将返回的 URL 放入 &lt;img src=\"...\" /&gt;。</p></section>",
+  "content_source_url": "",
+  "thumb_media_id": "replace-with-media-id-from-upload-permanent-image",
+  "show_cover_pic": 0,
+  "need_open_comment": 0,
+  "only_fans_can_comment": 0
+}

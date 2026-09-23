@@ -1,0 +1,8 @@
+{
+  "displayVersion": "v26",
+  "machineVersion": "0.26.0",
+  "studioMarker": "CONTENT_DESK_BUILD=v26",
+  "expectedBridgeVersion": "codex-bridge.v26-20260831",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "apiSchemaVersion": "content-desk.request.v2"
+}

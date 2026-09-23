@@ -1,0 +1,17 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-vendor-mixed-provenance",
+  "topic": "厂商与独立来源混合升级",
+  "content_type": "tool_review",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {"id": "S1", "title": "Vendor page", "organization": "Acme", "url": "https://example.com/vendor", "source_level": "vendor", "access_status": "accessible", "usage_status": "allowed", "retrieved_at": "2026-02-01"},
+    {"id": "S2", "title": "Independent report", "organization": "Institute", "url": "https://example.com/independent", "source_level": "research_institution", "access_status": "accessible", "usage_status": "allowed", "retrieved_at": "2026-02-01"}
+  ],
+  "claims": [
+    {"id": "C1", "text": "该产品 ROI 提升 37%", "kind": "metric", "source_ids": ["S1", "S2"], "evidence_class": "mixed", "evidence_quotes": [{"source_id": "S1", "text": "ROI 提升 37%"}, {"source_id": "S2", "text": "ROI"}]}
+  ],
+  "uncertainties": []
+}

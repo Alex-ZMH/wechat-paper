@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-compute-experiment-paper",
+  "description": "计算+实验论文分享区分原始结论、计算假设/DFT 结果、实验条件、相关性与因果，不把吻合写成机理已证明。",
+  "input": {
+    "message": "把一篇包含 VASP/DFT 计算和 XRD、XPS 实验表征的论文整理成公众号文章。请分开论文原始结论、我的原创转述、计算输入与假设、实验条件、计算结果、表征观察、相关性/因果、复现与外推；只做原创转述，不复制摘要、正文、图表或图注。"
+  },
+  "expect": {
+    "mustContain": ["论文原始结论", "计算假设", "实验条件", "相关性", "因果", "复现"],
+    "mustNotContain": ["计算与实验完全一致，因此唯一机理已被证明", "DFT结果就是实验事实且无需实验条件", "本文已经完整复现并证明全部结论"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-compute-experiment-paper.md"
+}

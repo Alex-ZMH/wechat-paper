@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v39",
+  "productVersion": "0.39.0",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v39",
+  "bridgeVersion": "codex-bridge.v39-20260903",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "status": "superseded_failed_candidate",
+  "features": [
+    "replaces the node-strip-and-replacement-panel interaction with one left-to-right canvas and permanently expanded stage cards",
+    "keeps task input, author profile, research, Writing DNA, Academic DNA, professional context, writing, review, human editing and delivery visible together",
+    "renders every optional skill card even when it is not connected and exposes explicit connect/remove controls with an honest not-connected state",
+    "supports anchor navigation, Ctrl or Meta wheel zoom, plus/minus/100 percent/fit controls and horizontal canvas scrolling",
+    "keeps research evidence, working draft, editor dialogue and final draft together in a permanent artifact reading zone",
+    "preserves the existing Bridge handlers for research, DNA corpus/distill/stop, generation, manual save, annotations, editor dialogue, finalize/export and MultiPost delivery",
+    "labels the legacy editorial score as an uncalibrated compatibility gate while prioritizing hard blockers and independent review receipts"
+  ],
+  "validation": {
+    "studioTests": "pending final v39 Bridge/version cutover",
+    "bridgeTests": "pending final v39 Bridge/version cutover",
+    "typescript": "passed_by_production_build",
+    "lint": "passed_without_warnings",
+    "build": "passed",
+    "independentAdversarialReview": "pending",
+    "browserWorkflow": {
+      "status": "failed",
+      "note": "The real 20,000-character MOF run reached dual review, but an already-running same-version Bridge was reused and discarded the rejected candidate; v40 supersedes this build."
+    }
+  },
+  "deployment": {
+    "savedToSites": false,
+    "deployed": false,
+    "accessMode": "local_only"
+  },
+  "openReleaseBlockers": [
+    "Superseded by v40; do not restart or deploy this candidate."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-vendor-evidence",
+  "description": "厂商产品页只能支撑厂商主张，不能被改写成独立 ROI 或客户效果证据。",
+  "input": {
+    "message": "请比较 ABB Genix Copilot、Siemens Opcenter APS 和 SAP Digital Manufacturing，写给制造数字化负责人。请先列来源和截止日期，分开厂商自述、独立事实和作者判断；如果只有厂商页声称 ROI 提升 37%，必须标为 vendor_claim，不能改标独立 metric。开始取回前检查服务条款、版权/许可和 robots.txt，不要补写客户案例。"
+  },
+  "expect": {
+    "mustContain": ["厂商主张", "独立证据", "截止日期", "来源"],
+    "mustNotContain": ["已证明 ROI", "普遍提升", "客户都", "已经发布"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-vendor-evidence.md"
+}

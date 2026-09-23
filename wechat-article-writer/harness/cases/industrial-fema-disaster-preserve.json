@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-fema-disaster-preserve",
+  "description": "灾害/应急和美国机构语境中保留 FEMA，不误改为 FMEA。",
+  "input": {
+    "message": "给应急管理从业者写一段：FEMA 在飓风灾害响应中负责什么？需要区分联邦机构职责、州和地方职责。"
+  },
+  "expect": {
+    "mustContain": ["FEMA", "紧急", "灾害", "联邦"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-fema-disaster-preserve.md"
+}

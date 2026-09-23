@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/codex-bridge/content-continuation.schema.json",
+  "title": "Codex long-form continuation section",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "mode",
+    "sectionId",
+    "sectionTitle",
+    "chunk",
+    "usedClaimIds",
+    "warnings"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "codex.bridge.continuation.v1" },
+    "status": { "type": "string", "enum": ["succeeded", "succeeded_with_warnings"] },
+    "mode": { "type": "string", "enum": ["initial_generation", "annotation_regeneration", "source_rewrite"] },
+    "sectionId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "sectionTitle": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "chunk": { "type": "string", "minLength": 1, "maxLength": 18000 },
+    "usedClaimIds": {
+      "type": "array",
+      "maxItems": 80,
+      "items": { "type": "string", "minLength": 1, "maxLength": 128 }
+    },
+    "warnings": {
+      "type": "array",
+      "maxItems": 16,
+      "items": { "type": "string", "maxLength": 500 }
+    }
+  }
+}

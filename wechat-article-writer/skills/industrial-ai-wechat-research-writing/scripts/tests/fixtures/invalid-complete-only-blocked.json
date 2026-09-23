@@ -1,0 +1,16 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-complete-blocked",
+  "topic": "complete 但来源全部被拦截",
+  "content_type": "deep_research",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {"id": "S1", "title": "Blocked official page", "organization": "Example", "url": "https://example.com/blocked", "source_level": "official", "access_status": "blocked", "usage_status": "manual_required", "retrieved_at": "2026-02-01"}
+  ],
+  "claims": [
+    {"id": "C1", "text": "页面说明了某个事实", "kind": "fact", "source_ids": ["S1"], "evidence_quotes": [{"source_id": "S1", "text": "某个事实"}]}
+  ],
+  "uncertainties": [{"id": "U1", "text": "页面被拦截，尚未人工核对", "claim_ids": ["C1"]}]
+}

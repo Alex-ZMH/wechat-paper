@@ -1,0 +1,16 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-metadata-only-evidence",
+  "topic": "仅元数据来源误作事实证据",
+  "content_type": "tool_review",
+  "cutoff": "2026-02-01",
+  "research_status": "complete",
+  "retrieval_status": "complete",
+  "sources": [
+    {"id": "S1", "title": "Licensed page navigation", "organization": "Example", "url": "https://example.com/restricted", "source_level": "official", "access_status": "accessible", "usage_status": "metadata_only", "usage_notes": "页面许可不允许 AI 摄入正文，只保留链接和元数据。", "retrieved_at": "2026-02-01"}
+  ],
+  "claims": [
+    {"id": "C1", "text": "该页面证明效率提升 37%", "kind": "metric", "source_ids": ["S1"], "evidence_class": "independent", "evidence_quotes": [{"source_id": "S1", "text": "效率提升 37%"}]}
+  ],
+  "uncertainties": [{"id": "U1", "text": "正文未摄入，需由有权用户人工核对", "claim_ids": ["C1"]}]
+}

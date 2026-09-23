@@ -1,0 +1,36 @@
+# Dependencies and build caches
+**/node_modules/
+**/.next/
+**/.cache/
+**/.turbo/
+**/.runtime/
+**/.ruff_cache/
+
+# Local credentials and secrets
+**/.env
+**/.env.*
+!.env.example
+**/*.pem
+**/*.key
+
+# Local runtime state, logs, and generated data
+wechat-article-studio/data/
+wechat-article-studio/logs/
+wechat-article-studio/.runtime/
+wechat-article-writer/**/data/
+wechat-article-writer/**/logs/
+wechat-article-writer/**/.runtime/
+**/coverage/
+**/*.local.json
+**/*.tmp
+**/__pycache__/
+**/*.pyc
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Nested legacy repository is kept locally, not vendored here
+wechat-article-writer/studio/

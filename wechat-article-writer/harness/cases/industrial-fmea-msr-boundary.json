@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "matterai.case.v2",
+  "id": "industrial-fmea-msr-boundary",
+  "description": "纠正把 FMEA-MSR 当作 PFMEA 设备维护步骤的混淆。",
+  "input": {
+    "message": "有人说 FMEA-MSR 就是 PFMEA 里的设备维护步骤，所以可以和维修保养表合并。这个说法对吗？请首次给出中英文全称，再给公众号读者一个克制的边界说明。"
+  },
+  "expect": {
+    "mustContain": ["MSR", "Supplemental FMEA", "Monitoring and System Response", "监视", "响应", "PFMEA"],
+    "toolCalls": []
+  },
+  "rubric": "harness/rubrics/industrial-fmea-msr-boundary.md"
+}

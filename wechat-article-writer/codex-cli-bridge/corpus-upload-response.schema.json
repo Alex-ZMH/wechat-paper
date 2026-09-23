@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "content-desk.corpus-upload-response.v1",
+  "title": "Content Desk corpus file upload response v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "package", "file", "idempotent"],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "content-desk.corpus-upload-response.v1" },
+    "package": { "$ref": "content-desk.corpus-package.v1" },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fileId", "clientFileId", "name", "mediaType", "mimeType", "bytes", "state", "uploadedBytes", "sha256", "normalizedTextHash", "parserVersion", "issues", "charCount", "characterCount", "lineCount"],
+      "properties": {
+        "fileId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "clientFileId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 180 },
+        "mediaType": { "type": "string", "enum": ["text/markdown", "text/plain", "text/x-markdown", "application/octet-stream"] },
+        "mimeType": { "type": "string", "enum": ["text/markdown", "text/plain", "text/x-markdown", "application/octet-stream"] },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "state": { "type": "string", "enum": ["awaiting_upload", "parsed"] },
+        "uploadedBytes": { "type": "integer", "minimum": 0 },
+        "sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "normalizedTextHash": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "parserVersion": { "type": "string" },
+        "issues": { "type": "array", "items": { "type": "string" } },
+        "charCount": { "type": ["integer", "null"], "minimum": 0 },
+        "characterCount": { "type": ["integer", "null"], "minimum": 0 },
+        "lineCount": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    },
+    "idempotent": { "type": "boolean" }
+  }
+}

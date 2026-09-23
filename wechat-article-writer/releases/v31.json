@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "content-desk.release-record.v1",
+  "displayVersion": "v31",
+  "productVersion": "0.31.0",
+  "studioBuildMarker": "CONTENT_DESK_BUILD=v31",
+  "bridgeVersion": "codex-bridge.v31-20260901",
+  "workspaceSchemaVersion": "content-desk.workspace.v24",
+  "requestSchemaVersion": "content-desk.request.v2",
+  "status": "local_candidate",
+  "sourceCommit": "f0545f97295f5dcdd081819c27c2c8679a72fcb1",
+  "sourceTag": null,
+  "siteVersion": null,
+  "deploymentId": null,
+  "publicUrl": null,
+  "validation": {
+    "studioTests": "119/119",
+    "bridgeTests": "182/182",
+    "typescript": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "bridgeSyntax": "passed",
+    "realBrowserE2E": "pending",
+    "realCodexContentSmoke": {
+      "status": "passed_chain_candidate_remains_review_required",
+      "requestId": "2230f061-3463-40c5-9089-8f02e301d28f",
+      "elapsedMs": 924145,
+      "writerModel": "codex-luna",
+      "reviewerModels": ["codex-luna", "codex-luna"],
+      "passes": 3,
+      "reviewPasses": 2,
+      "editorialScore": 99,
+      "candidateStatus": "review_required",
+      "targetLength": 300,
+      "visibleDraftLength": 778,
+      "note": "The real chain completed, but the candidate was not released. The oversized draft and uncalibrated score remain blockers."
+    },
+    "realAnnotationRegeneration": "pending_v31",
+    "realSourceRewrite": "pending_v31"
+  },
+  "modelReadiness": {
+    "codexProfiles": ["codex-sol", "codex-terra", "codex-luna"],
+    "ollamaQwen3_8b": {
+      "installed": true,
+      "probeLevel": "minimal_schema",
+      "ready": false,
+      "contentSmoke": false,
+      "note": "The minimal JSON probe succeeded through Codex CLI and Ollama; it does not prove long-form workflow capacity."
+    }
+  },
+  "qualityGate": {
+    "threshold": 99,
+    "label": "uncalibrated_editorial_release_score",
+    "reviewPasses": 2,
+    "conservativeMerge": "per_dimension_minimum",
+    "strictFinalize": true,
+    "calibrationManifest": "harness/calibration/v31-editorial-benchmark.json",
+    "calibrated": false,
+    "releaseAllowed": false
+  },
+  "humanizer": {
+    "path": "skills/humanizer-zh",
+    "upstreamCommit": "401e372eeb1a91045d15ec21c2d13b9d0f7842ea",
+    "license": "MIT",
+    "skillFileSha256": "ebbd44533262868d6cab07cc06c11ea47ff50de0a30b5fd0969d5cbb1d116bbb",
+    "executionReceiptImplemented": false
+  },
+  "incidentHarness": {
+    "path": "harness/incidents-v31.json",
+    "incidentCount": 22,
+    "evidenceComplete": false,
+    "openIncidentIds": [
+      "INC-007-self-score-release",
+      "INC-008-fake-e2e",
+      "INC-013-rule-false-positive",
+      "INC-016-unsupported-claim-release",
+      "INC-017-content-run-recovery-gap",
+      "INC-018-localhost-security-gap"
+      ,"INC-022-monolithic-schema-latency"
+    ]
+  },
+  "closedDeterministicRisks": [
+    "review_required cannot finalize or create an export manifest",
+    "v31 model-routed requests require dualReview=true",
+    "reviewer B does not receive reviewer A score, issues, reasons or passed verdict",
+    "tied totals are merged per dimension instead of dropping deductions",
+    "review audit is persisted with the content revision",
+    "unknown model profile ids are rejected",
+    "minimal Ollama schema probe does not claim fully ready"
+    ,"OpenAI structured-output optional fields are nullable and required instead of omitted"
+    ,"humanized=false remains a review-required candidate instead of becoming a contract failure"
+    ,"empty server-owned annotation sets cannot be polluted by model-invented receipts"
+  ],
+  "openReleaseBlockers": [
+    "The 99-point rubric has no completed human-labelled blind calibration set.",
+    "Full evidence spans and evidence hashes are not yet required for a perfect score.",
+    "humanizer-zh is fixed and supplied in the prompt, but has no execution hash/receipt proving the model applied it.",
+    "A real v31 browser generation, annotation regeneration and source rewrite have not yet been recorded.",
+    "The local Qwen profile has not completed the full long-form content smoke.",
+    "Claim-to-source provenance and localhost session/CSRF hardening are not complete."
+    ,"The monolithic writer/reviewer response schema produced a 924145 ms real smoke and must be split before the quick workflow is called usable."
+  ],
+  "deployment": {
+    "savedToSites": false,
+    "deployed": false,
+    "publicBaseline": "v30"
+  },
+  "notes": [
+    "v31 is intentionally not tagged or deployed.",
+    "The public URL remains the v30 launcher-only baseline.",
+    "The quick-writing task brief now grows with its content; brief text areas auto-size with a bounded long-text scroll.",
+    "Passing deterministic tests does not close the human calibration or real-browser evidence gates."
+  ]
+}

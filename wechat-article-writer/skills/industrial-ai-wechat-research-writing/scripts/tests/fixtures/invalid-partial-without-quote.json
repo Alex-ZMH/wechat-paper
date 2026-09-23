@@ -1,0 +1,16 @@
+{
+  "schema_version": "industrial-research-packet.v1",
+  "packet_id": "bad-partial-quote",
+  "topic": "部分取回却没有证据摘录",
+  "content_type": "standard_analysis",
+  "cutoff": "2026-02-01",
+  "research_status": "partial",
+  "retrieval_status": "partial",
+  "sources": [
+    {"id": "S1", "title": "Partially retrieved page", "organization": "Example", "url": "https://example.com/partial", "source_level": "official", "access_status": "partial", "usage_status": "allowed", "retrieved_at": "2026-02-01", "coverage": "只取回标题和方法章节"}
+  ],
+  "claims": [
+    {"id": "C1", "text": "部分页面提到某个定义", "kind": "definition", "source_ids": ["S1"], "evidence_quotes": []}
+  ],
+  "uncertainties": [{"id": "U1", "text": "页面只取回部分段落，需人工补取原文", "claim_ids": ["C1"]}]
+}
